@@ -1,4 +1,3 @@
-/*
 import React from 'react';
 import {
   Platform,
@@ -43,4 +42,3 @@ export default class SettingsScreen extends React.Component {
     );
   }
 }
-*/
