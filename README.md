@@ -1,0 +1,3 @@
+# SmidigProsjekt
+
+Empty README.md
