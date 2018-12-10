@@ -27,6 +27,15 @@ export default class App extends React.Component {
     })
   }
 
+  componentDidMount() {
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        console.log(user)
+      }
+    })
+  }
+
   signUpUser = (email, password) => {
 
     try{
@@ -54,6 +63,20 @@ export default class App extends React.Component {
     }
     catch(error) {
       console.log(error.toString())
+    }
+  }
+
+  async loginWithFacebook() {
+
+    const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync
+    ('277227992982251', {permissions: ['public_profile']})
+
+    if (type == 'success') {
+      const credential = firebase.auth.FacebookAuthProvider.credential(token)
+
+      firebase.auth().signInWithCredentials(credential).catch((error) => {
+        console.log(error)
+      })
     }
   }
 
@@ -97,6 +120,15 @@ export default class App extends React.Component {
             onPress={()=> this.signUpUser(this.state.email, this.state.password)}
           >
             <Text> Sign Up </Text>
+          </Button>
+
+          <Button style={{marginTop: 20}}
+            full
+            rounded
+            primary
+            onPress={()=> this.loginWithFacebook()}
+          >
+            <Text> Login with Facebook </Text>
           </Button>
         </Form>
       </Container>
