@@ -74,7 +74,7 @@ export default class App extends React.Component {
     if (type == 'success') {
       const credential = firebase.auth.FacebookAuthProvider.credential(token)
 
-      firebase.auth().signInWithCredentials(credential).catch((error) => {
+      firebase.auth().signInWithCredential(credential).catch((error) => {
         console.log(error)
       })
     }
