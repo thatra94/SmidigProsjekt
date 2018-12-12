@@ -16,6 +16,23 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+firebase.database().ref('database/').push({
+  userCount: 0,
+  userToken: true
+});
+
+firebase.database().ref('database/-LTW_MYiTAKqEpk7MOHh').update({
+  usertoken: true
+})
+
+var groupRef = firebase.database().ref("database/");
+var groupKey = groupRef.orderByChild('userCount').equalTo(1).on("value", function(snapshot) {
+    console.log(snapshot.val());
+    snapshot.forEach(function(data) {
+        console.log(data.key);
+    });
+});
+
 export default class App extends React.Component {
 
   constructor(props){
