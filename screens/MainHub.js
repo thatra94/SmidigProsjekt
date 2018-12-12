@@ -36,7 +36,7 @@ class HorizontalFlatListItem extends React.Component {
   }
 }
 
-export class HUBScreen extends React.Component {
+export default class HUBScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };

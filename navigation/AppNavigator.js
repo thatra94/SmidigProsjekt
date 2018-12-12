@@ -2,22 +2,31 @@ import React from 'react';
 import {
   createBottomTabNavigator,
   createStackNavigator,
-  createAppContainer,
+  createAppContainer
 } from 'react-navigation';
 
-import HUBScreen from '../screens/HUBScreen';
+import List from '../screens/HomeScreen';
+
+import HUBScreen from '../screens/MainHub';
+
+
+const MainNavigation = createStackNavigator({
+    Kollokvie: List
+});
 
 const HUBStack = createStackNavigator({
-  HUB: HUBScreen
+  Home: HUBScreen
 });
 
 const SettingsStack = createStackNavigator({
   Settings: HUBScreen
 });
 
+
 export default createAppContainer(createBottomTabNavigator(
   {
-    HUB: HUBStack,
-    HUB: SettingsStack,
+    MainNavigation,
+    HUBStack,
+    SettingsStack,
   }
 ));

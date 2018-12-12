@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
-   
-class List extends Component {
+
+export default class List extends Component {
    state = {
       names: [
          {
@@ -19,7 +19,7 @@ class List extends Component {
          {
             id: 3,
             name: 'Informasjonssikkerhet',
-         },  
+         },
         {
             id: 4,
             name: 'Webprosjekt',
@@ -40,7 +40,7 @@ class List extends Component {
             id: 8,
             name: 'Animasjon',
          },
-          
+
       ]
    }
    alertItemName = (item) => {
@@ -49,7 +49,7 @@ class List extends Component {
    render() {
       return (
          <ScrollView>
-          
+
             {
                this.state.names.map((item, index) => (
                   <TouchableOpacity
@@ -66,7 +66,6 @@ class List extends Component {
       )
    }
 }
-export default List
 
 const styles = StyleSheet.create ({
    container: {

@@ -1,15 +1,28 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import List from '../screens/HomeScreen';
+//import { StackNavigator } from 'react-navigation';
+//import List from './screens/HomeScreen';
+import createStackNavigator from 'react-navigation';
+import AppNavigator from './navigation/AppNavigator';
+import HUBScreen from './screens/MainHub';
+
+//import HUBScreen from '../screens/HUBScreen.js';
+//import createAppContainer from '.navigation/AppNavigator';
 
 import * as firebase from 'firebase';
 
 import {Container, Content, Header, Form, Input, Item, Button, Label} from 'native-base';
 
-const MainNavigation = StackNavigator({
+
+/*const MainNavigation = createStackNavigator({
     Kollokvie: List
+});*/
+
+const MainStack = createStackNavigator({
+  Login: App,
+  Home: HUBScreen
 });
+
 
 //Initialize firebase
 const firebaseConfig = {
@@ -134,7 +147,7 @@ export default class App extends React.Component {
             rounded
             success
             onPress={()=> this.loginUser(this.state.email, this.state.password)}
-            onPress={()=> this.props.navigate('Kollokvie')}
+            onPress={()=> this.props.navigate('Home')}
           >
             <Text> Login </Text>
           </Button>
