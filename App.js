@@ -1,9 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import List from '../screens/HomeScreen';
 
 import * as firebase from 'firebase';
 
 import {Container, Content, Header, Form, Input, Item, Button, Label} from 'native-base';
+
+const MainNavigation = StackNavigator({
+    Kollokvie: List
+});
 
 //Initialize firebase
 const firebaseConfig = {
@@ -128,6 +134,7 @@ export default class App extends React.Component {
             rounded
             success
             onPress={()=> this.loginUser(this.state.email, this.state.password)}
+            onPress={()=> this.props.navigate('Kollokvie')}
           >
             <Text> Login </Text>
           </Button>
