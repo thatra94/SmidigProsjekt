@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { AppLoading, Asset, Font, Icon } from 'expo';
+import AppNavigator from './navigation/AppNavigator'
 
 import * as firebase from 'firebase';
 
@@ -73,8 +75,10 @@ export default class App extends React.Component {
 
     try{
 
-      firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
-        console.log(user)
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
+        firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
+          console.log(user)
+        })
       })
 
     }
@@ -148,6 +152,7 @@ export default class App extends React.Component {
             <Text> Login with Facebook </Text>
           </Button>
         </Form>
+        <AppNavigator />
       </Container>
     );
   }
