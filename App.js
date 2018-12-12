@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import AppNavigator from '../navigation/AppNavigator';
 
 import * as firebase from 'firebase';
 
@@ -150,6 +151,7 @@ export default class App extends React.Component {
             <Text> Login with Facebook </Text>
           </Button>
         </Form>
+        <AppContainer />
       </Container>
     );
   }
