@@ -151,7 +151,7 @@ export default class App extends React.Component {
             <Text> Login with Facebook </Text>
           </Button>
         </Form>
-        <AppContainer />
+        //<AppContainer />
       </Container>
     );
   }
