@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import AppNavigator from '../navigation/AppNavigator';
+//import AppNavigator from '../navigation/AppNavigator';
 
 import * as firebase from 'firebase';
 
