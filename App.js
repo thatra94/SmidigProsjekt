@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 //import { StackNavigator } from 'react-navigation';
 //import List from './screens/HomeScreen';
-import createStackNavigator from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import AppNavigator from './navigation/AppNavigator';
 import HUBScreen from './screens/MainHub';
 
@@ -19,7 +19,7 @@ import {Container, Content, Header, Form, Input, Item, Button, Label} from 'nati
 });*/
 
 const MainStack = createStackNavigator({
-  Login: App,
+  //Login: LoginScreen,
   Home: HUBScreen
 });
 
@@ -52,7 +52,7 @@ var groupKey = groupRef.orderByChild('userCount').equalTo(1).on("value", functio
     });
 });
 
-export default class App extends React.Component {
+export default class LoginScreen extends React.Component {
 
   constructor(props){
     super(props)
@@ -146,8 +146,8 @@ export default class App extends React.Component {
             full
             rounded
             success
-            onPress={()=> this.loginUser(this.state.email, this.state.password)}
-            onPress={()=> this.props.navigate('Home')}
+            //onPress={()=> this.loginUser(this.state.email, this.state.password)}
+            onPress={()=> this.props.navigation.navigate('Home')}
           >
             <Text> Login </Text>
           </Button>
