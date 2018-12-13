@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import {
   StyleSheet,
   Image,
@@ -6,26 +6,26 @@ import {
   View
 } from 'react-native';
 
-export default class App extends Component {
+export default class Profil extends React.Component {
   render() {
     return (
       <View style={styles.container}>
       <Image style={styles.profileIcon} source={require('../assets/images/user.png')} />
         <Text style={styles.nameUser}>John Doe</Text>
         <Text style={styles.studyUser}>Programmering</Text>
-        
+
         <View style={styles.container2}>
         <View style={styles.iconOne}>
             <Image style={styles.otherIcon} source={require('../assets/images/group.png')} />
           </View>
-                                            
+
         <View style={styles.iconTwo}>
             <Image style={styles.otherIcon} source={require('../assets/images/chat.png')} />
           </View>
 
         <View style={styles.iconThree}>
             <Image style={styles.otherIcon} source={require('../assets/images/snapchat.png')} />
-          </View>    
+          </View>
         </View>
 
         <Text style={styles.interestTitle}>Interesser</Text>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
    nameUser: {
     marginTop: 20,
     textAlign: 'center',
-    fontSize: 25, 
+    fontSize: 25,
    },
     studyUser: {
     marginTop: 10,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     interestText:{
     marginTop: 20,
     textAlign: 'center',
-    fontSize: 14, 
+    fontSize: 14,
     color: 'gray',
     marginLeft: 20,
     marginRight: 20,
@@ -94,17 +94,17 @@ const styles = StyleSheet.create({
     width:40,
     height:40,
     justifyContent: 'center',
-    alignItems:'center', 
+    alignItems:'center',
   },
     iconTwo: {
     width:40,
     height:40,
     justifyContent: 'center',
-    alignItems:'center', 
+    alignItems:'center',
   },
     iconThree: {
     width:40,
     height:40,
     justifyContent: 'center',
   },
-});
+});*/

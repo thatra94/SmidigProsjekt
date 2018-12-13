@@ -5,7 +5,7 @@ import {
   View
 } from 'react-native';
 
-export default class App extends Component {
+export default class Gruppe extends React.Component {
   render() {
     return (
         //welcome - Text
@@ -14,8 +14,8 @@ export default class App extends Component {
         <Text style={styles.welcome}>Studiegruppe</Text>
         <Text style={styles.subText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
         </View>
-        
-        
+
+
         <Text style={styles.welcome}>Vors</Text>
         <Text style={styles.welcome}>Brettspill</Text>
         <Text style={styles.welcome}>Utveksling</Text>

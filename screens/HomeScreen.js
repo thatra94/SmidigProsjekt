@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
-export default class List extends Component {
+export default class List extends React.Component {
    state = {
       names: [
          {

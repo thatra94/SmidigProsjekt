@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -7,26 +7,28 @@ import {
 
 import List from '../screens/HomeScreen';
 
-import HUBScreen from '../screens/MainHub';
+import Gruppe from '../screens/Gruppe';
 
+import Test from '../screens/Test';
 
 const MainNavigation = createStackNavigator({
-    Kollokvie: List
+  Kollokvie: List
 });
 
-const HUBStack = createStackNavigator({
-  Home: HUBScreen
+const GroupsStack = createStackNavigator({
+  Gruppe: Gruppe
 });
 
 const SettingsStack = createStackNavigator({
-  Settings: HUBScreen
+  Test: Test
 });
 
-
-export default createAppContainer(createBottomTabNavigator(
+const AppContainer = createAppContainer(createBottomTabNavigator(
   {
     MainNavigation,
-    HUBStack,
+    GroupsStack,
     SettingsStack,
   }
-));*/
+));
+
+export default AppContainer;

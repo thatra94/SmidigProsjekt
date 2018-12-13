@@ -1,16 +1,17 @@
-import React from 'react'
+/*import React, {Component} from 'react'
 import {Container, Content, Header, Form, Input, Item, Button, Label} from 'native-base';
-import { Component, AppRegistry, StyleSheet, Text, View } from 'react-native';
-
-
+import { StyleSheet, Text, View } from 'react-native';
+//import FireBase from '../components/FireBase';
+import * as firebase from 'firebase';
+import StackNavigator from '../navigation/StackNavigator';
 
 
 export default class LoginScreen extends React.Component {
 
   constructor(props){
     super(props)
-
-    this.state = {
+}
+  /*  this.state = {
       email: '',
       password: ''
     }
@@ -75,9 +76,9 @@ export default class LoginScreen extends React.Component {
     return (
 
       <Container style={styles.container}>
-        <Form>
+        //<Form>
 
-          <Item floatingLabel>
+          /*<Item floatingLabel>
             <Label> Email </Label>
             <Input
               autoCorrect={false}
@@ -110,7 +111,7 @@ export default class LoginScreen extends React.Component {
             full
             rounded
             primary
-            onPress={()=> this.signUpUser(this.state.email, this.state.password)}
+            //onPress={()=> this.signUpUser(this.state.email, this.state.password)}
           >
             <Text> Sign Up </Text>
           </Button>
@@ -119,15 +120,16 @@ export default class LoginScreen extends React.Component {
             full
             rounded
             primary
-            onPress={()=> this.loginWithFacebook()}
+            //onPress={()=> this.loginWithFacebook()}
           >
             <Text> Login with Facebook </Text>
           </Button>
-        </Form>
+        //</Form>
       </Container>
-    );
+    )
   }
-}
+};
+
 
 const styles = StyleSheet.create({
   container: {
@@ -136,4 +138,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10
   },
-});
+});*/
