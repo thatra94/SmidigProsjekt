@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -29,4 +29,4 @@ export default createAppContainer(createBottomTabNavigator(
     HUBStack,
     SettingsStack,
   }
-));
+));*/

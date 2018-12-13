@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import {
   Image,
   Platform,
@@ -36,10 +36,11 @@ class HorizontalFlatListItem extends React.Component {
   }
 }
 
-export default class HUBScreen extends React.Component {
+export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
 
   render() {
     return (
@@ -193,3 +194,4 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+*/
