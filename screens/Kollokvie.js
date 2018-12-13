@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
-export default class List extends React.Component {
+export default class Fag extends React.Component {
    state = {
       names: [
          {
@@ -55,7 +55,9 @@ export default class List extends React.Component {
                   <TouchableOpacity
                      key = {item.id}
                      style = {styles.container}
-                     onPress = {() => this.alertItemName(item)}>
+                     onPress={() => this.props.navigation.navigate('Gruppe')}
+                     //onPress = {() => this.alertItemName(item)}
+                     >
                      <Text style = {styles.text}>
                         {item.name}
                      </Text>

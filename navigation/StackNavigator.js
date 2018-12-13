@@ -5,12 +5,16 @@ import {
   createAppContainer
 } from 'react-navigation';
 
-import LoginScreen from '../screens/LoginScreen';
+//import LoginScreen from '../screens/LoginScreen';
 import Test from '../screens/Test';
+import Gruppe from '../screens/Gruppe';
 
-const StackNavigator = createStackNavigator({
-  //Login: LoginScreen,
-  Home: Test
+const GruppeStack = createStackNavigator({
+  Gruppe: Gruppe
 });
 
-export default StackNavigator;
+const StackContainer = createAppContainer(createStackNavigator({
+  GruppeStack
+}));
+
+export default StackContainer;

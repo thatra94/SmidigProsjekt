@@ -1,20 +1,15 @@
 import React, {Component} from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
-//import { StackNavigator } from 'react-navigation';
-//import List from './screens/HomeScreen';
 import { createStackNavigator } from 'react-navigation';
-//import AppNavigator from './navigation/AppNavigator';
-//import HUBScreen from './screens/MainHub';
+
 import Test from './screens/Test.js';
 import LoginScreen from './screens/LoginScreen';
-import List from './screens/HomeScreen';
+import Fag from './screens/Kollokvie';
 //import Profil from './screens/Profil';
 import Gruppe from './screens/Gruppe';
 import AppContainer from './navigation/AppNavigator';
-//import FireBase from '.components/FireBase';
 
-//import HUBScreen from '  ../screens/HUBScreen.js';
-//import createAppContainer from '.navigation/AppNavigator';
+//import FireBase from '.components/FireBase';
 
 import * as firebase from 'firebase';
 
@@ -23,13 +18,6 @@ import {Container, Content, Header, Form, Input, Item, Button, Label} from 'nati
 /*const MainNavigation = createStackNavigator({
     Kollokvie: List
 });*/
-
-/*
-const MainStack = createStackNavigator({
-  //Login: LoginScreen,
-  Home: HUBScreen
-});
-*/
 
 //Initialize firebase
 

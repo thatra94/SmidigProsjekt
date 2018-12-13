@@ -5,14 +5,20 @@ import {
   createAppContainer
 } from 'react-navigation';
 
-import List from '../screens/HomeScreen';
+import HomeScreen from '../screens/MainHub'
+
+import Fag from '../screens/Kollokvie';
 
 import Gruppe from '../screens/Gruppe';
 
 import Test from '../screens/Test';
 
-const MainNavigation = createStackNavigator({
-  Kollokvie: List
+const HubStack = createStackNavigator({
+  Hub: HomeScreen
+});
+
+const KollokvieStack = createStackNavigator({
+  Kollokvie: Fag
 });
 
 const GroupsStack = createStackNavigator({
@@ -25,7 +31,8 @@ const SettingsStack = createStackNavigator({
 
 const AppContainer = createAppContainer(createBottomTabNavigator(
   {
-    MainNavigation,
+    HubStack,
+    KollokvieStack,
     GroupsStack,
     SettingsStack,
   }

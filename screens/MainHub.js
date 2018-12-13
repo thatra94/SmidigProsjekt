@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 import {
   Image,
   Platform,
@@ -9,6 +9,7 @@ import {
   View,
   FlatList,
 } from 'react-native';
+import Button from 'native-base';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
@@ -63,16 +64,16 @@ export default class HomeScreen extends React.Component {
                   />
                   <Text style={styles.gridText}>Arrangementer</Text>
               </View>
-              <View style={{flex: 1}}>
-              <Image
-                source={
-                  __DEV__
-                  ? require('../assets/images/books-stack-of-three.png')
-                  : require('../assets/images/books-stack-of-three.png')
-                }
-                style={styles.gridImage}
-                />
-                <Text style={styles.gridText}>Kollokvie</Text>
+                <View style={{flex: 1}}>
+                  <Image
+                    source={
+                      __DEV__
+                      ? require('../assets/images/books-stack-of-three.png')
+                      : require('../assets/images/books-stack-of-three.png')
+                    }
+                    style={styles.gridImage}
+                  />
+                  <Text style={styles.gridText}>Kollokvie</Text>
               </View>
               <View style={{flex: 1}}>
               <Image
@@ -194,4 +195,3 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
-*/
