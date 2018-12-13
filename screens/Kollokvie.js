@@ -63,7 +63,8 @@ export default class Fag extends React.Component {
                      key = {item.id}
                      style = {styles.container}
                      onPress={() => this.props.navigation.navigate(item.name)}
-                     >
+                     //onPress={() => this.props.navigation.navigate('Gruppe')}
+                  >
                      <Text style = {styles.text}>
                         {item.name}
                      </Text>

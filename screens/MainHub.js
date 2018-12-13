@@ -19,7 +19,7 @@ import { horizontalFlatListData } from '../data/HorizontalFlatListData';
 class HorizontalFlatListItem extends React.Component {
   render() {
     return (
-      <View style={{
+      <TouchableOpacity style={{
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
@@ -32,7 +32,7 @@ class HorizontalFlatListItem extends React.Component {
         <Text style={{ fontSize: 16}}>
           {this.props.item.test}
         </Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 }
@@ -100,7 +100,12 @@ export default class HomeScreen extends React.Component {
                 data={horizontalFlatListData}
                 renderItem={({item, index}) => {
                   return (
-                    <HorizontalFlatListItem item={item} index={index} parentFlatList={this}>
+                    <HorizontalFlatListItem
+                      item={item}
+                      index={index}
+                      parentFlatList={this}
+                      onPress={() => this.props.navigation.navigate(item.test)}
+                      >
                     </HorizontalFlatListItem>
                   )
                 }}>

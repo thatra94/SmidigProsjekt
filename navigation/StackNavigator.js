@@ -10,7 +10,8 @@ import Test from '../screens/Test';
 import Gruppe from '../screens/Gruppe';
 
 const GruppeStack = createStackNavigator({
-  Gruppe: Gruppe
+  Gruppe: Gruppe,
+  Test: Test
 });
 
 const StackContainer = createAppContainer(createStackNavigator({

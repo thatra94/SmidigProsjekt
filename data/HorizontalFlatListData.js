@@ -24,10 +24,10 @@ var horizontalFlatListData =[
     test: 'test8'
   },
   {
-    test: 'test9'
+    test: 'Test'
   },
   {
-    test: 'test10'
+    test: 'Gruppe'
   },
 ];
 
