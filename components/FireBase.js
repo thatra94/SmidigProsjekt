@@ -32,37 +32,36 @@ export default class FireBase extends React.Component {
     snapshot.forEach(function(data) {
       console.log(data.key);
     });
-  });*/
+  });
 }
-
-
+*/
 var testUserId = 123;
-//createNewGroup(testUserId);
+var testBool = false;
+
 function joinGroup(userId){
-  console.log("#############Sjekker grupper###########");
-  if (!checkGroup(userId)) {
-    createNewGroup(testUserId);
-  }
-}
-
-function checkGroup(userId){
-
   var query = firebase.database().ref("database/");
-  query.once("value", function(snapshot) {
+  query.once("value")
+    .then(function(snapshot) {
       snapshot.forEach(function(snapshot) {
           console.log(snapshot.key);
           var userCount = snapshot.val().userCount;
           var groupKey = snapshot.key;
           if(userCount < 3){
-            addToGroup(groupKey, userId);
+            addToGroup(groupKey, userId, userCount);
+            testBool = true;
             return true;
           }
-          return false;
+          else {
+            testBool = false;
+          }
       });
+      if (!testBool) {
+        createNewGroup(userId);
+        addToGroup(groupKey, userId, userCount);
+      }
   });
 }
-
-function addToGroup(groupKey, userId){
+function addToGroup(groupKey, userId, userCount){
     firebase.database().ref('database/'+groupKey).update({
       Token: userId,
       userCount: userCount+1,
@@ -70,10 +69,12 @@ function addToGroup(groupKey, userId){
     console.log("Lagt til i gruppe!");
 }
 function createNewGroup(userId){
-  firebase.database().ref('database/').push({
+  var query = firebase.database().ref("database/");
+  var key = query.push({
     userCount: 0,
     userToken: true,
     Token: userId
-  });
-  console.log("Lagd ny gruppe");
+  }).key;
+  console.log("lagd ny gruppe!");
+  addToGroup(key, userId, 0);
 }
