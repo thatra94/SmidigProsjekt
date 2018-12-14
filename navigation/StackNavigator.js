@@ -9,11 +9,18 @@ import {
 import Test from '../screens/Test';
 import Gruppe from '../screens/Gruppe';
 import Hub from '../screens/HubScreen';
+import Loading from '../screens/login/Loading';
+import SignUp from '../screens/login/SignUp';
+import Login from '../screens/login/Login';
 
 const Navigation = createStackNavigator({
+
+Test: Test,
   Gruppe: Gruppe,
-  Test: Test,
   Hub: Hub,
+  Loading: Loading,
+  SignUp: SignUp,
+  Login: Login,
 });
 
 const StackContainer = createAppContainer(createStackNavigator({

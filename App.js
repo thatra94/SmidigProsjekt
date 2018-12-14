@@ -8,6 +8,7 @@ import Fag from './screens/Kollokvie';
 //import Profil from './screens/Profil';
 import Gruppe from './screens/Gruppe';
 import AppContainer from './navigation/AppNavigator';
+import StackContainer from './navigation/StackNavigator';
 
 //import FireBase from '.components/FireBase';
 
@@ -34,6 +35,7 @@ firebase.initializeApp(firebaseConfig)
 export default class App extends Component {
   render() {
     return (
+      //<StackContainer/>
       <AppContainer/>
     )};
   }

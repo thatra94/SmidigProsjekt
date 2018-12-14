@@ -11,7 +11,8 @@ import Gruppe from '../screens/Gruppe';
 
 import Test from '../screens/Test';
 
-import Hub from '../screens/HubScreen'
+import Hub from '../screens/HubScreen';
+import SignUp from '../screens/login/SignUp';
 
 const KollokvieStack = createStackNavigator({
   Kollokvie: Fag
@@ -29,13 +30,18 @@ const HubStack = createStackNavigator({
   Hub: Hub
 });
 
+const SignupStack = createStackNavigator({
+  SignUp: SignUp
+});
+
 const AppContainer = createAppContainer(createBottomTabNavigator(
   {
+    SignupStack,
     HubStack,
     KollokvieStack,
     GroupsStack,
     SettingsStack,
-  }
-));
+  })
+);
 
 export default AppContainer;
