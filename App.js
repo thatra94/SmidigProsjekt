@@ -29,7 +29,8 @@ const firebaseConfig = {
   storageBucket: "smidigprosjekt-e3cdc.appspot.com",
 };
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
+checkGroup(testUserId);
 
 export default class App extends Component {
   render() {
