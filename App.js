@@ -30,7 +30,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-checkGroup(testUserId);
 
 export default class App extends Component {
   render() {

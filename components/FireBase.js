@@ -39,7 +39,6 @@ var testUserId = 123;
 var testBool = false;
 
 function joinGroup(userId){
-
   var query = firebase.database().ref("database/");
   query.once("value")
     .then(function(snapshot) {
