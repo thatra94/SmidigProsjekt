@@ -48,6 +48,10 @@ export default class Fag extends React.Component {
            id: 10,
            name: 'Gruppe'
          },
+         {
+           id: 11,
+           name: 'Hub'
+         },
       ]
    }
    alertItemName = (item) => {

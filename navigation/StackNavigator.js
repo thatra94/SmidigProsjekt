@@ -8,14 +8,16 @@ import {
 //import LoginScreen from '../screens/LoginScreen';
 import Test from '../screens/Test';
 import Gruppe from '../screens/Gruppe';
+import Hub from '../screens/HubScreen';
 
-const GruppeStack = createStackNavigator({
+const Navigation = createStackNavigator({
   Gruppe: Gruppe,
-  Test: Test
+  Test: Test,
+  Hub: Hub,
 });
 
 const StackContainer = createAppContainer(createStackNavigator({
-  GruppeStack
+  Navigation
 }));
 
 export default StackContainer;
