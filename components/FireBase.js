@@ -43,7 +43,7 @@ function joinGroup(userId){
   query.once("value")
     .then(function(snapshot) {
       snapshot.forEach(function(snapshot) {
-          console.log(snapshot.key);
+          //console.log(snapshot.key);
           var userCount = snapshot.val().userCount;
           var groupKey = snapshot.key;
           if(userCount < 3){
@@ -66,7 +66,6 @@ function addToGroup(groupKey, userId, userCount){
       Token: userId,
       userCount: userCount+1,
     });
-    console.log("Lagt til i gruppe!");
 }
 function createNewGroup(userId){
   var query = firebase.database().ref("database/");
@@ -75,6 +74,5 @@ function createNewGroup(userId){
     userToken: true,
     Token: userId
   }).key;
-  console.log("lagd ny gruppe!");
   addToGroup(key, userId, 0);
 }
