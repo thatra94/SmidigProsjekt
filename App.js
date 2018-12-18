@@ -10,7 +10,7 @@ import Gruppe from './screens/Gruppe';
 import AppContainer from './navigation/AppNavigator';
 import StackContainer from './navigation/StackNavigator';
 
-//import FireBase from '.components/FireBase';
+import FireBase from './components/FireBase';
 
 import * as firebase from 'firebase';
 
@@ -21,7 +21,7 @@ import {Container, Content, Header, Form, Input, Item, Button, Label} from 'nati
 });*/
 
 //Initialize firebase
-
+/*
 const firebaseConfig = {
   apiKey: "AIzaSyA8WS2uhrgoz0ldb-Uke0Uz0fv_cVfQehU",
   authDomain: "smidigprosjekt-e3cdc.firebaseapp.com",
@@ -31,6 +31,15 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+*/
+
+fb = new FireBase();
+
+fb.getStudieFromFirebase();
+
+
+
+
 
 export default class App extends Component {
   render() {
