@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import firebase from 'firebase';
-import * as Fire from '../components/FireBase';
+import FireBase from '../components/FireBase';
 
 //Fire.joinGroup(firebase.auth().currentUser.uid);
+fb = new FireBase;
 
 export default class Fag extends React.Component {
    state = {
@@ -64,7 +65,6 @@ export default class Fag extends React.Component {
    render() {
       return (
          <ScrollView>
-
             {
                this.state.names.map((item, index) => (
                   <TouchableOpacity
@@ -87,9 +87,8 @@ export default class Fag extends React.Component {
 }
 
 handleOnPress = () => {
-  console.log(firebase.auth().currentUser.uid);
-  /*Fire.joinGroup(firebase.auth().currentUser.uid)
-  .catch(error)*/
+  //console.log(firebase.auth().currentUser.uid);
+  fb.joinGroup(firebase.auth().currentUser.uid)
 }
 
 const styles = StyleSheet.create ({
