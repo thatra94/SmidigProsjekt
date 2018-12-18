@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import firebase from 'firebase';
+import * as Fire from '../components/FireBase';
+
+//var userId = firebase.auth().currentUser.uid;
+
+Fire.joinGroup(firebase.auth().currentUser.uid);
 
 export default class Fag extends React.Component {
    state = {
@@ -66,7 +72,7 @@ export default class Fag extends React.Component {
                   <TouchableOpacity
                      key = {item.id}
                      style = {styles.container}
-                     onPress={() => this.props.navigation.navigate(item.name)}
+                     onPress={() => handleOnPress()}
                      //onPress={() => this.props.navigation.navigate('Gruppe')}
                   >
                      <Text style = {styles.text}>
@@ -78,6 +84,12 @@ export default class Fag extends React.Component {
          </ScrollView>
       )
    }
+}
+
+handleOnPress = () => {
+  Fire.joinGroup(firebase.auth().currentUser.uid)
+  .then(this.props.navigation.navigate("Gruppe"))
+  .catch(error)
 }
 
 const styles = StyleSheet.create ({
