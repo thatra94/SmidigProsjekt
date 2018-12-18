@@ -3,9 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-nati
 import firebase from 'firebase';
 import * as Fire from '../components/FireBase';
 
-//var userId = firebase.auth().currentUser.uid;
-
-Fire.joinGroup(firebase.auth().currentUser.uid);
+//Fire.joinGroup(firebase.auth().currentUser.uid);
 
 export default class Fag extends React.Component {
    state = {
@@ -72,8 +70,10 @@ export default class Fag extends React.Component {
                   <TouchableOpacity
                      key = {item.id}
                      style = {styles.container}
-                     onPress={() => handleOnPress()}
-                     //onPress={() => this.props.navigation.navigate('Gruppe')}
+                     onPress={() => {
+                       handleOnPress()
+                       this.props.navigation.navigate('Gruppe')}
+                     }
                   >
                      <Text style = {styles.text}>
                         {item.name}
@@ -87,9 +87,9 @@ export default class Fag extends React.Component {
 }
 
 handleOnPress = () => {
-  Fire.joinGroup(firebase.auth().currentUser.uid)
-  .then(this.props.navigation.navigate("Gruppe"))
-  .catch(error)
+  console.log(firebase.auth().currentUser.uid);
+  /*Fire.joinGroup(firebase.auth().currentUser.uid)
+  .catch(error)*/
 }
 
 const styles = StyleSheet.create ({
