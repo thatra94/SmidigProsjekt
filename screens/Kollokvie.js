@@ -71,7 +71,7 @@ export default class Fag extends React.Component {
                      key = {item.id}
                      style = {styles.container}
                      onPress={() => {
-                       handleOnPress()
+                       joinGroupHandler()
                        this.props.navigation.navigate('Gruppe')}
                      }
                   >
@@ -86,8 +86,7 @@ export default class Fag extends React.Component {
    }
 }
 
-handleOnPress = () => {
-  //console.log(firebase.auth().currentUser.uid);
+joinGroupHandler = () => {
   fb.joinGroup(firebase.auth().currentUser.uid)
 }
 
