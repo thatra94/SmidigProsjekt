@@ -1,9 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import firebase from 'firebase';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default class SignUp extends React.Component {
-  state = { email: '', password: '', firstName: '', lastName:'', studySubject: '', errorMessage: null }
+  state = {
+    email: '',
+    password: '',
+    firstName: '',
+    lastName:'',
+    studySubject: '',
+    items: [
+      { label: 'Programmering', value: 'Programmering' },
+      { label: 'Interaktivt Design', value: 'Interaktivt Design' },
+      { label: 'Spillprogrammering', value: 'Spillprogrammering' },
+    ],
+    errorMessage: null }
 
 /*
 componentDidMount() {
@@ -93,13 +105,24 @@ saveUserData = (user) => {
           onChangeText={lastName => this.setState({ lastName })}
           value={this.state.lastName}
         />
+        <RNPickerSelect
+          items={this.state.items}
+          style={styles.textInputSelector}
+          placeholder="Studieretning"
+          onValueChange={(value) => {
+            this.setState({
+              studySubject: value,
+            });
+          }}
+        >
         <TextInput
           placeholder="Studieretning"
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.textInputSelector}
           onChangeText={studySubject => this.setState({ studySubject })}
           value={this.state.studySubject}
         />
+        </RNPickerSelect>
         <TextInput
           placeholder="Email"
           autoCapitalize="none"
@@ -132,6 +155,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textInput: {
+    height: 40,
+    width: '90%',
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginTop: 8
+  },
+  textInputSelector: {
+    left: 18,
     height: 40,
     width: '90%',
     borderColor: 'gray',
