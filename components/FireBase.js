@@ -50,7 +50,6 @@ class FireBase {
     firebase.database().ref('users/'+userId+'/groups').update({
       [groupKey]: true
     });
-    this.getGroups(userId);
 }
 
  createNewGroup(userId, subjectName){
@@ -75,18 +74,7 @@ class FireBase {
           console.log(userStudie);
         });
   }
-
-  getGroups(userId){
-    firebase.database().ref('users/' + userId+'/groups')
-      .once("value").then(function (snapshot){
-        snapshot.forEach(function(snapshot) {
-          console.log(snapshot.key);
-          
-        });
-      });
-   }
-
- }
+}
 
 
 export default FireBase;
