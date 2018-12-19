@@ -35,11 +35,6 @@ firebase.initializeApp(firebaseConfig);
 
 fb = new FireBase();
 
-fb.getStudieFromFirebase();
-
-
-
-
 
 export default class App extends Component {
   render() {

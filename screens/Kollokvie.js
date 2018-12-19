@@ -6,6 +6,30 @@ import FireBase from '../components/FireBase';
 //Fire.joinGroup(firebase.auth().currentUser.uid);
 fb = new FireBase;
 
+function joinGroup(userId, subjectName){
+ var testBool = false;
+
+ var query = firebase.database().ref("Groups/")
+   .once("value").then(function(snapshot) {
+     snapshot.forEach(function(snapshot) {
+         var userCount = snapshot.val().userCount;
+         var groupKey = snapshot.key;
+         if(userCount < 3){
+           fb.addToGroup(groupKey, userId, userCount);
+           testBool = true;
+           return true;
+         }
+         else {
+           testBool = false;
+         }
+     });
+     if (!testBool) {
+       fb.createNewGroup(userId, subjectName);
+       fb.addToGroup(groupKey, userId, userCount);
+     }
+ });
+}
+
 export default class Fag extends React.Component {
    state = {
       names: [
@@ -71,7 +95,7 @@ export default class Fag extends React.Component {
                      key = {item.id}
                      style = {styles.container}
                      onPress={() => {
-                       joinGroupHandler()
+                       joinGroup(firebase.auth().currentUser.uid, item.name)
                        this.props.navigation.navigate('Gruppe')}
                      }
                   >
@@ -84,10 +108,6 @@ export default class Fag extends React.Component {
          </ScrollView>
       )
    }
-}
-
-joinGroupHandler = () => {
-  fb.joinGroup(firebase.auth().currentUser.uid)
 }
 
 const styles = StyleSheet.create ({
