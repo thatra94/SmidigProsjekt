@@ -25,7 +25,7 @@ function joinGroup(userId, subjectName){
      });
      if (!testBool) {
        fb.createNewGroup(userId, subjectName);
-       fb.addToGroup(groupKey, userId, userCount);
+       //fb.addToGroup(groupKey, userId, userCount);
      }
  });
 }

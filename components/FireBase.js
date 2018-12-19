@@ -15,7 +15,7 @@ class FireBase {
   FireBase() {
     console.log("du har opprettet en instanse av firebase, erlend er homo");
   }
-
+/*
  joinGroup(userId){
   var testBool = false;
 
@@ -39,34 +39,44 @@ class FireBase {
       }
   });
 }
+*/
 
  addToGroup(groupKey, userId, userCount){
+    const userUid = {[userId]: true,}
     firebase.database().ref('Groups/'+groupKey).update({
       Token: userId,
       userCount: userCount+1,
+      users: userUid
+    });
+    firebase.database().ref('users/'+userId+'/Groups').update({
+
     });
 }
 
  createNewGroup(userId, subjectName){
+  const userUid = {[userId]: true,}
   var key = firebase.database().ref("Groups/")
     .push({
     userCount: 0,
     subject: subjectName,
     userToken: true,
-    Token: userId
+    Token: userId,
+    users: userUid
   }).key;
-  addToGroup(key, userId, 0);
+
+  this.addToGroup(key, userId, 0);
 }
 
-  getStudieFromFirebase(){
+  getStudieFromUser(userId){
     var userStudie;
 
-    firebase.database().ref('users/123asdfasdf'/*+userId+"/"*/)
+    firebase.database().ref('users/' + userId)
       .once("value").then(function (snapshot){
           userStudie = snapshot.val().studieretning;
           console.log(userStudie);
         });
   }
 }
+
 
 export default FireBase;
