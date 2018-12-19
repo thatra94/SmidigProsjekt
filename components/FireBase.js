@@ -1,7 +1,5 @@
-/*import React, {Component} from 'react';
+import React, {Component} from 'react';
 import * as firebase from 'firebase';
-
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8WS2uhrgoz0ldb-Uke0Uz0fv_cVfQehU",
@@ -11,43 +9,23 @@ const firebaseConfig = {
   storageBucket: "smidigprosjekt-e3cdc.appspot.com",
 };
 
+firebase.initializeApp(firebaseConfig);
 
-export default class FireBase extends React.Component {
-  constructor() {
-      firebase.initializeApp(firebaseConfig)
-  };
-/*
-  firebase.database().ref('database/').push({
-    userCount: 0,
-    userToken: true
-  });
+class FireBase {
+  FireBase() {
+    console.log("du har opprettet en instanse av firebase, erlend er homo");
+  }
 
-  firebase.database().ref('database/-LTW_MYiTAKqEpk7MOHh').update({
-    usertoken: true
-  })
+ joinGroup(userId){
+  var testBool = false;
 
-  var groupRef = firebase.database().ref("database/");
-  var groupKey = groupRef.orderByChild('userCount').equalTo(1).on("value", function(snapshot) {
-    console.log(snapshot.val());
-    snapshot.forEach(function(data) {
-      console.log(data.key);
-    });
-  });
-}
-*/
-var testUserId = 123;
-var testBool = false;
-
-function joinGroup(userId){
-  var query = firebase.database().ref("database/");
-  query.once("value")
-    .then(function(snapshot) {
+  var query = firebase.database().ref("Groups/")
+    .once("value").then(function(snapshot) {
       snapshot.forEach(function(snapshot) {
-          //console.log(snapshot.key);
           var userCount = snapshot.val().userCount;
           var groupKey = snapshot.key;
           if(userCount < 3){
-            addToGroup(groupKey, userId, userCount);
+            addToGroup(groupKey, userId, userCount).bind(this);
             testBool = true;
             return true;
           }
@@ -56,23 +34,38 @@ function joinGroup(userId){
           }
       });
       if (!testBool) {
-        createNewGroup(userId);
-        addToGroup(groupKey, userId, userCount);
+        createNewGroup(userId).bind(this);
+        addToGroup(groupKey, userId, userCount).bind(this);
       }
   });
 }
-function addToGroup(groupKey, userId, userCount){
-    firebase.database().ref('database/'+groupKey).update({
+
+ addToGroup(groupKey, userId, userCount){
+    firebase.database().ref('Groups/'+groupKey).update({
       Token: userId,
       userCount: userCount+1,
     });
 }
-function createNewGroup(userId){
-  var query = firebase.database().ref("database/");
-  var key = query.push({
+
+ createNewGroup(userId){
+  var key = firebase.database().ref("Groups/")
+    .push({
     userCount: 0,
     userToken: true,
     Token: userId
   }).key;
   addToGroup(key, userId, 0);
 }
+
+  getStudieFromFirebase(){
+    var userStudie;
+
+    firebase.database().ref('users/123asdfasdf'/*+userId+"/"*/)
+      .once("value").then(function (snapshot){
+          userStudie = snapshot.val().studieretning;
+          console.log(userStudie);
+        });
+  }
+}
+
+export default FireBase;

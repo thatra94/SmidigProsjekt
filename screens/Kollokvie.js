@@ -1,5 +1,34 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import firebase from 'firebase';
+import FireBase from '../components/FireBase';
+
+//Fire.joinGroup(firebase.auth().currentUser.uid);
+fb = new FireBase;
+
+function joinGroup(userId, subjectName){
+ var testBool = false;
+
+ var query = firebase.database().ref("Groups/")
+   .once("value").then(function(snapshot) {
+     snapshot.forEach(function(snapshot) {
+         var userCount = snapshot.val().userCount;
+         var groupKey = snapshot.key;
+         if(userCount < 3){
+           fb.addToGroup(groupKey, userId, userCount);
+           testBool = true;
+           return true;
+         }
+         else {
+           testBool = false;
+         }
+     });
+     if (!testBool) {
+       fb.createNewGroup(userId, subjectName);
+       fb.addToGroup(groupKey, userId, userCount);
+     }
+ });
+}
 
 export default class Fag extends React.Component {
    state = {
@@ -60,14 +89,15 @@ export default class Fag extends React.Component {
    render() {
       return (
          <ScrollView>
-
             {
                this.state.names.map((item, index) => (
                   <TouchableOpacity
                      key = {item.id}
                      style = {styles.container}
-                     onPress={() => this.props.navigation.navigate(item.name)}
-                     //onPress={() => this.props.navigation.navigate('Gruppe')}
+                     onPress={() => {
+                       joinGroup(firebase.auth().currentUser.uid, item.name)
+                       this.props.navigation.navigate('Gruppe')}
+                     }
                   >
                      <Text style = {styles.text}>
                         {item.name}
