@@ -42,26 +42,24 @@ class FireBase {
 */
 
  addToGroup(groupKey, userId, userCount){
-    const userUid = {[userId]: true,}
     firebase.database().ref('Groups/'+groupKey).update({
       Token: userId,
       userCount: userCount+1,
-      users: userUid
+      [userId]: true
     });
-    firebase.database().ref('users/'+userId+'/Groups').update({
-
+    firebase.database().ref('users/'+userId+'/groups').update({
+      [groupKey]: true
     });
 }
 
  createNewGroup(userId, subjectName){
-  const userUid = {[userId]: true,}
   var key = firebase.database().ref("Groups/")
     .push({
     userCount: 0,
     subject: subjectName,
     userToken: true,
     Token: userId,
-    users: userUid
+    [userId]: true
   }).key;
 
   this.addToGroup(key, userId, 0);
