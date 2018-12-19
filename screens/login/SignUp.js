@@ -108,7 +108,6 @@ saveUserData = (user) => {
         <RNPickerSelect
           items={this.state.items}
           style={styles.textInputSelector}
-          placeholder="Studieretning"
           onValueChange={(value) => {
             this.setState({
               studySubject: value,
