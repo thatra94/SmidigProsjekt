@@ -47,10 +47,11 @@ class FireBase {
     });
 }
 
- createNewGroup(userId){
+ createNewGroup(userId, subjectName){
   var key = firebase.database().ref("Groups/")
     .push({
     userCount: 0,
+    subject: subjectName,
     userToken: true,
     Token: userId
   }).key;
