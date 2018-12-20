@@ -31,6 +31,13 @@ function joinGroup(userId, subjectName){
 }
 
 export default class Fag extends React.Component {
+
+  static navigationOptions = {
+    title: "Velg et fag",
+    headerStyle: { marginTop: 24 },
+  }
+
+
    state = {
       names: [
          {

@@ -24,7 +24,7 @@ GroupsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-group'}
+      name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-people'}
     />
   )
 };
@@ -37,7 +37,7 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-more' : 'md-more_horiz'}
+      name={Platform.OS === 'ios' ? 'ios-more' : 'md-more'}
     />
   )
 };
