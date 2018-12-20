@@ -1,25 +1,19 @@
 import React from 'react';
+import {Platform } from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
   createAppContainer
 } from 'react-navigation';
+import TabBarIcon from '../components/TabBarIcon';
 
 import Fag from '../screens/Kollokvie';
-
 import Gruppe from '../screens/Gruppe';
-
 import Test from '../screens/Test';
-
 import Profil from '../screens/Profil';
-
 import Hub from '../screens/HubScreen';
 import SignUp from '../screens/login/SignUp';
 import Login from '../screens/login/Login';
-
-const KollokvieStack = createStackNavigator({
-  Kollokvie: Fag
-});
 
 const GroupsStack = createStackNavigator({
   Gruppe: Gruppe
@@ -37,6 +31,15 @@ GroupsStack.navigationOptions = {
 const SettingsStack = createStackNavigator({
   Test: Test
 });
+SettingsStack.navigationOptions = {
+  tabBarLabel: 'Test',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-more' : 'md-more'}
+    />
+  )
+};
 
 const HubStack = createStackNavigator({
   Hub: Hub,
@@ -55,19 +58,32 @@ HubStack.navigationOptions = {
 const ProfilStack = createStackNavigator({
   Profil: Profil
 });
+ProfilStack.navigationOptions = {
+  tabBarLabel: 'Profil',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-contact' : 'md-person'}
+    />
+  )
+};
 
 const SignupStack = createStackNavigator({
   SignUp: SignUp,
   Login: Login,
 });
+SignupStack.navigationOptions = {
+  tabBarLabel: 'Login',
+  tabBarVisible: false,
+};
 
 const AppContainer = createAppContainer(createBottomTabNavigator(
   {
     SignupStack,
     HubStack,
     GroupsStack,
-    SettingsStack,
     ProfilStack,
+    SettingsStack,
   })
 );
 
