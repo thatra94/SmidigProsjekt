@@ -74,7 +74,7 @@ const SignupStack = createStackNavigator({
 });
 SignupStack.navigationOptions = {
   tabBarLabel: 'Login',
-  tabBarVisible: false,
+  //tabBarVisible: false,
 };
 
 const AppContainer = createAppContainer(createBottomTabNavigator(
