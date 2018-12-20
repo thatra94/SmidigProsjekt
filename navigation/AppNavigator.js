@@ -11,7 +11,7 @@ import Fag from '../screens/Kollokvie';
 import Gruppe from '../screens/Gruppe';
 import Test from '../screens/Test';
 import Profil from '../screens/Profil';
-import Hub from '../screens/HubScreen';
+import Hub from '../screens/HomeScreen';
 import SignUp from '../screens/login/SignUp';
 import Login from '../screens/login/Login';
 import Loading from '../screens/login/Loading';

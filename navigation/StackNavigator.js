@@ -8,7 +8,7 @@ import {
 //import LoginScreen from '../screens/LoginScreen';
 import Test from '../screens/Test';
 import Gruppe from '../screens/Gruppe';
-import Hub from '../screens/HubScreen';
+import Hub from '../screens/HomeScreen';
 import Fag from '../screens/Kollokvie';
 import Loading from '../screens/login/Loading';
 import SignUp from '../screens/login/SignUp';
