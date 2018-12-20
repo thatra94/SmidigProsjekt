@@ -24,8 +24,10 @@ export default class Loading extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        //<Image style={{marginTop: 20}} source={require('./assets/images/logo-insj.png')} />
-        <Text>Loading</Text>
+        <Image
+          style={{height: '20%', width: '30%', marginBottom: 40}}
+          source={require('../../assets/images/logo-insj.png')}
+        />
         <ActivityIndicator size="large" />
       </View>
     )
