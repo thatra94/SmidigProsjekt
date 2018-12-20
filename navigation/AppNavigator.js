@@ -37,7 +37,7 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-more' : 'md-more'}
+      name={Platform.OS === 'ios' ? 'ios-more' : 'md-more_horiz'}
     />
   )
 };

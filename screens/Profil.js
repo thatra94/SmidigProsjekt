@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
    },
     studyUser: {
     marginTop: 10,
+    marginBottom: 30,
     textAlign: 'center',
     fontSize: 20,
     color: 'gray',
