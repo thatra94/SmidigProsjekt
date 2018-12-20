@@ -22,26 +22,6 @@ export default class SignUp extends React.Component {
     ],
     errorMessage: null }
 
-
-componentDidMount() {
-  this.authListener();
-}
-
-authListener() {
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      console.log("We are authenticated now!");
-      useruid = user.uid,
-      console.log(useruid),
-      this.props.navigation.navigate('Hub')
-    } else {
-      console.log("you are not authenticated");
-      this.props.navigation.navigate('SignUp')
-    }
-  });
-}
-
-
   handleSignUp = () => {
     const { email, password, firstName, lastName, studySubject } = this.state
     firebase
@@ -153,6 +133,7 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   textInputSelector: {
+    left: 18,
     height: 40,
     width: '90%',
     borderColor: 'gray',
