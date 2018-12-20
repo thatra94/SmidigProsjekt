@@ -4,7 +4,7 @@ import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, Touchabl
 import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
 
-var groupList = [];
+ var groupList = [];
 
  function getGroups(userId){
 
@@ -27,30 +27,37 @@ export default class Grupper extends React.Component {
   constructor(){
     super();
     getGroups(firebase.auth().currentUser.uid);
-
   }
 
+
    state = {
-     groups: groupList
+     liste:[{
+       id: 0,
+       name: "Smidig Prosjekt"
+     },
+   {
+     id: 1,
+     name: "Programmering"
+   }]
    }
    alertItemName = (item) => {
-      alert(item.groupName)
+      alert(item.name)
    }
    render() {
       return (
          <ScrollView>
             {
-               this.state.groups.map((item, index) => (
+               this.state.liste.map((item, index) => (
                   <TouchableOpacity
                      key = {item.id}
                      style = {styles.container}
                      onPress={() => {
-                        console.log(JSON.stringify(groupList[0]));
+
                       }
                      }
                   >
                      <Text style = {styles.text}>
-                        {item.groupName}
+                        {item.name}
                      </Text>
                   </TouchableOpacity>
                ))
@@ -64,14 +71,14 @@ const styles = StyleSheet.create ({
    container: {
       padding: 30,
       marginTop: 0,
-      backgroundColor: 'blue',
+      backgroundColor: '#ffffff',
       alignItems: 'center',
       borderWidth: 0.3,
       borderColor: 'black',
 
    },
    text: {
-      color: 'white',
+      color: '#4f603c',
       fontSize: 20,
    }
 })
