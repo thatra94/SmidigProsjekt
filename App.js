@@ -8,8 +8,9 @@ import Fag from './screens/Kollokvie';
 //import Profil from './screens/Profil';
 import Gruppe from './screens/Gruppe';
 import AppContainer from './navigation/AppNavigator';
+import StackContainer from './navigation/StackNavigator';
 
-//import FireBase from '.components/FireBase';
+import FireBase from './components/FireBase';
 
 import * as firebase from 'firebase';
 
@@ -20,7 +21,7 @@ import {Container, Content, Header, Form, Input, Item, Button, Label} from 'nati
 });*/
 
 //Initialize firebase
-
+/*
 const firebaseConfig = {
   apiKey: "AIzaSyA8WS2uhrgoz0ldb-Uke0Uz0fv_cVfQehU",
   authDomain: "smidigprosjekt-e3cdc.firebaseapp.com",
@@ -29,11 +30,16 @@ const firebaseConfig = {
   storageBucket: "smidigprosjekt-e3cdc.appspot.com",
 };
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
+*/
+
+fb = new FireBase();
+
 
 export default class App extends Component {
   render() {
     return (
+      //<StackContainer/>
       <AppContainer/>
     )};
   }

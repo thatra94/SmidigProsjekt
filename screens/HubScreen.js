@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
 } from 'react-native';
 
 import { WebBrowser } from 'expo';
@@ -26,41 +27,36 @@ export default class Hub extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-            <View style={styles.getStartedContainer}>
-
-                <ScrollView
-                    scrollEventThrottle={16}
-                >
-                    <View style={{flex: 1}}>
-                        <Text style={{fontSize: 24, fontWeight: '700',
-                        paddingHorizontal: 20, textAlign: 'center'}}>
-                            INSJ HUB
-                        </Text>
-
-                        <Text style={{fontWeight: '100', marginTop: 15,                 paddingHorizontal: 20, textAlign: 'center'}}>
-                                Getchoself a friend
-                        </Text>
-                    </View>
-                </ScrollView>
+          <View style={styles.getStartedContainer}>
+            <ScrollView
+              scrollEventThrottle={16}
+            >
+              <View style={{flex: 1}}>
+                <Text style={{fontSize: 24, fontWeight: '700',
+                  paddingHorizontal: 20, textAlign: 'center'}}>
+                  INSJ HUB
+                </Text>
+                <Text style={{fontWeight: '100', marginTop: 15,                 paddingHorizontal: 20, textAlign: 'center'}}>
+                  Getchoself a friend
+                </Text>
+              </View>
+            </ScrollView>
           </View>
+          <Button onPress={() => this.props.navigation.navigate('Fag')} title="Kollokvie"/>
 
         <View style={{ alignItems: 'center', marginHorizontal: 20 }}>
-            <View style={styles.menuContainer}
-            >
-                <MenuItem imageUri=
-                {require('../assets/images/beer.png')}
-                    name="Møt Andre"
+            <View style={styles.menuContainer}>
+                <MenuItem
+                  imageUri={require('../assets/images/beer.png')}
+                  name="Møt Andre"
                 />
-
-                <MenuItem imageUri=
-                {require('../assets/images/open-book.png')}
-                    name="Kollokvie"
+                <MenuItem
+                  imageUri={require('../assets/images/open-book.png')}
+                  name="Fag"
                 />
-
-                <MenuItem imageUri=
-                {require('../assets/images/group.png')}
-                    name="Grupper"
+                <MenuItem
+                  imageUri={require('../assets/images/group.png')}
+                  name="Gruppe"
                 />
             </View>
         </View>

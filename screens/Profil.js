@@ -1,4 +1,4 @@
-/*import React, { Component } from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Image,
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
     height:40,
     justifyContent: 'center',
   },
-});*/
+});
