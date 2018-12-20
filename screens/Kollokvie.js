@@ -25,26 +25,8 @@ function joinGroup(userId, subjectName){
      });
      if (!testBool) {
        fb.createNewGroup(userId, subjectName);
-       //fb.addToGroup(groupKey, userId, userCount);
      }
  });
-}
-
-var groupList = [];
-
-function getGroups(userId){
-
-    firebase.database().ref('users/' + userId+'/groups')
-      .once("value").then(function (snapshot){
-        snapshot.forEach(function(snapshot) {
-          firebase.database().ref('Groups/'+snapshot.key)
-          .once("value").then(function(snapshot){
-            groupList.push({
-              group: snapshot.val().subject,
-            });
-          });
-        });
-      });
 }
 
 export default class Fag extends React.Component {
