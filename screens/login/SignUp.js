@@ -58,17 +58,6 @@ authListener() {
           //console.log(user),
           console.log(user.uid);
         })
-        /*.then((user) => {
-              console.log(user.uid);
-              firebase.database().ref('users/' + user.uid).set({
-                email: email.toLowerCase(),
-                firstName: firstName
-          })
-          console.log(user.uid)
-          console.log("22")
-        })
-      })
-      *///.then(user => this.props.navigation.navisgate('Main'))
       .catch(error => this.setState({ errorMessage: error.message }))
   }
 
