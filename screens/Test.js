@@ -1,32 +1,19 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, FlatList, Text, View, Alert } from "react-native";
 
+import * as firebase from 'firebase';
+import FireBase from '../components/FireBase';
+
 export default class HomeActivity extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       GridListItems: [
-        { key: "programmering" },
-        { key: "interaktivt design" },
-        { key: "Amit" },
-        { key: "React" },
-        { key: "React Native" },
-        { key: "Java" },
-        { key: "Javascript" },
-        { key: "PHP" },
-        { key: "AJAX" },
-        { key: "Android" },
-        { key: "Selenium" },
-        { key: "HTML" },
+        { key: "AAAA" },
         { key: "Database" },
-        { key: "MYSQL" },
-        { key: "SQLLite" },
-        { key: "Web Technology" },
-        { key: "CSS" },
-        { key: "Python" },
-        { key: "Linux" },
-        { key: "Kotlin" },
+        { key: "Kollokvie" },
+        { key: "ThanhErHomo" },
       ]
     };
   }
@@ -43,7 +30,7 @@ export default class HomeActivity extends Component {
         renderItem={ ({item}) =>
           <View style={styles.GridViewContainer}>
            <Text style={styles.GridViewTextLayout} onPress={this.GetGridViewItem.bind(this, item.key)} > {item.key} </Text>
-           <Text style={styles.GridViewTextMemberLayout}> medlemmer:fredrik </Text>
+           <Text style={styles.GridViewTextMemberLayout}> medlemmer:Fredrik </Text>
           </View> }
         numColumns={2}
      />

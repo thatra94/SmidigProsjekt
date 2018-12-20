@@ -30,6 +30,23 @@ function joinGroup(userId, subjectName){
  });
 }
 
+var groupList = [];
+
+function getGroups(userId){
+
+    firebase.database().ref('users/' + userId+'/groups')
+      .once("value").then(function (snapshot){
+        snapshot.forEach(function(snapshot) {
+          firebase.database().ref('Groups/'+snapshot.key)
+          .once("value").then(function(snapshot){
+            groupList.push({
+              group: snapshot.val().subject,
+            });
+          });
+        });
+      });
+}
+
 export default class Fag extends React.Component {
    state = {
       names: [
@@ -96,6 +113,7 @@ export default class Fag extends React.Component {
                      style = {styles.container}
                      onPress={() => {
                        joinGroup(firebase.auth().currentUser.uid, item.name)
+                       getGroups(firebase.auth().currentUser.uid)
                        this.props.navigation.navigate('Gruppe')}
                      }
                   >
