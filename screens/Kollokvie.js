@@ -25,7 +25,6 @@ function joinGroup(userId, subjectName){
      });
      if (!testBool) {
        fb.createNewGroup(userId, subjectName);
-       //fb.addToGroup(groupKey, userId, userCount);
      }
  });
 }
@@ -103,6 +102,7 @@ export default class Fag extends React.Component {
                      style = {styles.container}
                      onPress={() => {
                        joinGroup(firebase.auth().currentUser.uid, item.name)
+                       getGroups(firebase.auth().currentUser.uid)
                        this.props.navigation.navigate('Gruppe')}
                      }
                   >

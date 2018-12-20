@@ -13,7 +13,6 @@ firebase.initializeApp(firebaseConfig);
 
 class FireBase {
   FireBase() {
-    console.log("du har opprettet en instanse av firebase, erlend er homo");
   }
 /*
  joinGroup(userId){
@@ -65,7 +64,7 @@ class FireBase {
   this.addToGroup(key, userId, 0);
 }
 
-  getStudieFromUser(userId){
+  getSubjectFromUser(userId){
     var userStudie;
 
     firebase.database().ref('users/' + userId)
@@ -74,7 +73,24 @@ class FireBase {
           console.log(userStudie);
         });
   }
-}
 
+  //var groupList = [];
+
+   getGroups(userId){
+
+      firebase.database().ref('users/' + userId+'/groups')
+        .once("value").then(function (snapshot){
+          snapshot.forEach(function(snapshot) {
+            firebase.database().ref('Groups/'+snapshot.key)
+            .once("value").then(function(snapshot){
+              groupList.push({
+                group: snapshot.val().subject,
+              });
+            });
+          });
+        });
+  }
+
+ }
 
 export default FireBase;

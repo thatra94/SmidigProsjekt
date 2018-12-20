@@ -1,90 +1,77 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, FlatList, Text, View, Alert } from "react-native";
+import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, TouchableOpacity } from "react-native";
 
-export default class HomeActivity extends Component {
-  constructor(props) {
-    super(props);
+import * as firebase from 'firebase';
+import FireBase from '../components/FireBase';
 
-    this.state = {
-      GridListItems: [
-        { key: "programmering" },
-        { key: "interaktivt design" },
-        { key: "Amit" },
-        { key: "React" },
-        { key: "React Native" },
-        { key: "Java" },
-        { key: "Javascript" },
-        { key: "PHP" },
-        { key: "AJAX" },
-        { key: "Android" },
-        { key: "Selenium" },
-        { key: "HTML" },
-        { key: "Database" },
-        { key: "MYSQL" },
-        { key: "SQLLite" },
-        { key: "Web Technology" },
-        { key: "CSS" },
-        { key: "Python" },
-        { key: "Linux" },
-        { key: "Kotlin" },
-      ]
-    };
+var groupList = [];
+
+ function getGroups(userId){
+
+    firebase.database().ref('users/' + userId+'/groups')
+      .once("value").then(function (snapshot){
+        snapshot.forEach(function(snapshot) {
+          firebase.database().ref('Groups/'+snapshot.key)
+          .once("value").then(function(snapshot){
+            groupList.push({
+              id: snapshot.key,
+              groupName: snapshot.val().subject,
+            });
+          });
+        });
+      });
+}
+
+
+export default class Grupper extends React.Component {
+  constructor(){
+    super();
+    getGroups(firebase.auth().currentUser.uid);
+
   }
 
-  GetGridViewItem(item) {
-    Alert.alert(item);
-  }
-
-  render() {
-    return (
-   <View style={styles.container}>
-     <FlatList
-        data={ this.state.GridListItems }
-        renderItem={ ({item}) =>
-          <View style={styles.GridViewContainer}>
-           <Text style={styles.GridViewTextLayout} onPress={this.GetGridViewItem.bind(this, item.key)} > {item.key} </Text>
-           <Text style={styles.GridViewTextMemberLayout}> medlemmer:fredrik </Text>
-          </View> }
-        numColumns={2}
-     />
-   </View>
- );
+   state = {
+     groups: groupList
+   }
+   alertItemName = (item) => {
+      alert(item.groupName)
+   }
+   render() {
+      return (
+         <ScrollView>
+            {
+               this.state.groups.map((item, index) => (
+                  <TouchableOpacity
+                     key = {item.id}
+                     style = {styles.container}
+                     onPress={() => {
+                        console.log(JSON.stringify(groupList[0]));
+                      }
+                     }
+                  >
+                     <Text style = {styles.text}>
+                        {item.groupName}
+                     </Text>
+                  </TouchableOpacity>
+               ))
+            }
+         </ScrollView>
+      )
+   }
 }
 
-}
-const styles = StyleSheet.create({
-container: {
-flex: 1,
-justifyContent: "center",
-backgroundColor: "#e5e5e5"
-},
-headerText: {
-fontSize: 20,
-textAlign: "center",
-margin: 10,
-fontWeight: "bold"
-},
-GridViewContainer: {
-flex:1,
-justifyContent: 'center',
-alignItems: 'center',
-height: 200,
-margin: 5,
-backgroundColor: 'dodgerblue'
-},
-GridViewTextLayout: {
-fontSize: 20,
-fontWeight: 'bold',
-justifyContent: 'center',
-color: '#fff',
-padding: 10,
-},
+const styles = StyleSheet.create ({
+   container: {
+      padding: 30,
+      marginTop: 0,
+      backgroundColor: 'blue',
+      alignItems: 'center',
+      borderWidth: 0.3,
+      borderColor: 'black',
 
-GridViewTextMemberLayout: {
-fontSize: 10,
-fontWeight: 'bold',
-justifyContent: 'center',
-color: '#fff',
-padding: 10,
-}
-});
+   },
+   text: {
+      color: 'white',
+      fontSize: 20,
+   }
+})
