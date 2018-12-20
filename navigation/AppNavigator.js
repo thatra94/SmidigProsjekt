@@ -14,6 +14,7 @@ import Profil from '../screens/Profil';
 import Hub from '../screens/HubScreen';
 import SignUp from '../screens/login/SignUp';
 import Login from '../screens/login/Login';
+import Loading from '../screens/login/Loading';
 
 const GroupsStack = createStackNavigator({
   Gruppe: Gruppe
@@ -69,12 +70,13 @@ ProfilStack.navigationOptions = {
 };
 
 const SignupStack = createStackNavigator({
+  Loading: Loading,
   SignUp: SignUp,
   Login: Login,
 });
 SignupStack.navigationOptions = {
   tabBarLabel: 'Login',
-  //tabBarVisible: false,
+  tabBarVisible: false,
 };
 
 const AppContainer = createAppContainer(createBottomTabNavigator(
