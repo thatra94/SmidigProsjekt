@@ -22,7 +22,6 @@ const KollokvieStack = createStackNavigator({
 const GroupsStack = createStackNavigator({
   Gruppe: Gruppe
 });
-
 GroupsStack.navigationOptions = {
   tabBarLabel: 'Grupper',
   tabBarIcon: ({ focused }) => (
@@ -47,8 +46,18 @@ SettingsStack.navigationOptions = {
 };
 
 const HubStack = createStackNavigator({
-  Hub: Hub
+  Hub: Hub,
+  Fag: Fag,
 });
+HubStack.navigationOptions = {
+  tabBarLabel: 'Hjem',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+    />
+  )
+};
 
 const ProfilStack = createStackNavigator({
   Profil: Profil
@@ -72,10 +81,9 @@ const AppContainer = createAppContainer(createBottomTabNavigator(
   {
     SignupStack,
     HubStack,
-    KollokvieStack,
     GroupsStack,
     SettingsStack,
-    Profil,
+    ProfilStack,
   })
 );
 
