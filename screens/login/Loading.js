@@ -1,18 +1,33 @@
 import React from 'react'
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet, Image } from 'react-native'
 import firebase from 'firebase'
 
 export default class Loading extends React.Component {
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.props.navigation.navigate(user ? 'Main' : 'SignUp')
-    })
+    this.authListener();
+  }
+
+  authListener() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log("We are authenticated now!");
+        useruid = user.uid,
+        console.log(useruid),
+        this.props.navigation.navigate('Hub')
+      } else {
+        console.log("you are not authenticated");
+        this.props.navigation.navigate('SignUp')
+      }
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Loading</Text>
+        <Image
+          style={{height: '20%', width: '30%', marginBottom: 40}}
+          source={require('../../assets/images/logo-insj.png')}
+        />
         <ActivityIndicator size="large" />
       </View>
     )

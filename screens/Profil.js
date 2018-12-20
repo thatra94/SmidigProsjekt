@@ -3,10 +3,24 @@ import {
   StyleSheet,
   Image,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
+import firebase from 'firebase';
+
+
 
 export default class Profil extends React.Component {
+
+  signOutUser = () => {
+    firebase
+      .auth()
+        .signOut()
+          .then(() => {
+            console.log('sign out succesful')
+          }).catch(error => console.log('error'))
+      }
+
   render() {
     return (
       <View style={styles.container}>
@@ -30,6 +44,8 @@ export default class Profil extends React.Component {
 
         <Text style={styles.interestTitle}>Interesser</Text>
         <Text style={styles.interestText}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</Text>
+
+        <Button title="Sign Out" onPress={this.signOutUser} />
       </View>
     );
   }

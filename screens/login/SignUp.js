@@ -4,6 +4,11 @@ import firebase from 'firebase';
 import RNPickerSelect from 'react-native-picker-select';
 
 export default class SignUp extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     email: '',
     password: '',
@@ -16,28 +21,6 @@ export default class SignUp extends React.Component {
       { label: 'Spillprogrammering', value: 'Spillprogrammering' },
     ],
     errorMessage: null }
-
-/*
-componentDidMount() {
-  this.authListener();
-}
-
-authListener() {
-  const { email, firstName} = this.state
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      console.log("We are authenticated now!");
-      useruid = user.uid,
-      console.log(useruid),
-      firebase.database().ref('users/' + useruid).set({
-        email: email.toLowerCase(),
-        firstName: firstName
-    })  } else {
-      console.log("you are not authenticated");
-    }
-  });
-}
-*/
 
   handleSignUp = () => {
     const { email, password, firstName, lastName, studySubject } = this.state
@@ -55,17 +38,6 @@ authListener() {
           //console.log(user),
           console.log(user.uid);
         })
-        /*.then((user) => {
-              console.log(user.uid);
-              firebase.database().ref('users/' + user.uid).set({
-                email: email.toLowerCase(),
-                firstName: firstName
-          })
-          console.log(user.uid)
-          console.log("22")
-        })
-      })
-      *///.then(user => this.props.navigation.navisgate('Main'))
       .catch(error => this.setState({ errorMessage: error.message }))
   }
 
