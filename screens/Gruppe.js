@@ -1,56 +1,84 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React, { Component } from "react";
+import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, TouchableOpacity } from "react-native";
 
-export default class Gruppe extends React.Component {
-  render() {
-    return (
-        //welcome - Text
-      <View style={styles.container}>
-        <View style={styles.box1}>
-        <Text style={styles.welcome}>Studiegruppe</Text>
-        <Text style={styles.subText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
-        </View>
+import * as firebase from 'firebase';
+import FireBase from '../components/FireBase';
 
+ var groupList = [];
 
-        <Text style={styles.welcome}>Vors</Text>
-        <Text style={styles.welcome}>Brettspill</Text>
-        <Text style={styles.welcome}>Utveksling</Text>
-        <Text style={styles.welcome}>Minigolf</Text>
-      </View>
-    );
-  }
+ function getGroups(userId){
+
+    firebase.database().ref('users/' + userId+'/groups')
+      .once("value").then(function (snapshot){
+        snapshot.forEach(function(snapshot) {
+          firebase.database().ref('Groups/'+snapshot.key)
+          .once("value").then(function(snapshot){
+            groupList.push({
+              id: snapshot.key,
+              groupName: snapshot.val().subject,
+            });
+          });
+        });
+      });
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-    backgroundColor: '#F5FCFF',
-  },
-    box1: {
-    marginTop: 20,
-    backgroundColor: 'pink',
-    height: 170,
-  },
-  welcome: {
-    flex: 1,
-    margin: 20,
-    backgroundColor: 'orange',
-    margin: 10,
-    textAlign: 'center',
-    fontSize: 20,
-    paddingTop: 30,
-  },
-    subText: {
-    margin: 20,
-    backgroundColor: 'orange',
-    textAlign: 'center',
-    fontSize: 10,
-    paddingLeft: 40,
-    paddingRight: 40,
+
+export default class Grupper extends React.Component {
+  constructor(){
+    super();
+    getGroups(firebase.auth().currentUser.uid);
   }
-});
+
+
+   state = {
+     liste:[{
+       id: 0,
+       name: "Smidig Prosjekt"
+     },
+   {
+     id: 1,
+     name: "Programmering"
+   }]
+   }
+   alertItemName = (item) => {
+      alert(item.name)
+   }
+   render() {
+      return (
+         <ScrollView>
+            {
+               this.state.liste.map((item, index) => (
+                  <TouchableOpacity
+                     key = {item.id}
+                     style = {styles.container}
+                     onPress={() => {
+
+                      }
+                     }
+                  >
+                     <Text style = {styles.text}>
+                        {item.name}
+                     </Text>
+                  </TouchableOpacity>
+               ))
+            }
+         </ScrollView>
+      )
+   }
+}
+
+const styles = StyleSheet.create ({
+   container: {
+      padding: 30,
+      marginTop: 0,
+      backgroundColor: '#ffffff',
+      alignItems: 'center',
+      borderWidth: 0.3,
+      borderColor: 'black',
+
+   },
+   text: {
+      color: '#4f603c',
+      fontSize: 20,
+   }
+})

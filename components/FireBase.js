@@ -73,24 +73,6 @@ class FireBase {
           console.log(userStudie);
         });
   }
-
-  //var groupList = [];
-
-   getGroups(userId){
-
-      firebase.database().ref('users/' + userId+'/groups')
-        .once("value").then(function (snapshot){
-          snapshot.forEach(function(snapshot) {
-            firebase.database().ref('Groups/'+snapshot.key)
-            .once("value").then(function(snapshot){
-              groupList.push({
-                group: snapshot.val().subject,
-              });
-            });
-          });
-        });
-  }
-
- }
+}
 
 export default FireBase;
