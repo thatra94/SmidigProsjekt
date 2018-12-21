@@ -37,15 +37,20 @@ export default class Grupper extends React.Component {
 
 
    state = {
-     liste:[{
-       id: 0,
-       name: "Smidig Prosjekt"
-     },
-   {
-     id: 1,
-     name: "Programmering"
-   }]
+     liste: [
+       {
+         id: 0,
+         name: "Smidig Prosjekt",
+         medlemmer: "Thanh, Fredrik og 2 til"
+       },
+       {
+         id: 1,
+         name: "Programmering",
+         medlemmer: "Jonas og Erlend"
+       }
+     ]
    }
+
    alertItemName = (item) => {
       alert(item.name)
    }
@@ -64,6 +69,9 @@ export default class Grupper extends React.Component {
                   >
                      <Text style = {styles.text}>
                         {item.name}
+                     </Text>
+                     <Text style = {styles.text2}>
+                        {item.medlemmer}
                      </Text>
                   </TouchableOpacity>
                ))
@@ -86,5 +94,10 @@ const styles = StyleSheet.create ({
    text: {
       color: '#4f603c',
       fontSize: 20,
+   },
+   text2: {
+      color: '#4f603c',
+      fontSize: 12,
+      marginTop: 10,
    }
 })
