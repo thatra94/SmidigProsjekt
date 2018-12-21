@@ -119,15 +119,15 @@ export default class Fag extends React.Component {
 const styles = StyleSheet.create ({
    container: {
       padding: 30,
-      marginTop: 0,
-      backgroundColor: '#ffffff',
+      marginTop: 5,
+      backgroundColor: '#ff6650',
       alignItems: 'center',
       borderWidth: 0.3,
       borderColor: 'black',
 
    },
    text: {
-      color: '#4f603c',
+      color: '#ffffff',
       fontSize: 20,
    }
 })
