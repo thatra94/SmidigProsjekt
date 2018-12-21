@@ -30,6 +30,12 @@ export default class Grupper extends React.Component {
   }
 
 
+    static navigationOptions = {
+      title: "Dine Grupper",
+      headerStyle: { marginTop: 24 },
+    }
+
+
    state = {
      liste:[{
        id: 0,
