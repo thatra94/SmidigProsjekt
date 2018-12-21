@@ -45,7 +45,7 @@ export default class HomeScreen extends React.Component {
                 onPress={() => {this.props.navigation.navigate('Gruppe')}}
                 style={{height: 85}}
                 >
-                <View style={{ flex: 1, flexDirection: 'row', marginTop: 15, width: 250, height: 70, backgroundColor: '#ab4046', borderRadius: 23 }}>
+                <View style={{ flex: 1, flexDirection: 'row', marginTop: 15, width: 250, height: 70, backgroundColor: '#ff6650', borderRadius: 23 }}>
 
                     <Image
                         source={require('../assets/images/open-book.png')}
@@ -60,7 +60,7 @@ export default class HomeScreen extends React.Component {
                 onPress={() => {this.props.navigation.navigate('Fag')}}
                 style={{height: 105}}
                 >
-                <View style={{ flex: 1, flexDirection: 'row', marginTop: 35, width: 250, height: 70, backgroundColor: '#ab4046', borderRadius: 23 }}>
+                <View style={{ flex: 1, flexDirection: 'row', marginTop: 35, width: 250, height: 70, backgroundColor: '#ff6650', borderRadius: 23 }}>
 
                     <Image
                         source={require('../assets/images/college.png')}

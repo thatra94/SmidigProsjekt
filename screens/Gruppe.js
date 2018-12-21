@@ -29,12 +29,10 @@ export default class Grupper extends React.Component {
     getGroups(firebase.auth().currentUser.uid);
   }
 
-
     static navigationOptions = {
       title: "Dine Grupper",
       headerStyle: { marginTop: 24 },
     }
-
 
    state = {
      liste: [
