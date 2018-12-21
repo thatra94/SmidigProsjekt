@@ -95,11 +95,11 @@ const styles = StyleSheet.create ({
    },
 
    text: {
-      color: '#4f603c',
+      color: '#ffffff',
       fontSize: 20,
    },
    text2: {
-      color: '#4f603c',
+      color: '#ffffff',
       fontSize: 12,
       marginTop: 10,
    }
