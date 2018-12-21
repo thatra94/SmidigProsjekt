@@ -89,16 +89,16 @@ const styles = StyleSheet.create ({
       height: 150,
       borderColor: 'black',
       margin: 5,
-
+      justifyContent: 'center',
    },
 
    text: {
       color: '#ffffff',
-      fontSize: 20,
+      fontSize: 24,
    },
    text2: {
       color: '#ffffff',
-      fontSize: 12,
+      fontSize: 14,
       marginTop: 10,
    }
 })
