@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import firebase from 'firebase';
 import FireBase from '../components/FireBase';
+import CustomListView from "../components/CustomListView";
 
 //Fire.joinGroup(firebase.auth().currentUser.uid);
-fb = new FireBase;
+let fb = new FireBase;
 
 function joinGroup(userId, subjectName){
  var testBool = false;
@@ -29,12 +30,35 @@ function joinGroup(userId, subjectName){
  });
 }
 
+var studies = [];
+
+function getStudies(userId){
+    //let studies = [];
+    //const userStudie = fb.getSubjectFromUser(firebase.auth().currentUser.uid);
+    //console.log("Recieved " + userStudie);
+    firebase.database().ref('users/' + userId)
+        .once("value").then(function (snapshot){
+        firebase.database().ref("Studie/" + snapshot.val().studieretning)
+            .once("value").then(function (snapshot) {
+            //snapshot.forEach(function (snapshot) {
+            studies.push({
+                title: snapshot.key
+            })
+        })
+        //})
+        ;
+        console.log(studies);
+        return studies;
+    });
+
+}
+
 export default class Fag extends React.Component {
 
   static navigationOptions = {
     title: "Velg et fag",
     headerStyle: { marginTop: 24 },
-  }
+  };
 
 
    state = {
@@ -88,29 +112,14 @@ export default class Fag extends React.Component {
            name: 'Hub'
          },
       ]
-   }
+   };
    alertItemName = (item) => {
       alert(item.name)
-   }
+   };
    render() {
       return (
          <ScrollView>
-            {
-               this.state.names.map((item, index) => (
-                  <TouchableOpacity
-                     key = {item.id}
-                     style = {styles.container}
-                     onPress={() => {
-                       joinGroup(firebase.auth().currentUser.uid, item.name)
-                       this.props.navigation.navigate('Gruppe')}
-                     }
-                  >
-                     <Text style = {styles.text}>
-                        {item.name}
-                     </Text>
-                  </TouchableOpacity>
-               ))
-            }
+            <CustomListView itemList={getStudies(firebase.auth().currentUser.uid)}/>
          </ScrollView>
       )
    }
@@ -130,4 +139,4 @@ const styles = StyleSheet.create ({
       color: '#ffffff',
       fontSize: 20,
    }
-})
+});

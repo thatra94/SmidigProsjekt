@@ -65,13 +65,14 @@ class FireBase {
 }
 
   getSubjectFromUser(userId){
-    var userStudie;
+    let userStudie = "";
 
     firebase.database().ref('users/' + userId)
       .once("value").then(function (snapshot){
           userStudie = snapshot.val().studieretning;
-          console.log(userStudie);
+          console.log("Returned " + userStudie);
         });
+    return userStudie;
   }
 }
 

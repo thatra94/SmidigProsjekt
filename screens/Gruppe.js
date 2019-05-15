@@ -24,8 +24,8 @@ import FireBase from '../components/FireBase';
 
 
 export default class Grupper extends React.Component {
-  constructor(){
-    super();
+    constructor(props){
+    super(props);
     getGroups(firebase.auth().currentUser.uid);
   }
 
