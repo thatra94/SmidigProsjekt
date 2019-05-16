@@ -30,96 +30,118 @@ function joinGroup(userId, subjectName){
  });
 }
 
-var studies = [];
-
-
-function getStudies(userId){
-    firebase.database().ref('users/' + userId)
-        .once("value").then(function (snapshot){
-        firebase.database().ref("Studie/" + snapshot.val().studieretning)
-            .once("value").then(function (snapshot) {
-            snapshot.forEach(function (snapshot) {
-                studies.push({title: snapshot.key})
+async function getStudies(userId) {
+    let studies = [];
+    await firebase.database().ref('users/' + userId)
+        .once("value").then(function (snapshot) {
+            firebase.database().ref("Studie/" + snapshot.val().studieretning)
+                .once("value").then(function (snapshot) {
+                snapshot.forEach(function (snapshot) {
+                    studies.push({title: snapshot.key})
+                });
+                console.log(studies);
+                return studies;
             })
-            });
-        let result = studies.map(a => a.title);
-        console.log(result);
-        return studies;
-    });
-
+        });
 }
+
+
+
 
 export default class Fag extends React.Component {
+    constructor(props) {
+        super(props);
+        //this.setState({subject: getStudies(firebase.auth().currentUser.uid)})
+    };
 
-  static navigationOptions = {
-    title: "Velg et fag",
-    headerStyle: { marginTop: 24 },
-  };
+    static navigationOptions = {
+        title: "Velg et fag",
+        headerStyle: {marginTop: 24},
+    };
 
 
-   state = {
-      names: [
-         {
-            id: 0,
-            name: 'Databaser',
-         },
-         {
-            id: 1,
-            name: 'Programmering',
-         },
-         {
-            id: 2,
-            name: 'Digital Teknologi',
-         },
-         {
-            id: 3,
-            name: 'Informasjonssikkerhet',
-         },
-        {
-            id: 4,
-            name: 'Webprosjekt',
-         },
-        {
-            id: 5,
-            name: 'Programmering 2',
-         },
-        {
-            id: 6,
-            name: 'Algoritmer og Datastrukturer',
-         },
-        {
-            id: 7,
-            name: 'Interaksjonsdesign',
-         },
-        {
-            id: 8,
-            name: 'Animasjon',
-         },
-         {
-           id: 9,
-           name: 'Test'
-         },
-         {
-           id: 10,
-           name: 'Gruppe'
-         },
-         {
-           id: 11,
-           name: 'Hub'
-         },
-      ]
-   };
-   alertItemName = (item) => {
-      alert(item.name)
-   };
-   render() {
-      return (
-         <ScrollView>
-            <CustomListView itemList={getStudies(firebase.auth().currentUser.uid)}/>
-         </ScrollView>
-      )
-   }
+    state = {
+
+        isLoading: true,
+        title: [],
+        names: [
+            {
+                id: 0,
+                name: 'Databaser',
+            },
+            {
+                id: 1,
+                name: 'Programmering',
+            },
+            {
+                id: 2,
+                name: 'Digital Teknologi',
+            },
+            {
+                id: 3,
+                name: 'Informasjonssikkerhet',
+            },
+            {
+                id: 4,
+                name: 'Webprosjekt',
+            },
+            {
+                id: 5,
+                name: 'Programmering 2',
+            },
+            {
+                id: 6,
+                name: 'Algoritmer og Datastrukturer',
+            },
+            {
+                id: 7,
+                name: 'Interaksjonsdesign',
+            },
+            {
+                id: 8,
+                name: 'Animasjon',
+            },
+            {
+                id: 9,
+                name: 'Test'
+            },
+            {
+                id: 10,
+                name: 'Gruppe'
+            },
+            {
+                id: 11,
+                name: 'Hub'
+            },
+        ]
+    };
+    alertItemName = (item) => {
+        alert(item.name)
+    };
+
+    async componentDidMount() {
+        let studie = await getStudies(firebase.auth().currentUser.uid);
+        this.setState({title: studie});
+        this.setState({isLoading: false});
+        console.log(this.state.title, "test");
+
+    }
+
+    render() {
+        if (this.state.isLoading) {
+            return (
+                <View><Text>Loading...</Text></View>
+            )
+        }
+        return (
+            <ScrollView>
+                <Text>Main page</Text>
+                <CustomListView itemList={this.state.title}/>
+            </ScrollView>
+        );
+    }
 }
+
 
 const styles = StyleSheet.create ({
    container: {

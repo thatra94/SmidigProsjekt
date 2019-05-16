@@ -23,13 +23,47 @@ import CustomListView from '../components/CustomListView';
       });
 }
 
+
+async function getStudies(userId) {
+    let studies = [];
+    let result = [];
+    await firebase.database().ref('users/' + userId)
+        .once("value").then(function (snapshot) {
+            firebase.database().ref("Studie/" + snapshot.val().studieretning)
+                .once("value").then(function (snapshot) {
+                snapshot.forEach(function (snapshot) {
+                    studies.push({title: snapshot.key})
+                });
+                let result = studies.map(a => a.title);
+                console.log(studies);
+                return studies;
+            })
+        });
+}
+
+
 export default class Grupper extends React.Component {
     constructor(props){
     super(props);
     getGroups(firebase.auth().currentUser.uid);
   }
 
+    state = {
+        list: [
+            {
+                title: 'Databaser',
+            },
+            {
+                title: 'Programmering',
+            },
+            {
+                title: 'Digital Teknologi',
+            }
+        ]
+    };
+
    render() {
+       console.log(this.state.list);
       return (
          <ScrollView>
             <CustomListView itemList={this.state.list}/>
