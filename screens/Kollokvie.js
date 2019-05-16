@@ -32,22 +32,18 @@ function joinGroup(userId, subjectName){
 
 var studies = [];
 
+
 function getStudies(userId){
-    //let studies = [];
-    //const userStudie = fb.getSubjectFromUser(firebase.auth().currentUser.uid);
-    //console.log("Recieved " + userStudie);
     firebase.database().ref('users/' + userId)
         .once("value").then(function (snapshot){
         firebase.database().ref("Studie/" + snapshot.val().studieretning)
             .once("value").then(function (snapshot) {
-            //snapshot.forEach(function (snapshot) {
-            studies.push({
-                title: snapshot.key
+            snapshot.forEach(function (snapshot) {
+                studies.push({title: snapshot.key})
             })
-        })
-        //})
-        ;
-        console.log(studies);
+            });
+        let result = studies.map(a => a.title);
+        console.log(result);
         return studies;
     });
 
