@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 var groupList = [];
 
-class FireBase {
+export default class FireBase {
 
   static myInstance = null;
 
@@ -66,7 +66,7 @@ class FireBase {
            firebase.database().ref('Groups/'+childSnapshot.key)
            .once("value").then(function(childSnapshot){
              groupList.push({
-               //id: childSnapshot.key,
+               id: childSnapshot.key,
                groupName: childSnapshot.val().subject,
              });
            });
@@ -89,5 +89,3 @@ getGroupList(){
  }
 
 }
-
-export default FireBase;
