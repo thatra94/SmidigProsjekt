@@ -4,28 +4,38 @@ import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, Touchabl
 import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
 
+
  var groupList = [];
 
  function getGroups(userId){
 
     firebase.database().ref('users/' + userId+'/groups')
       .once("value").then(function (snapshot){
-        snapshot.forEach(function(snapshot) {
-          firebase.database().ref('Groups/'+snapshot.key)
-          .once("value").then(function(snapshot){
+        snapshot.forEach(function(childSnapshot) {
+          firebase.database().ref('Groups/'+childSnapshot.key)
+          .once("value").then(function(childSnapshot){
             groupList.push({
-              id: snapshot.key,
-              groupName: snapshot.val().subject,
+              id: childSnapshot.key,
+              groupName: childSnapshot.val().subject,
             });
           });
         });
       });
 }
 
+function printGroups(){
+  if (groupList.length == 0) {
+    console.log("Error");
+  }
+  for(var i = 0; i < groupList.length; i++){
+    console.log(groupList[i].groupName);
+  }
+}
+
 
 export default class Grupper extends React.Component {
-    constructor(props){
-    super(props);
+  constructor(){
+    super();
     getGroups(firebase.auth().currentUser.uid);
   }
 
@@ -34,71 +44,37 @@ export default class Grupper extends React.Component {
       headerStyle: { marginTop: 24 },
     }
 
-   state = {
-     liste: [
-       {
-         id: 0,
-         name: "Smidig Prosjekt",
-         medlemmer: "Thanh, Fredrik og 2 til"
-       },
-       {
-         id: 1,
-         name: "Programmering",
-         medlemmer: "Jonas og Erlend"
-       }
-     ]
-   }
-
    alertItemName = (item) => {
-      alert(item.name)
+      alert(item)
    }
    render() {
-      return (
-         <ScrollView>
-            {
-               this.state.liste.map((item, index) => (
-                  <TouchableOpacity
-                     key = {item.id}
-                     style = {styles.container}
-                     onPress={() => {
+     //printGroups();
 
-                      }
-                     }
-                  >
-                     <Text style = {styles.text}>
-                        {item.name}
-                     </Text>
-                     <Text style = {styles.text2}>
-                        {item.medlemmer}
-                     </Text>
-                  </TouchableOpacity>
-               ))
-            }
-         </ScrollView>
-      )
-   }
+     var SampleNameArray = ["Test", "Programmering"];
+
+   return (
+     <View style={styles.MainContainer}>
+
+         { SampleNameArray.map((item, key)=>(
+         <Text key={key} style={styles.TextStyle} onPress={ this.alertItemName.bind(this, item) }> { item } </Text>)
+         )}
+
+     </View>
+   );
+ }
 }
 
-const styles = StyleSheet.create ({
-   container: {
-      padding: 30,
-      marginTop: 0,
-      backgroundColor: '#ff6650',
-      alignItems: 'center',
-      borderWidth: 0.3,
-      height: 150,
-      borderColor: 'black',
-      margin: 5,
-      justifyContent: 'center',
-   },
+const styles = StyleSheet.create({
 
-   text: {
-      color: '#ffffff',
-      fontSize: 24,
-   },
-   text2: {
-      color: '#ffffff',
-      fontSize: 14,
-      marginTop: 10,
-   }
-})
+ MainContainer: {
+   flex: 1,
+   margin: 10
+
+ },
+
+ TextStyle:{
+   fontSize : 25,
+    textAlign: 'center'
+ }
+
+});
