@@ -11,34 +11,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-class FireBase {
-  FireBase() {
-  }
-/*
- joinGroup(userId){
-  var testBool = false;
+var groupList = [];
 
-  var query = firebase.database().ref("Groups/")
-    .once("value").then(function(snapshot) {
-      snapshot.forEach(function(snapshot) {
-          var userCount = snapshot.val().userCount;
-          var groupKey = snapshot.key;
-          if(userCount < 3){
-            addToGroup(groupKey, userId, userCount).bind(this);
-            testBool = true;
-            return true;
-          }
-          else {
-            testBool = false;
-          }
-      });
-      if (!testBool) {
-        createNewGroup(userId).bind(this);
-        addToGroup(groupKey, userId, userCount).bind(this);
-      }
-  });
-}
-*/
+class FireBase {
+
+  static myInstance = null;
+
+  static getInstance(){
+    if(FireBase.myInstance == null){
+      FireBase.myInstance = new FireBase();
+    }
+    return this.myInstance;
+  }
 
  addToGroup(groupKey, userId, userCount){
     firebase.database().ref('Groups/'+groupKey).update({
@@ -65,15 +49,45 @@ class FireBase {
 }
 
   getSubjectFromUser(userId){
-    let userStudie = "";
+    var userStudie;
 
     firebase.database().ref('users/' + userId)
       .once("value").then(function (snapshot){
           userStudie = snapshot.val().studieretning;
-          console.log("Returned " + userStudie);
+          console.log(userStudie);
         });
-    return userStudie;
   }
+
+  getGroups(userId){
+
+     firebase.database().ref('users/' + userId+'/groups')
+       .once("value").then(function (snapshot){
+         snapshot.forEach(function(childSnapshot) {
+           firebase.database().ref('Groups/'+childSnapshot.key)
+           .once("value").then(function(childSnapshot){
+             groupList.push({
+               id: childSnapshot.key,
+               groupName: childSnapshot.val().subject,
+             });
+           });
+         });
+       });
+ }
+
+ printGroups(){
+   if (groupList.length == 0) {
+     console.log("Error");
+   }
+   for(var i = 0; i < groupList.length; i++){
+     console.log(groupList[i].groupName);
+   }
+ }
+
+getGroupList(){
+   //console.log(groupList);
+   return groupList;
+ }
+
 }
 
 export default FireBase;

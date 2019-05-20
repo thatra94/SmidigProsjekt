@@ -10,7 +10,18 @@ import {
   Button,
 } from 'react-native';
 
+import * as firebase from 'firebase';
+import FireBase from '../components/FireBase';
+
+
+
 export default class HomeScreen extends React.Component {
+  constructor(){
+    super();
+    fb = FireBase.getInstance();
+    fb.getGroups(firebase.auth().currentUser.uid);
+  }
+
   static navigationOptions = {
     header: null,
   };
