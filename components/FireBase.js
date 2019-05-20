@@ -66,7 +66,7 @@ class FireBase {
            firebase.database().ref('Groups/'+childSnapshot.key)
            .once("value").then(function(childSnapshot){
              groupList.push({
-               id: childSnapshot.key,
+               //id: childSnapshot.key,
                groupName: childSnapshot.val().subject,
              });
            });

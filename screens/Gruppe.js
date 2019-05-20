@@ -2,32 +2,43 @@ import React, { Component } from "react";
 import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, TouchableOpacity } from "react-native";
 
 import FireBase from '../components/FireBase';
+import firebase from "./Kollokvie";
+import CustomListView from "../components/CustomListView";
 
 export default class Grupper extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
   }
 
-    static navigationOptions = {
+    state = {
+        groupName: []
+
+    };
+
+  static navigationOptions = {
       title: "Dine Grupper",
       headerStyle: { marginTop: 24 },
-    }
+    };
 
    alertItemName = (item) => {
       alert(item)
    }
-   render() {
-     let fbData = FireBase.getInstance();
-     let GroupArray = fbData.getGroupList();
-     console.log(GroupArray);
-     let SampleNameArray = ["Test", "YOLOHOLO"];
 
+    async componentWillMount() {
+        let fbData = FireBase.getInstance();
+        await this.setState({groupName: fbData.getGroupList()});
+        console.log(this.state.groupName);
+        let SampleNameArray = ["Test", "YOLOHOLO"];
+
+    }
+
+   render() {
    return (
      <View style={styles.MainContainer}>
 
-         { GroupArray.groupName.map((item, key)=>(
-         <Text key={key} style={styles.TextStyle} onPress={ this.alertItemName.bind(this, item) }> { item } </Text>)
-         )}
+         <ScrollView>
+         <CustomListView itemList={this.state.groupName}/>
+         </ScrollView>
 
      </View>
    );
