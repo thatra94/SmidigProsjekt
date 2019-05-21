@@ -35,7 +35,7 @@ const CustomListView = ({ itemList }) => (
         <FlatList
             data={itemList}
             renderItem={({ item }) => <CustomRow
-                title={item.groupName}
+                title={item.title}
             />}
         />
 

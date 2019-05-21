@@ -68,7 +68,7 @@ export default class FireBase {
            .once("value").then(function(childSnapshot){
              groupList.push({
                id: childSnapshot.key,
-               groupName: childSnapshot.val().subject,
+               title: childSnapshot.val().subject,
              });
            });
          });
@@ -93,7 +93,7 @@ export default class FireBase {
      console.log("Error");
    }
    for(var i = 0; i < groupList.length; i++){
-     console.log(groupList[i].groupName);
+     console.log(groupList[i].title);
    }
  }
 

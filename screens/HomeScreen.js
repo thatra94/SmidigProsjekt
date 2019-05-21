@@ -20,6 +20,7 @@ export default class HomeScreen extends React.Component {
     super();
     fb = FireBase.getInstance();
     fb.getGroups(firebase.auth().currentUser.uid);
+    fb.getSubjects(firebase.auth().currentUser.uid);
   }
 
   static navigationOptions = {

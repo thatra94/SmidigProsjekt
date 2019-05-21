@@ -16,7 +16,7 @@ import CustomListView from '../components/CustomListView';
           .once("value").then(function(snapshot){
             groupList.push({
               id: snapshot.key,
-              groupName: snapshot.val().subject,
+              title: snapshot.val().subject,
             });
           });
         });

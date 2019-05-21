@@ -48,7 +48,6 @@ async function getStudies(userId) {
 export default class Fag extends React.Component {
     constructor(props) {
         super(props);
-        //this.setState({subject: getStudies(firebase.auth().currentUser.uid)})
     };
 
     static navigationOptions = {
@@ -58,8 +57,6 @@ export default class Fag extends React.Component {
 
 
     state = {
-
-        isLoading: true,
         title: [],
 
     };
@@ -69,18 +66,12 @@ export default class Fag extends React.Component {
 
     async componentWillMount() {
         let fbData = FireBase.getInstance();
-        let studie = await getStudies(firebase.auth().currentUser.uid);
-        this.setState({title: studie});
-        this.setState({isLoading: false});
+        await this.setState({title: fbData.getSubjectList()});
         console.log(this.state.title, "test");
-
     }
 
     render() {
-        if (this.state.isLoading) {
-            return (
-                <View><Text>Loading...</Text></View>
-            )
+        if (styles.MainContainer) {
         }
         return (
             <ScrollView>

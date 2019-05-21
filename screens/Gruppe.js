@@ -11,7 +11,7 @@ export default class Grupper extends React.Component {
   }
 
     state = {
-        groupName: []
+        title: []
 
     };
 
@@ -26,8 +26,8 @@ export default class Grupper extends React.Component {
 
     async componentWillMount() {
         let fbData = FireBase.getInstance();
-        await this.setState({groupName: fbData.getGroupList()});
-        console.log(this.state.groupName);
+        await this.setState({title: fbData.getGroupList()});
+        console.log(this.state.title);
     }
 
    render() {
@@ -35,7 +35,7 @@ export default class Grupper extends React.Component {
      <View style={styles.MainContainer}>
 
          <ScrollView>
-         <CustomListView itemList={this.state.groupName}/>
+         <CustomListView itemList={this.state.title}/>
          </ScrollView>
 
      </View>
