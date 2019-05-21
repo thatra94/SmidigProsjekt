@@ -45,9 +45,6 @@ async function getStudies(userId) {
         });
 }
 
-
-
-
 export default class Fag extends React.Component {
     constructor(props) {
         super(props);
@@ -64,62 +61,14 @@ export default class Fag extends React.Component {
 
         isLoading: true,
         title: [],
-        names: [
-            {
-                id: 0,
-                name: 'Databaser',
-            },
-            {
-                id: 1,
-                name: 'Programmering',
-            },
-            {
-                id: 2,
-                name: 'Digital Teknologi',
-            },
-            {
-                id: 3,
-                name: 'Informasjonssikkerhet',
-            },
-            {
-                id: 4,
-                name: 'Webprosjekt',
-            },
-            {
-                id: 5,
-                name: 'Programmering 2',
-            },
-            {
-                id: 6,
-                name: 'Algoritmer og Datastrukturer',
-            },
-            {
-                id: 7,
-                name: 'Interaksjonsdesign',
-            },
-            {
-                id: 8,
-                name: 'Animasjon',
-            },
-            {
-                id: 9,
-                name: 'Test'
-            },
-            {
-                id: 10,
-                name: 'Gruppe'
-            },
-            {
-                id: 11,
-                name: 'Hub'
-            },
-        ]
+
     };
     alertItemName = (item) => {
         alert(item.name)
     };
 
-    async componentDidMount() {
+    async componentWillMount() {
+        let fbData = FireBase.getInstance();
         let studie = await getStudies(firebase.auth().currentUser.uid);
         this.setState({title: studie});
         this.setState({isLoading: false});
