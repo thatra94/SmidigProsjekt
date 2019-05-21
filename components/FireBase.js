@@ -106,9 +106,7 @@ getSubjectList() {
    return subjectsList;
 }
 
-}
-
-function joinGroup(userId, subjectName) {
+joinGroup(userId, subjectName) {
     let testBool = false;
 
     const query = firebase.database().ref("Groups/")
@@ -128,4 +126,5 @@ function joinGroup(userId, subjectName) {
                 this.createNewGroup(userId, subjectName);
             }
         });
+}
 }
