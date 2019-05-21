@@ -55,7 +55,7 @@ export default class FireBase {
       firebase.database().ref('users/' + userId)
       .once("value").then(function (snapshot){
           userStudie = snapshot.val().studieretning;
-          console.log(userStudie);
+          return userStudie;
         });
   }
 
