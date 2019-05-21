@@ -102,7 +102,7 @@ getGroupList(){
    return groupList;
  }
 
-getStudiesList() {
+getSubjectList() {
    return subjectsList;
 }
 
