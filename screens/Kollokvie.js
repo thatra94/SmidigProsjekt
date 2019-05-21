@@ -4,21 +4,6 @@ import firebase from 'firebase';
 import FireBase from '../components/FireBase';
 import CustomListView from "../components/CustomListView";
 
-async function getStudies(userId) {
-    let studies = [];
-    await firebase.database().ref('users/' + userId)
-        .once("value").then(function (snapshot) {
-            firebase.database().ref("Studie/" + snapshot.val().studieretning)
-                .once("value").then(function (snapshot) {
-                snapshot.forEach(function (snapshot) {
-                    studies.push({title: snapshot.key})
-                });
-                console.log(studies);
-                return studies;
-            })
-        });
-}
-
 export default class Fag extends React.Component {
     constructor(props) {
         super(props);
