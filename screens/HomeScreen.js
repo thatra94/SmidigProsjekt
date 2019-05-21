@@ -50,12 +50,13 @@ export default class HomeScreen extends React.Component {
 
             <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 40, shadowOffset:{width: 6,  height: 5}, shadowColor: 'black', shadowOpacity: 0.4}}>
               <TouchableOpacity
-                onPress={() => {fb.joinGroup(firebase.auth().currentUser.uid, fb.getSubjectFromUser(firebase.auth().currentUser.uid))}}
-                onPress={() => {this.props.navigation.navigate('Gruppe')}}
+                onPress={() => {
+                  fb.joinGroup(firebase.auth().currentUser.uid, fb.getSubjectFromUser(firebase.auth().currentUser.uid));
+                  this.props.navigation.navigate('Gruppe');
+                }}
                 style={{height: 85}}
                 >
                 <View style={{ flex: 1, flexDirection: 'row', marginTop: 15, width: 250, height: 70, backgroundColor: '#ff6650', borderRadius: 23 }}>
-
                     <Image
                         source={require('../assets/images/open-book.png')}
                         style={{width: 35, height: 35, marginTop: 16, marginLeft: 20}}
