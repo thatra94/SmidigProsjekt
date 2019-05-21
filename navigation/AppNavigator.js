@@ -9,7 +9,7 @@ import TabBarIcon from '../components/TabBarIcon';
 
 import Fag from '../screens/Kollokvie';
 import Gruppe from '../screens/Gruppe';
-import Test from '../screens/Test';
+import Test from '../screens/Chat';
 import Profil from '../screens/Profil';
 import Hub from '../screens/HomeScreen';
 import SignUp from '../screens/login/SignUp';

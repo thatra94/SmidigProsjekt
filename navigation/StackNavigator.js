@@ -6,7 +6,7 @@ import {
 } from 'react-navigation';
 
 //import LoginScreen from '../screens/LoginScreen';
-import Test from '../screens/Test';
+import Test from '../screens/Chat';
 import Gruppe from '../screens/Gruppe';
 import Hub from '../screens/HomeScreen';
 import Fag from '../screens/Kollokvie';

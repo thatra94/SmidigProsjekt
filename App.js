@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import Test from './screens/Test.js';
+import Test from './screens/Chat.js';
 import LoginScreen from './screens/LoginScreen';
 import Fag from './screens/Kollokvie';
 //import Profil from './screens/Profil';
