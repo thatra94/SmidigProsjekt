@@ -14,7 +14,6 @@ export default class Fag extends React.Component {
         headerStyle: {marginTop: 24},
     };
 
-
     state = {
         title: [],
 
