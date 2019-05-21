@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
         height: 150,
         borderColor: 'black',
         marginTop: 5,
-
     },
     title: {
         color: '#4f603c',
@@ -28,10 +27,8 @@ const CustomRow = ({ title }) => (
                 {title}
             </Text>
         </View>
-
     </View>
 );
-
 
 const CustomListView = ({ itemList }) => (
     <View style={styles.container}>

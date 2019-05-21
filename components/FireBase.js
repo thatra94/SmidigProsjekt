@@ -12,6 +12,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var groupList = [];
+var subjectsList = [];
 
 export default class FireBase {
 
@@ -72,7 +73,20 @@ export default class FireBase {
            });
          });
        });
- }
+  }
+
+  getSubjects(userId) {
+
+       firebase.database().ref('users/' + userId)
+            .once("value").then(function (snapshot) {
+                firebase.database().ref("Studie/" + snapshot.val().studieretning)
+                    .once("value").then(function (snapshot) {
+                    snapshot.forEach(function (snapshot) {
+                        subjectsList.push({title: snapshot.key})
+                    });
+                });
+            });
+    }
 
  printGroups(){
    if (groupList.length == 0) {
@@ -87,5 +101,9 @@ getGroupList(){
    //console.log(groupList);
    return groupList;
  }
+
+getStudiesList() {
+   return subjectsList;
+}
 
 }
