@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import * as firebase from 'firebase';
+import React from 'react';
+import firebase from "../screens/Kollokvie";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8WS2uhrgoz0ldb-Uke0Uz0fv_cVfQehU",
@@ -11,8 +11,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-var groupList = [];
-var subjectsList = [];
+const groupList = [];
+const subjectsList = [];
 
 export default class FireBase {
 
@@ -37,22 +37,22 @@ export default class FireBase {
 }
 
  createNewGroup(userId, subjectName){
-  var key = firebase.database().ref("Groups/")
-    .push({
-    userCount: 0,
-    subject: subjectName,
-    userToken: true,
-    Token: userId,
-    [userId]: true
-  }).key;
+     const key = firebase.database().ref("Groups/")
+         .push({
+             userCount: 0,
+             subject: subjectName,
+             userToken: true,
+             Token: userId,
+             [userId]: true
+         }).key;
 
-  this.addToGroup(key, userId, 0);
+     this.addToGroup(key, userId, 0);
 }
 
   getSubjectFromUser(userId){
-    var userStudie;
+      let userStudie;
 
-    firebase.database().ref('users/' + userId)
+      firebase.database().ref('users/' + userId)
       .once("value").then(function (snapshot){
           userStudie = snapshot.val().studieretning;
           console.log(userStudie);
@@ -92,7 +92,7 @@ export default class FireBase {
    if (groupList.length == 0) {
      console.log("Error");
    }
-   for(var i = 0; i < groupList.length; i++){
+   for(let i = 0; i < groupList.length; i++){
      console.log(groupList[i].title);
    }
  }
@@ -106,4 +106,26 @@ getSubjectList() {
    return subjectsList;
 }
 
+}
+
+function joinGroup(userId, subjectName) {
+    let testBool = false;
+
+    const query = firebase.database().ref("Groups/")
+        .once("value").then(function (snapshot) {
+            snapshot.forEach(function (snapshot) {
+                var userCount = snapshot.val().userCount;
+                var groupKey = snapshot.key;
+                if (userCount < 3) {
+                    this.addToGroup(groupKey, userId, userCount);
+                    testBool = true;
+                    return true;
+                } else {
+                    testBool = false;
+                }
+            });
+            if (!testBool) {
+                this.createNewGroup(userId, subjectName);
+            }
+        });
 }

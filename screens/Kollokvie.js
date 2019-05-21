@@ -1,34 +1,8 @@
-import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import React from 'react';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 import firebase from 'firebase';
 import FireBase from '../components/FireBase';
 import CustomListView from "../components/CustomListView";
-
-//Fire.joinGroup(firebase.auth().currentUser.uid);
-let fb = new FireBase;
-
-function joinGroup(userId, subjectName){
- var testBool = false;
-
- var query = firebase.database().ref("Groups/")
-   .once("value").then(function(snapshot) {
-     snapshot.forEach(function(snapshot) {
-         var userCount = snapshot.val().userCount;
-         var groupKey = snapshot.key;
-         if(userCount < 3){
-           fb.addToGroup(groupKey, userId, userCount);
-           testBool = true;
-           return true;
-         }
-         else {
-           testBool = false;
-         }
-     });
-     if (!testBool) {
-       fb.createNewGroup(userId, subjectName);
-     }
- });
-}
 
 async function getStudies(userId) {
     let studies = [];
