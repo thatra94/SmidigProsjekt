@@ -1,5 +1,6 @@
 import React from 'react';
-import firebase from "../screens/Kollokvie";
+import firebase from 'firebase';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8WS2uhrgoz0ldb-Uke0Uz0fv_cVfQehU",
@@ -13,8 +14,13 @@ firebase.initializeApp(firebaseConfig);
 
 const groupList = [];
 const subjectsList = [];
+let firstName;
+let lastName;
+let userStudie;
+
 
 export default class FireBase {
+
 
   static myInstance = null;
 
@@ -23,6 +29,13 @@ export default class FireBase {
       FireBase.myInstance = new FireBase();
     }
     return this.myInstance;
+  }
+
+  mountElements(){
+      getGroups(firebase.auth().currentUser.uid);
+      getSubjects(firebase.auth().currentUser.uid);
+      mountName(firebase.auth().currentUser.uid);
+      mountStudy(firebase.auth().currentUser.uid);
   }
 
  addToGroup(groupKey, userId, userCount){
@@ -49,14 +62,26 @@ export default class FireBase {
      this.addToGroup(key, userId, 0);
 }
 
-  getSubjectFromUser(userId){
-      let userStudie;
-
+  mountStudy(userId){
       firebase.database().ref('users/' + userId)
       .once("value").then(function (snapshot){
           userStudie = snapshot.val().studieretning;
           return userStudie;
         });
+  }
+  mountName(userId){
+      firebase.database().ref('users/'+userId)
+          .once("value").then(function (snapshot) {
+            firstName = snapshot.val().fornavn;
+            lastName = snapshot.val().etternavn;
+      });
+  }
+  getName(){
+      return firstName +" "+ lastName;
+  }
+
+  getStudy(userId){
+      return userStudie;
   }
 
   getGroups(userId){
@@ -107,7 +132,7 @@ getSubjectList() {
 }
 
 joinGroup(userId, subjectName) {
-    let testBool = false;
+    let groupFull = false;
 
     const query = firebase.database().ref("Groups/")
         .once("value").then(function (snapshot) {
@@ -116,13 +141,13 @@ joinGroup(userId, subjectName) {
                 var groupKey = snapshot.key;
                 if (userCount < 3) {
                     this.addToGroup(groupKey, userId, userCount);
-                    testBool = true;
+                    groupFull = true;
                     return true;
                 } else {
-                    testBool = false;
+                    groupFull = false;
                 }
             });
-            if (!testBool) {
+            if (!groupFull) {
                 this.createNewGroup(userId, subjectName);
             }
         });
