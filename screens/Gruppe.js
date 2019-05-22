@@ -3,7 +3,7 @@ import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, Touchabl
 
 import FireBase from '../components/FireBase';
 import firebase from "./Kollokvie";
-import CustomListView from "../components/CustomListView";
+import GroupListView from "../components/GroupListView";
 
 export default class Grupper extends React.Component {
   constructor(props){
@@ -35,7 +35,7 @@ export default class Grupper extends React.Component {
      <View style={styles.MainContainer}>
 
          <ScrollView>
-         <CustomListView itemList={this.state.title}/>
+         <GroupListView itemList={this.state.title}/>
          </ScrollView>
 
      </View>

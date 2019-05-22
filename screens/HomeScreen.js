@@ -16,7 +16,11 @@ export default class HomeScreen extends React.Component {
   constructor(){
     super();
     fb = FireBase.getInstance();
-    fb.mountElements();
+    //fb.mountElements();
+      fb.getGroups(firebase.auth().currentUser.uid);
+      fb.getSubjects(firebase.auth().currentUser.uid);
+      fb.mountName(firebase.auth().currentUser.uid);
+      fb.mountStudy(firebase.auth().currentUser.uid);
   }
 
   static navigationOptions = {
@@ -50,11 +54,8 @@ export default class HomeScreen extends React.Component {
             <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 40, shadowOffset:{width: 6,  height: 5}, shadowColor: 'black', shadowOpacity: 0.4}}>
               <TouchableOpacity
                 onPress={() => {
-<<<<<<< HEAD
                   /*fb.joinGroup(firebase.auth().currentUser.uid, fb.getSubjectFromUser(firebase.auth().currentUser.uid));*/
-=======
                   fb.joinGroup(firebase.auth().currentUser.uid, fb.mountStudy(firebase.auth().currentUser.uid));
->>>>>>> f6ddb64349222c3f81bae8f3d506914a79022ca2
                   this.props.navigation.navigate('Gruppe');
                 }}
                 style={{height: 85}}
