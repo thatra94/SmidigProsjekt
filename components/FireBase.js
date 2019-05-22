@@ -126,5 +126,6 @@ joinGroup(userId, subjectName) {
                 this.createNewGroup(userId, subjectName);
             }
         });
+    this.getGroups(userId);
 }
 }
