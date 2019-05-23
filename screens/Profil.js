@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TouchableOpacity } from 'react-native'
 import {
   StyleSheet,
   Image,
@@ -12,6 +13,10 @@ import firebase from 'firebase';
 
 export default class Profil extends React.Component {
 
+     static navigationOptions = {
+      header: null,
+  };
+    
   signOutUser = () => {
     firebase
       .auth()
@@ -20,78 +25,106 @@ export default class Profil extends React.Component {
             console.log('sign out succesful')
           }).catch(error => console.log('error'))
       }
-
+  
   render() {
     return (
-      <View style={styles.container}>
-      <Image style={styles.profileIcon} source={require('../assets/images/user.png')} />
-        <Text style={styles.nameUser}>John Doe</Text>
-        <Text style={styles.studyUser}>Programmering</Text>
-
-        <View style={styles.container2}>
-        <View style={styles.iconOne}>
-            <Image style={styles.otherIcon} source={require('../assets/images/group.png')} />
-          </View>
-
-        <View style={styles.iconTwo}>
-            <Image style={styles.otherIcon} source={require('../assets/images/chat.png')} />
-          </View>
-
-        <View style={styles.iconThree}>
-            <Image style={styles.otherIcon} source={require('../assets/images/snapchat.png')} />
-          </View>
+    <View style={styles.backgroundContainer}>
+        <View style={styles.TitleContainer}>
+            <Text style={styles.pageTitle}>Din profil</Text>
         </View>
+        <View style={styles.container}>
+            <Image style={styles.profileIcon} source={require('../assets/images/user.png' )}/>
+            <TouchableOpacity style={styles.editIconContainer} activeOpacity={0.5}>
+                <Image
+                source={require('../assets/images/edit.png')}
+                style={styles.editIcon} />
+                <Text style={styles.TextStyle}></Text>
+            </TouchableOpacity>
+        
+            <Text style={styles.nameUser}>John Doe</Text>
+            <Text style={styles.studentUser}>Student</Text>
+            <Text style={styles.studyUser}>Programmering</Text>
+        
+            <Button color='red' title="Logg ut" onPress={this.signOutUser} />
+        </View>
+    </View>
 
-        <Text style={styles.interestTitle}>Interesser</Text>
-        <Text style={styles.interestText}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</Text>
 
-        <Button title="Sign Out" onPress={this.signOutUser} />
-      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 20,
-    paddingBottom: 220,
     backgroundColor: 'white',
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: {
+	   width: 0,
+	   height: 3,
+    },
+    shadowOpacity: 0.50,
+    shadowRadius: 4.65,
+    elevation: 13,
+    width: 340,
+    height: 450,
   },
     container2: {
-    flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
-    titlelText: {
-    marginTop: 20,
-    textAlign: 'center',
-    fontSize: 40,
+    backgroundContainer: {
+    backgroundColor: '#3e1133',
+    width: '100%',
+    height: '100%',
+    display:'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-   nameUser: {
+    pageTitle: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    marginBottom: 20,
+  },
+    nameUser: {
     marginTop: 20,
     textAlign: 'center',
     fontSize: 25,
-   },
+  },
     studyUser: {
     marginTop: 10,
     marginBottom: 30,
     textAlign: 'center',
     fontSize: 20,
     color: 'gray',
-   },
+  },
+    studentUser: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: 10,
+  },
     profileIcon:{
     marginTop: 40,
-    height: '20%',
+    height: '35%',
     width: '100%',
     resizeMode: 'contain',
-    },
+  },
+    editIcon:{
+    height: '250%',
+    resizeMode: 'contain',
+  },
+    editIconContainer:{
+    position: 'absolute',
+    marginTop: 20,
+    left: 50,
+  },
     interestTitle:{
     marginTop: 20,
     textAlign: 'center',
     fontSize: 20,
-    },
+  },
     interestText:{
     marginTop: 20,
     textAlign: 'center',
@@ -100,13 +133,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     fontStyle: 'italic',
-    },
+  },
     otherIcon:{
     height: '80%',
     width: '100%',
     resizeMode: 'contain',
     flexDirection: 'row',
-    },
+  },
     iconOne: {
     width:40,
     height:40,
@@ -124,4 +157,5 @@ const styles = StyleSheet.create({
     height:40,
     justifyContent: 'center',
   },
+    
 });

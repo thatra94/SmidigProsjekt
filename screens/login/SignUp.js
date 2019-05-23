@@ -4,6 +4,9 @@ import firebase from 'firebase';
 import RNPickerSelect from 'react-native-picker-select';
 
 export default class SignUp extends React.Component {
+    static navigationOptions = {
+      header: null,
+  };
 
   constructor(props) {
     super(props);
@@ -56,24 +59,29 @@ saveUserData = (user) => {
 
   render() {
     return (
+    <View style={styles.backgroundContainer}>
       <View style={styles.container}>
-        <Text>Sign Up</Text>
+        <Text style={{color: 'white', fontSize: 30, marginBottom: 70 }}>Registrer Deg</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
 
         <TextInput
+          style={styles.textInput}
           placeholder="Fornavn"
           autoCapitalize="none"
           style={styles.textInput}
+          placeholderTextColor='white'
           onChangeText={firstName => this.setState({ firstName })}
           value={this.state.firstName}
         />
         <TextInput
+          style={styles.textInput}
           placeholder="Etternavn"
           autoCapitalize="none"
           style={styles.textInput}
+          placeholderTextColor='white'
           onChangeText={lastName => this.setState({ lastName })}
           value={this.state.lastName}
         />
@@ -87,39 +95,54 @@ saveUserData = (user) => {
           }}
         >
         <TextInput
+          style={styles.textInput}
           placeholder="Studieretning"
           autoCapitalize="none"
+          placeholderTextColor='white'
           style={styles.textInputSelector}
           onChangeText={studySubject => this.setState({ studySubject })}
           value={this.state.studySubject}
         />
         </RNPickerSelect>
         <TextInput
+          style={styles.textInput}
           placeholder="Email"
           autoCapitalize="none"
+          placeholderTextColor='white'
           style={styles.textInput}
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
         <TextInput
+          style={styles.textInput}
           secureTextEntry
           placeholder="Password"
           autoCapitalize="none"
+          placeholderTextColor='white'
           style={styles.textInput}
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
         <Button title="Sign Up" onPress={this.handleSignUp} />
+        <TouchableOpacity  onPress={this.handleSignUp}>
+            <Text>Neste</Text>
+        </TouchableOpacity>
         <Button
           title="Already have an account? Login"
           onPress={() => this.props.navigation.navigate('Login')}
         />
       </View>
+</View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+    backgroundContainer: {
+    backgroundColor: '#3e1133',
+    width: '100%',
+    height: '100%',
+  },  
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -139,5 +162,19 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     marginTop: 8
-  }
+  },
+     textInput: {
+    height: 40,
+    width: '90%',
+    borderColor: 'white',
+    borderWidth: 1,
+    marginTop: 8,
+    color: 'white',
+    fontSize: 20,
+    borderBottomColor: 'white',
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    margin: 40,
+  },
 })
