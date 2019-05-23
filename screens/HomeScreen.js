@@ -55,7 +55,7 @@ export default class HomeScreen extends React.Component {
               <TouchableOpacity
                 onPress={async () => {
                   /*fb.joinGroup(firebase.auth().currentUser.uid, fb.getSubjectFromUser(firebase.auth().currentUser.uid));*/
-                  await fb.joinGroup(firebase.auth().currentUser.uid, fb.mountStudy(firebase.auth().currentUser.uid));
+                  await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
                   //await fb.getGroups(firebase.auth().currentUser.uid);
                   this.props.navigation.navigate('Gruppe');
                 }}

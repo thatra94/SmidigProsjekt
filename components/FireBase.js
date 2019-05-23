@@ -12,7 +12,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const groupList = [];
+let groupList = [];
 const subjectsList = [];
 let firstName;
 let lastName;
@@ -65,6 +65,7 @@ export default class FireBase {
         firebase.database().ref('users/' + userId)
             .once("value").then(function (snapshot){
             userStudie = snapshot.val().studieretning;
+            console.log(userStudie);
             return userStudie;
         });
     }
@@ -79,12 +80,12 @@ export default class FireBase {
         return firstName +" "+ lastName;
     }
 
-    getStudy(userId){
+    getStudy(){
         return userStudie;
     }
 
     getGroups(userId){
-        groupList.length = 0;
+        //groupList.length = 0;
         firebase.database().ref('users/' + userId+'/groups')
             .once("value").then(function (snapshot){
             snapshot.forEach(function(childSnapshot) {
@@ -138,12 +139,15 @@ export default class FireBase {
             snapshot.forEach(function (snapshot) {
                 var userCount = snapshot.val().userCount;
                 var groupKey = snapshot.key;
-                if (userCount < 3) {
-                    FireBase.addToGroup(groupKey, userId, userCount);
-                    groupFull = true;
-                    return true;
-                } else {
-                    groupFull = false;
+                console.log(snapshot.val().title);
+                if (!groupList.includes(groupKey)) {
+                    if (userCount < 3) {
+                        FireBase.addToGroup(groupKey, userId, userCount);
+                        groupFull = true;
+                        return true;
+                    } else {
+                        groupFull = false;
+                    }
                 }
             });
             if (!groupFull) {
