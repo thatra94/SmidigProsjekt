@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -88,6 +88,7 @@ saveUserData = (user) => {
         <RNPickerSelect
           items={this.state.items}
           style={styles.textInputSelector}
+          
           onValueChange={(value) => {
             this.setState({
               studySubject: value,
@@ -95,11 +96,11 @@ saveUserData = (user) => {
           }}
         >
         <TextInput
-          style={styles.textInput}
           placeholder="Studieretning"
           autoCapitalize="none"
           placeholderTextColor='white'
-          style={styles.textInputSelector}
+          style={{marginRight: 20}}
+          style={styles.pickerText}
           onChangeText={studySubject => this.setState({ studySubject })}
           value={this.state.studySubject}
         />
@@ -123,14 +124,15 @@ saveUserData = (user) => {
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        <Button title="Sign Up" onPress={this.handleSignUp} />
-        <TouchableOpacity  onPress={this.handleSignUp}>
-            <Text>Neste</Text>
+              
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+            <Text style={styles.registerText}>Allerede bruker? Logg inn</Text>
         </TouchableOpacity>
-        <Button
-          title="Already have an account? Login"
-          onPress={() => this.props.navigation.navigate('Login')}
-        />
+        
+        <TouchableOpacity style={styles.loginButton} onPress={this.handleSignUp}>
+            <Text style={styles.loginText}>Neste</Text>
+        </TouchableOpacity>
+      
       </View>
 </View>
     )
@@ -148,13 +150,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
-  },
+
   textInputSelector: {
     left: 18,
     height: 40,
@@ -163,7 +159,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 8
   },
-     textInput: {
+    textInput: {
     height: 40,
     width: '90%',
     borderColor: 'white',
@@ -176,5 +172,38 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
     margin: 40,
+  },
+    loginButton: {
+    marginTop: 80,
+    backgroundColor: 'white',
+    borderRadius: 100,
+    alignItems: 'center',
+    padding: 30,
+    paddingLeft: 50,
+    paddingRight: 50,
+  },
+  loginText: {
+    color: '#3e1133',
+    fontSize: 20,
+  },
+  registerText: {
+    color: 'white',
+    fontSize: 20,
+    textDecorationLine: 'underline',
+  },
+  pickerText:{
+    height: 40,
+    width: '90%',
+    borderColor: 'white',
+    borderWidth: 1,
+    marginTop: 8,
+    color: 'white',
+    fontSize: 20,
+    borderBottomColor: 'white',
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    marginLeft: 20,
+    marginBottom: 40,
   },
 })
