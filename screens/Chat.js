@@ -1,48 +1,11 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, TouchableOpacity } from "react-native";
-
-import * as firebase from 'firebase';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import FireBase from '../components/FireBase';
 import CustomListView from '../components/CustomListView';
 
  var groupList = [];
-
- function getGroups(userId){
-
-    firebase.database().ref('users/' + userId+'/groups')
-      .once("value").then(function (snapshot){
-        snapshot.forEach(function(snapshot) {
-          firebase.database().ref('Groups/'+snapshot.key)
-          .once("value").then(function(snapshot){
-            groupList.push({
-              id: snapshot.key,
-              title: snapshot.val().subject,
-            });
-          });
-        });
-      });
-}
-
-
-async function getStudies(userId) {
-    let studies = [];
-    let result = [];
-    await firebase.database().ref('users/' + userId)
-        .once("value").then(function (snapshot) {
-            firebase.database().ref("Studie/" + snapshot.val().studieretning)
-                .once("value").then(function (snapshot) {
-                snapshot.forEach(function (snapshot) {
-                    studies.push({title: snapshot.key})
-                });
-                let result = studies.map(a => a.title);
-                console.log(studies);
-                return studies;
-            })
-        });
-}
-
 
 export default class Chat extends React.Component {
     constructor(props) {
@@ -56,21 +19,21 @@ export default class Chat extends React.Component {
         messages: [],
     };
 
-    /*get user() {
+    get user() {
         return {
-            name: this.props.navigation.state.params.firstName,
+            name: "petter",
             //email: this.props.navigation.state.params.email,
            // avatar: this.props.navigation.state.params.avatar,
-            id: firebaseSvc.uid,
-            _id: firebaseSvc.uid, // need for gifted-chat
+            id: FireBase.getInstance().uid,
+            _id: FireBase.getInstance().uid, // need for gifted-chat
         };
-    }*/
+    }
 
     render() {
         return (
             <GiftedChat
                 messages={this.state.messages}
-                onSend={firebase.send}
+                onSend={FireBase.getInstance().send}
                 user={this.user}
              alignTop={30} initialText={"IceBreaker"}/>
         );
@@ -84,7 +47,7 @@ export default class Chat extends React.Component {
         );
     }*/
     componentWillUnmount() {
-        firebase.refOff();
+        FireBase.getInstance().refOff();
     }
 }
 

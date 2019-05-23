@@ -166,6 +166,7 @@ joinGroup(userId, subjectName) {
         return (firebase.auth().currentUser || {}).uid;
     }
 
+
     get ref() {
         return firebase.database().ref('Messages');
     }
