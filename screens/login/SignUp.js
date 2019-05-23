@@ -71,15 +71,7 @@ saveUserData = (user) => {
                         borderRadius: 500/2}}>
               </LinearGradient>
       <View style={styles.container}>
-        <Image source={require('../assets/images/Hvit.png')}
-                    style={{position: 'absolute',
-                            right: 120,
-                            top: 90,
-                            flex: 1,
-                            width: 185,
-                            height: 185}}
-                            resizeMode="stretch"
-                              />
+        
         <Text style={{color: 'white', fontSize: 30, marginBottom: 30, marginTop: 100 }}>Registrer Deg</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
@@ -153,7 +145,7 @@ saveUserData = (user) => {
         </TouchableOpacity>
       
       </View>
-</View>
+    </View>
     )
   }
 }
