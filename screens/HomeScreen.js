@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinearGradient } from 'expo';
 import {
   Image,
   Platform,
@@ -29,8 +30,8 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-            // Bakgrunn
-            // Lilla header
+            // Bakgrunn 
+            // Lilla header 
             // Gradient sirkel
             // Logo
             // Hvit boks
@@ -40,8 +41,8 @@ export default class HomeScreen extends React.Component {
               <ScrollView scrollEventThrottle={16}>
               <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <View style={{flex: 1, flexDirection: 'row'}}>
-              <View style={{width: 450,
-                            height: 470,
+              <View style={{width: 450, 
+                            height: 470, 
                             backgroundColor: '#330F2A'}} />
 
               <LinearGradient
@@ -73,9 +74,9 @@ export default class HomeScreen extends React.Component {
                           position: 'absolute',
                           top: 270,
                           right: 65,
-                          width: 320,
-                          height: 400,
-                          backgroundColor: 'white',
+                          width: 320, 
+                          height: 400, 
+                          backgroundColor: 'white', 
                           borderRadius: 50,
                           borderWidth: 0.5,
                           borderColor: '#d6d7da',
@@ -83,65 +84,65 @@ export default class HomeScreen extends React.Component {
                           shadowOffset:{width: 6, height: 5},
                           shadowOpacity: 0.4}}>
 
-                <Text style={{textAlign: 'center',
-                          marginTop: 60,
+                <Text style={{textAlign: 'center', 
+                          marginTop: 60, 
                           color: '#5D1049',
                           fontSize: 20,
                           fontWeight: 'bold' }}>
-                            Hvordan vil du finne gruppe?</Text>
+                            Hvordan vil du finne gruppe?</Text> 
 
-                <View style={{flex: 1,
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          marginTop: 40,
-                          shadowOffset:{width: 6, height: 5},
-                          shadowColor: 'black',
+                <View style={{flex: 1, 
+                          flexDirection: 'column', 
+                          alignItems: 'center', 
+                          marginTop: 40, 
+                          shadowOffset:{width: 6, height: 5}, 
+                          shadowColor: 'black', 
                           shadowOpacity: 0.4}}>
 
-                <TouchableOpacity onPress={() =>
+                <TouchableOpacity onPress={() => 
                             {this.props.navigation.navigate('Gruppe')}}
                             style={{height: 120, top: -20}}>
-                <View style={{flex: 1,
-                            flexDirection: 'row',
-                            marginTop: 30,
-                            width: 250,
-                            height: 100,
-                            backgroundColor: '#5D1049',
+                <View style={{flex: 1, 
+                            flexDirection: 'row', 
+                            marginTop: 30, 
+                            width: 250, 
+                            height: 100, 
+                            backgroundColor: '#5D1049', 
                             borderRadius: 30 }}>
                 <Image source={require('../assets/images/open-book.png')}
-                    style={{width: 35,
-                            height: 35,
-                            marginTop: 27,
+                    style={{width: 35, 
+                            height: 35, 
+                            marginTop: 27, 
                             marginLeft: 20}}
                             />
-                <Text style={{textAlign: 'center',
-                            marginTop: 35,
+                <Text style={{textAlign: 'center', 
+                            marginTop: 35, 
                             marginLeft: 30,
                             fontWeight: 'bold',
-                            fontSize: 18,
+                            fontSize: 18, 
                             color: 'white' }}>Studieretning</Text>
                         </View>
                             </TouchableOpacity>
 
-                  <TouchableOpacity onPress={() =>
+                  <TouchableOpacity onPress={() => 
                             {this.props.navigation.navigate('Fag')}}
                       style={{height: 110, top: 10}}>
                   <View style={{flex: 1,
-                            flexDirection: 'row',
-                            marginTop: 15,
-                            width: 250,
-                            height: 100,
-                            backgroundColor: '#5D1049',
+                            flexDirection: 'row', 
+                            marginTop: 15, 
+                            width: 250, 
+                            height: 100, 
+                            backgroundColor: '#5D1049', 
                             borderRadius: 30 }}>
                   <Image source={require('../assets/images/college.png')}
-                    style={{width: 35,
-                            height: 35,
-                            marginTop: 27,
+                    style={{width: 35, 
+                            height: 35, 
+                            marginTop: 27, 
                             marginLeft: 20}}
                               />
-                  <Text style={{textAlign: 'center',
-                            marginTop: 35,
-                            color: 'white',
+                  <Text style={{textAlign: 'center', 
+                            marginTop: 35, 
+                            color: 'white', 
                             marginLeft: 30,
                             fontWeight: 'bold',
                             fontSize: 18 }}>
