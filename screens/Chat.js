@@ -21,7 +21,7 @@ export default class Chat extends React.Component {
 
     get user() {
         return {
-            name: "petter",
+            name: FireBase.getInstance().getName(),
             //email: this.props.navigation.state.params.email,
            // avatar: this.props.navigation.state.params.avatar,
             id: FireBase.getInstance().uid,
