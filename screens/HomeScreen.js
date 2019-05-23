@@ -73,7 +73,8 @@ export default class HomeScreen extends React.Component {
                           height: 430, 
                           backgroundColor: 'white', 
                           borderRadius: 50,
-                          borderColor: 'black',
+                          borderWidth: 0.5,
+                          borderColor: '#d6d7da',
                           shadowColor: 'black',
                           shadowOffset:{width: 6, height: 5},
                           shadowOpacity: 0.4}}>
@@ -100,9 +101,9 @@ export default class HomeScreen extends React.Component {
                             flexDirection: 'row', 
                             marginTop: 15, 
                             width: 250, 
-                            height: 70, 
+                            height: 100, 
                             backgroundColor: '#5D1049', 
-                            borderRadius: 23 }}>
+                            borderRadius: 30 }}>
               <Image source={require('../assets/images/open-book.png')}
                     style={{width: 35, 
                             height: 35, 
@@ -120,14 +121,14 @@ export default class HomeScreen extends React.Component {
       
               <TouchableOpacity onPress={() => 
                             {this.props.navigation.navigate('Fag')}}
-                    style={{height: 105, top: 20}}>
+                    style={{height: 105, top: 30}}>
               <View style={{flex: 1,
                             flexDirection: 'row', 
                             marginTop: 35, 
                             width: 250, 
-                            height: 70, 
+                            height: 100, 
                             backgroundColor: '#5D1049', 
-                            borderRadius: 23 }}>
+                            borderRadius: 30 }}>
       
               <Image source={require('../assets/images/college.png')}
                     style={{width: 35, 
