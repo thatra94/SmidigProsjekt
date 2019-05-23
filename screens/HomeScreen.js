@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinearGradient } from 'expo';
 import {
   Image,
   Platform,
@@ -29,68 +30,126 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-            <View style={styles.getStartedContainer}>
-
-                <ScrollView
-                    scrollEventThrottle={16}
-                >
-                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <Image
-                      style={{height: '60%', width: '45%', marginTop: 100, marginBottom: 100}}
-                      source={require('../assets/images/logo-insj.png')}
-                    />
-                  </View>
-                    <View style={{flex: 1}}>
-                      <Text style={{fontSize: 20, fontWeight: '700', paddingHorizontal: 0, textAlign: 'center', }}>
-                            Hvordan vil du finne gruppe?
-                      </Text>
-                    </View>
-                </ScrollView>
-            </View>
-
-            <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 40, shadowOffset:{width: 6,  height: 5}, shadowColor: 'black', shadowOpacity: 0.4}}>
-              <TouchableOpacity
-                onPress={() => {
-                  /*fb.joinGroup(firebase.auth().currentUser.uid, fb.getSubjectFromUser(firebase.auth().currentUser.uid));*/
-                  fb.joinGroup(firebase.auth().currentUser.uid, fb.mountStudy(firebase.auth().currentUser.uid));
-                  this.props.navigation.navigate('Gruppe');
-                }}
-                style={{height: 85}}
-                >
-                <View style={{ flex: 1, flexDirection: 'row', marginTop: 15, width: 250, height: 70, backgroundColor: '#ff6650', borderRadius: 23 }}>
-                    <Image
-                        source={require('../assets/images/open-book.png')}
-                        style={{width: 35, height: 35, marginTop: 16, marginLeft: 20}}
-                    />
-                    <Text style={{textAlign: 'center', marginTop: 25, marginLeft: 30, color: 'white' }}>
-                        Studieretning
-                    </Text>
+            // Bakgrunn 
+            // Lilla header 
+            // Gradient sirkel
+            // Logo
+            // Hvit boks
+            // Studieretning-knapp
+            // Velg et emne-knapp
+            <View style={styles.container}>
+      
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{width: 450, 
+                            height: 470, 
+                            backgroundColor: '#330F2A'}} />
+              </View>
+      
+              <LinearGradient
+                colors={['#D54FBA', '#3F0630']}
+                style={{position: 'absolute',
+                        top: -120,
+                        left: -40,
+                        width: 500,
+                        height: 500,
+                        borderRadius: 500/2}}>
+              </LinearGradient>
+      
+              <Image source={require('../assets/images/Hvit.png')}
+                    style={{position: 'absolute',
+                            right: 120,
+                            top: 90,
+                            flex: 1,
+                            width: 185,
+                            height: 185}}
+                            resizeMode="stretch"
+                              />
+            
+            <View style={{
+                          position: 'absolute',
+                          top: 300,
+                          right: 45,
+                          width: 320, 
+                          height: 430, 
+                          backgroundColor: 'white', 
+                          borderRadius: 50,
+                          borderColor: 'black',
+                          shadowColor: 'black',
+                          shadowOffset:{width: 6, height: 5},
+                          shadowOpacity: 0.4}}>
+      
+            <Text style={{textAlign: 'center', 
+                          marginTop: 60, 
+                          color: '#5D1049',
+                          fontSize: 20,
+                          fontWeight: 'bold' }}>
+                            Hvordan vil du finne gruppe?</Text>          
+      
+            <View style={{flex: 1, 
+                          flexDirection: 'column', 
+                          alignItems: 'center', 
+                          marginTop: 40, 
+                          shadowOffset:{width: 6, height: 5}, 
+                          shadowColor: 'black', 
+                          shadowOpacity: 0.4}}>
+              
+              <TouchableOpacity onPress={() => 
+                            {this.props.navigation.navigate('Gruppe')}}
+                            style={{height: 85, top: 10}}>
+              <View style={{flex: 1, 
+                            flexDirection: 'row', 
+                            marginTop: 15, 
+                            width: 250, 
+                            height: 70, 
+                            backgroundColor: '#5D1049', 
+                            borderRadius: 23 }}>
+              <Image source={require('../assets/images/open-book.png')}
+                    style={{width: 35, 
+                            height: 35, 
+                            marginTop: 16, 
+                            marginLeft: 20}}
+                            />
+              <Text style={{textAlign: 'center', 
+                            marginTop: 25, 
+                            marginLeft: 30,
+                            fontWeight: 'bold',
+                            fontSize: 18, 
+                            color: 'white' }}>Studieretning</Text>
+                            </View>
+                      </TouchableOpacity>
+      
+              <TouchableOpacity onPress={() => 
+                            {this.props.navigation.navigate('Fag')}}
+                    style={{height: 105, top: 20}}>
+              <View style={{flex: 1,
+                            flexDirection: 'row', 
+                            marginTop: 35, 
+                            width: 250, 
+                            height: 70, 
+                            backgroundColor: '#5D1049', 
+                            borderRadius: 23 }}>
+      
+              <Image source={require('../assets/images/college.png')}
+                    style={{width: 35, 
+                            height: 35, 
+                            marginTop: 17, 
+                            marginLeft: 20}}
+                              />
+      
+              <Text style={{textAlign: 'center', 
+                            marginTop: 25, 
+                            color: 'white', 
+                            marginLeft: 30,
+                            fontWeight: 'bold',
+                            fontSize: 18 }}>
+                              Velg et emne
+                          </Text>
+                      </View>
+                    </TouchableOpacity>
+      
                 </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {this.props.navigation.navigate('Fag')}}
-                style={{height: 105}}
-                >
-                <View style={{ flex: 1, flexDirection: 'row', marginTop: 35, width: 250, height: 70, backgroundColor: '#ff6650', borderRadius: 23 }}>
-
-                    <Image
-                        source={require('../assets/images/college.png')}
-                        style={{width: 35, height: 35, marginTop: 17, marginLeft: 20}}
-                    />
-
-                    <Text style={{textAlign: 'center', marginTop: 25, color: 'white', marginLeft: 30 }}>
-                        Velg et emne
-                    </Text>
-                </View>
-              </TouchableOpacity>
+              </View>
             </View>
-
-        </ScrollView>
-
-      </View>
     );
   }
 }
