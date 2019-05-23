@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, TouchableOpacity } from "react-native";
 
 import * as firebase from 'firebase';
+import { GiftedChat } from 'react-native-gifted-chat';
+
 import FireBase from '../components/FireBase';
 import CustomListView from '../components/CustomListView';
 
@@ -42,34 +44,48 @@ async function getStudies(userId) {
 }
 
 
-export default class Grupper extends React.Component {
-    constructor(props){
-    super(props);
-    getGroups(firebase.auth().currentUser.uid);
-  }
+export default class Chat extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    static navigationOptions = ({ navigation }) => ({
+        title: (navigation.state.params || {}).name || 'Chat!',
+    });
 
     state = {
-        list: [
-            {
-                title: 'Databaser',
-            },
-            {
-                title: 'Programmering',
-            },
-            {
-                title: 'Digital Teknologi',
-            }
-        ]
+        messages: [],
     };
 
-   render() {
-       console.log(this.state.list);
-      return (
-         <ScrollView>
-            <CustomListView itemList={this.state.list}/>
-         </ScrollView>
-      )
-   }
+    /*get user() {
+        return {
+            name: this.props.navigation.state.params.firstName,
+            //email: this.props.navigation.state.params.email,
+           // avatar: this.props.navigation.state.params.avatar,
+            id: firebaseSvc.uid,
+            _id: firebaseSvc.uid, // need for gifted-chat
+        };
+    }*/
+
+    render() {
+        return (
+            <GiftedChat
+                messages={this.state.messages}
+                onSend={firebase.send}
+                user={this.user}
+             alignTop={30} initialText={"IceBreaker"}/>
+        );
+    }
+/*
+    componentDidMount() {
+        firebase.refOn(message =>
+            this.setState(previousState => ({
+                messages: GiftedChat.append(previousState.messages, message),
+            }))
+        );
+    }*/
+    componentWillUnmount() {
+        firebase.refOff();
+    }
 }
 
 const styles = StyleSheet.create ({
@@ -87,4 +103,4 @@ const styles = StyleSheet.create ({
       color: '#4f603c',
       fontSize: 20,
    }
-})
+});

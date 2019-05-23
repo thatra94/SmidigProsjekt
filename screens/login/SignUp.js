@@ -32,7 +32,7 @@ export default class SignUp extends React.Component {
       .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          user = firebase.auth().currentUser,
+          const user = firebase.auth().currentUser;
           firebase.database().ref('users/' + user.uid).set({
             email: email.toLowerCase(),
             fornavn: firstName,
