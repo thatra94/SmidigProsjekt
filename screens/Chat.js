@@ -38,14 +38,15 @@ export default class Chat extends React.Component {
              alignTop={30} initialText={"IceBreaker"}/>
         );
     }
-/*
+
     componentDidMount() {
-        firebase.refOn(message =>
+
+        FireBase.getInstance().refOn(message =>
             this.setState(previousState => ({
                 messages: GiftedChat.append(previousState.messages, message),
             }))
         );
-    }*/
+    }
     componentWillUnmount() {
         FireBase.getInstance().refOff();
     }
