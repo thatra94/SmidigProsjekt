@@ -38,39 +38,44 @@ export default class HomeScreen extends React.Component {
             // Studieretning-knapp
             // Velg et emne-knapp
             <View style={styles.container}>
-      
-            <View style={{flex: 1, flexDirection: 'row'}}>
+              <ScrollView scrollEventThrottle={16}>
+              <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <View style={{flex: 1, flexDirection: 'row'}}>
               <View style={{width: 450, 
                             height: 470, 
                             backgroundColor: '#330F2A'}} />
-              </View>
-      
+              
               <LinearGradient
                 colors={['#D54FBA', '#3F0630']}
                 style={{position: 'absolute',
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        right: -30,
                         top: -120,
-                        left: -40,
                         width: 500,
                         height: 500,
                         borderRadius: 500/2}}>
               </LinearGradient>
-      
+
               <Image source={require('../assets/images/Hvit.png')}
-                    style={{position: 'absolute',
-                            right: 120,
+                            style={{position: 'absolute',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            right: 150,
                             top: 90,
                             flex: 1,
-                            width: 185,
-                            height: 185}}
+                            width: 155,
+                            height: 155}}
                             resizeMode="stretch"
-                              />
-            
-            <View style={{
+                />
+
+                <View style={{
                           position: 'absolute',
-                          top: 300,
-                          right: 45,
+                          top: 270,
+                          right: 65,
                           width: 320, 
-                          height: 430, 
+                          height: 400, 
                           backgroundColor: 'white', 
                           borderRadius: 50,
                           borderWidth: 0.5,
@@ -78,78 +83,78 @@ export default class HomeScreen extends React.Component {
                           shadowColor: 'black',
                           shadowOffset:{width: 6, height: 5},
                           shadowOpacity: 0.4}}>
-      
-            <Text style={{textAlign: 'center', 
+
+                <Text style={{textAlign: 'center', 
                           marginTop: 60, 
                           color: '#5D1049',
                           fontSize: 20,
                           fontWeight: 'bold' }}>
-                            Hvordan vil du finne gruppe?</Text>          
-      
-            <View style={{flex: 1, 
+                            Hvordan vil du finne gruppe?</Text> 
+
+                <View style={{flex: 1, 
                           flexDirection: 'column', 
                           alignItems: 'center', 
                           marginTop: 40, 
                           shadowOffset:{width: 6, height: 5}, 
                           shadowColor: 'black', 
                           shadowOpacity: 0.4}}>
-              
-              <TouchableOpacity onPress={() => 
+
+                <TouchableOpacity onPress={() => 
                             {this.props.navigation.navigate('Gruppe')}}
-                            style={{height: 85, top: 10}}>
-              <View style={{flex: 1, 
+                            style={{height: 120, top: -20}}>
+                <View style={{flex: 1, 
+                            flexDirection: 'row', 
+                            marginTop: 30, 
+                            width: 250, 
+                            height: 100, 
+                            backgroundColor: '#5D1049', 
+                            borderRadius: 30 }}>
+                <Image source={require('../assets/images/open-book.png')}
+                    style={{width: 35, 
+                            height: 35, 
+                            marginTop: 27, 
+                            marginLeft: 20}}
+                            />
+                <Text style={{textAlign: 'center', 
+                            marginTop: 35, 
+                            marginLeft: 30,
+                            fontWeight: 'bold',
+                            fontSize: 18, 
+                            color: 'white' }}>Studieretning</Text>
+                        </View>
+                            </TouchableOpacity>
+
+                  <TouchableOpacity onPress={() => 
+                            {this.props.navigation.navigate('Fag')}}
+                      style={{height: 110, top: 10}}>
+                  <View style={{flex: 1,
                             flexDirection: 'row', 
                             marginTop: 15, 
                             width: 250, 
                             height: 100, 
                             backgroundColor: '#5D1049', 
                             borderRadius: 30 }}>
-              <Image source={require('../assets/images/open-book.png')}
+                  <Image source={require('../assets/images/college.png')}
                     style={{width: 35, 
                             height: 35, 
-                            marginTop: 16, 
-                            marginLeft: 20}}
-                            />
-              <Text style={{textAlign: 'center', 
-                            marginTop: 25, 
-                            marginLeft: 30,
-                            fontWeight: 'bold',
-                            fontSize: 18, 
-                            color: 'white' }}>Studieretning</Text>
-                            </View>
-                      </TouchableOpacity>
-      
-              <TouchableOpacity onPress={() => 
-                            {this.props.navigation.navigate('Fag')}}
-                    style={{height: 105, top: 30}}>
-              <View style={{flex: 1,
-                            flexDirection: 'row', 
-                            marginTop: 35, 
-                            width: 250, 
-                            height: 100, 
-                            backgroundColor: '#5D1049', 
-                            borderRadius: 30 }}>
-      
-              <Image source={require('../assets/images/college.png')}
-                    style={{width: 35, 
-                            height: 35, 
-                            marginTop: 17, 
+                            marginTop: 27, 
                             marginLeft: 20}}
                               />
-      
-              <Text style={{textAlign: 'center', 
-                            marginTop: 25, 
+                  <Text style={{textAlign: 'center', 
+                            marginTop: 35, 
                             color: 'white', 
                             marginLeft: 30,
                             fontWeight: 'bold',
                             fontSize: 18 }}>
                               Velg et emne
                           </Text>
-                      </View>
-                    </TouchableOpacity>
-      
-                </View>
+                            </View>
+                      </TouchableOpacity>
+                  </View>
               </View>
+            </View>
+          </View>
+        </ScrollView>
             </View>
     );
   }
@@ -160,7 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     width: '100%',
-    height: '100%',
+    height: '100%'
   },
   overlayContainer: {
         flex: 1,
