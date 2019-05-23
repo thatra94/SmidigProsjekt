@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
+import { ScrollView, Image, StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import { LinearGradient } from 'expo';
 import RNPickerSelect from 'react-native-picker-select';
@@ -60,8 +60,9 @@ saveUserData = (user) => {
 
   render() {
     return (
-    <View style={styles.backgroundContainer}>
-        <LinearGradient
+        <View style={styles.backgroundContainer}>
+                
+            <LinearGradient
                 colors={['#D54FBA', '#3F0630']}
                 style={{position: 'absolute',
                         top: -120,
@@ -70,88 +71,98 @@ saveUserData = (user) => {
                         height: 500,
                         borderRadius: 500/2}}>
               </LinearGradient>
-      <View style={styles.container}>
         
-        <Text style={{color: 'white', fontSize: 30, marginBottom: 30, marginTop: 100 }}>Registrer Deg</Text>
-        {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
-            {this.state.errorMessage}
-          </Text>}
-           
-            <TextInput
-              style={styles.textInput}
-              placeholder="Fornavn"
-              autoCapitalize="none"
-              style={styles.textInput}
-              placeholderTextColor='white'
-              onChangeText={firstName => this.setState({ firstName })}
-              value={this.state.firstName}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Etternavn"
-              autoCapitalize="none"
-              style={styles.textInput}
-              placeholderTextColor='white'
-              onChangeText={lastName => this.setState({ lastName })}
-              value={this.state.lastName}
-            />
-            <RNPickerSelect
-              items={this.state.items}
-              style={styles.textInputSelector}
+                <ScrollView scrollEventThrottle={16}>
+                  
+                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    </View>
+        
+                    <View style={styles.container}>
+                        <Text style={{color: 'white', fontSize: 30, marginBottom: 30, marginTop: 100 }}>Registrer deg</Text>
+                        {this.state.errorMessage &&
+                        <Text style={{ color: 'red' }}>
+                        {this.state.errorMessage}
+                        </Text>}
 
-              onValueChange={(value) => {
-                this.setState({
-                  studySubject: value,
-                });
-              }}
-            >
-            <TextInput
-              placeholder="Studieretning"
-              autoCapitalize="none"
-              placeholderTextColor='white'
-              style={{marginRight: 20}}
-              style={styles.pickerText}
-              onChangeText={studySubject => this.setState({ studySubject })}
-              value={this.state.studySubject}
-            />
-            </RNPickerSelect>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Email"
-              autoCapitalize="none"
-              placeholderTextColor='white'
-              style={styles.textInput}
-              onChangeText={email => this.setState({ email })}
-              value={this.state.email}
-            />
-            <TextInput
-              style={styles.textInput}
-              secureTextEntry
-              placeholder="Password"
-              autoCapitalize="none"
-              placeholderTextColor='white'
-              style={styles.textInput}
-              onChangeText={password => this.setState({ password })}
-              value={this.state.password}
-            />
+                    <TextInput
+                      style={styles.textInput}
+                      placeholder="Fornavn"
+                      autoCapitalize="none"
+                      style={styles.textInput}
+                      placeholderTextColor='white'
+                      onChangeText={firstName => this.setState({ firstName })}
+                      value={this.state.firstName}
+                    />
+                          
+                    <TextInput
+                      style={styles.textInput}
+                      placeholder="Etternavn"
+                      autoCapitalize="none"
+                      style={styles.textInput}
+                      placeholderTextColor='white'
+                      onChangeText={lastName => this.setState({ lastName })}
+                      value={this.state.lastName}
+                    />
+                          
+                    <RNPickerSelect
+                      items={this.state.items}
+                      style={styles.textInputSelector}
 
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                <Text style={styles.registerText}>Allerede bruker? Logg inn</Text>
-            </TouchableOpacity>
-            
-        <TouchableOpacity style={styles.loginButton} onPress={this.handleSignUp}>
-            <Text style={styles.loginText}>Neste</Text>
-        </TouchableOpacity>
-      
-      </View>
-    </View>
+                      onValueChange={(value) => {
+                        this.setState({
+                          studySubject: value,
+                        });
+                      }}
+                    >
+                    <TextInput
+                      placeholder="Studieretning"
+                      autoCapitalize="none"
+                      placeholderTextColor='white'
+                      style={{marginRight: 20}}
+                      style={styles.pickerText}
+                      onChangeText={studySubject => this.setState({ studySubject })}
+                      value={this.state.studySubject}
+                    />
+                    </RNPickerSelect>
+                    <TextInput
+                      style={styles.textInput}
+                      placeholder="Email"
+                      autoCapitalize="none"
+                      placeholderTextColor='white'
+                      style={styles.textInput}
+                      onChangeText={email => this.setState({ email })}
+                      value={this.state.email}
+                    />
+                    <TextInput
+                      style={styles.textInput}
+                      secureTextEntry
+                      placeholder="Password"
+                      autoCapitalize="none"
+                      placeholderTextColor='white'
+                      style={styles.textInput}
+                      onChangeText={password => this.setState({ password })}
+                      value={this.state.password}
+                    />
+
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                        <Text style={styles.registerText}>Allerede bruker? Logg inn</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.loginButton} onPress={this.handleSignUp}>
+                        <Text style={styles.loginText}>Neste</Text>
+                    </TouchableOpacity>
+                        
+                </View>
+                        
+            </ScrollView>
+                        
+        </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-    backgroundContainer: {
+  backgroundContainer: {
     backgroundColor: '#3e1133',
     width: '100%',
     height: '100%',
@@ -160,17 +171,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 120,
   },
-  textInputSelector: {
-    left: 18,
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
-  },
-    textInput: {
+  textInput: {
     height: 40,
     width: '90%',
     borderColor: 'white',
@@ -184,7 +186,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     marginBottom: 20,
   },
-    loginButton: {
+  loginButton: {
     marginTop: 40,
     backgroundColor: 'white',
     borderRadius: 100,
