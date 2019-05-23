@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
+import { LinearGradient } from 'expo';
 import RNPickerSelect from 'react-native-picker-select';
 
 export default class SignUp extends React.Component {
@@ -60,13 +61,30 @@ saveUserData = (user) => {
   render() {
     return (
     <View style={styles.backgroundContainer}>
+        <LinearGradient
+                colors={['#D54FBA', '#3F0630']}
+                style={{position: 'absolute',
+                        top: -120,
+                        left: -40,
+                        width: 500,
+                        height: 500,
+                        borderRadius: 500/2}}>
+              </LinearGradient>
       <View style={styles.container}>
+        <Image source={require('../assets/images/Hvit.png')}
+                    style={{position: 'absolute',
+                            right: 120,
+                            top: 90,
+                            flex: 1,
+                            width: 185,
+                            height: 185}}
+                            resizeMode="stretch"
+                              />
         <Text style={{color: 'white', fontSize: 30, marginBottom: 30, marginTop: 100 }}>Registrer Deg</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
-        
            
             <TextInput
               style={styles.textInput}
