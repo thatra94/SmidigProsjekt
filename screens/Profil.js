@@ -8,6 +8,7 @@ import {
   Button
 } from 'react-native';
 import firebase from 'firebase';
+import { LinearGradient } from 'expo';
 
 
 
@@ -29,6 +30,16 @@ export default class Profil extends React.Component {
   render() {
     return (
     <View style={styles.backgroundContainer}>
+        
+        <LinearGradient
+                colors={['#D54FBA', '#3F0630']}
+                style={{position: 'absolute',
+                        top: -120,
+                        left: -40,
+                        width: 500,
+                        height: 500,
+                        borderRadius: 500/2}}>
+              </LinearGradient>
         <View style={styles.TitleContainer}>
             <Text style={styles.pageTitle}>Din profil</Text>
         </View>
@@ -86,7 +97,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     color: 'white',
-    marginBottom: 20,
+    marginBottom: 0,
   },
     nameUser: {
     marginTop: 20,
