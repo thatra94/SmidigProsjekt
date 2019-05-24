@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import firebase from 'firebase';
 import FireBase from '../components/FireBase';
 import CustomListView from "../components/CustomListView";
@@ -11,7 +11,14 @@ export default class Fag extends React.Component {
 
     static navigationOptions = {
         title: "Velg et fag",
-        headerStyle: {marginTop: 24},
+        headerStyle: {marginTop: 24}, 
+        headerStyle: {
+          
+        backgroundColor: '#f2f2f2',
+        borderBottomColor:'transparent',
+        borderBottomWidth: 0,
+        shadowColor: 'transparent',
+    },
     };
 
     state = {
@@ -28,29 +35,28 @@ export default class Fag extends React.Component {
         console.log(this.state.title, "test");
     }
 
-    render() {
-        if (styles.MainContainer) {
-        }
-        return (
-            <ScrollView>
-                <Text>Main page</Text>
-                <CustomListView itemList={this.state.title}/>
-            </ScrollView>
-        );
-    }
+   render() {
+   return (
+     <View style={styles.MainContainer}>
+
+         <ScrollView>
+         <CustomListView itemList={this.state.title}/>
+         </ScrollView>
+
+     </View>
+   );
+ }
 }
 
 
 const styles = StyleSheet.create ({
-   container: {
-      padding: 30,
-      marginTop: 5,
-      backgroundColor: '#ff6650',
-      alignItems: 'center',
-      borderWidth: 0.3,
-      borderColor: 'black',
-
+    
+   MainContainer: {
+       flex: 1,
+       margin: 0,
+       backgroundColor: '#f2f2f2',
    },
+    
    text: {
       color: '#ffffff',
       fontSize: 20,

@@ -4,19 +4,23 @@ import { View, FlatList, StyleSheet, Text } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#f2f2f2',
     },
     rowContainer: {
         padding: 30,
-        backgroundColor: '#ff6650',
+        backgroundColor: '#5D1049',
         alignItems: 'center',
-        borderWidth: 0.3,
-        height: 150,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#fff',
+        height: 100,
         borderColor: 'black',
-        marginTop: 5,
+        marginTop: 7,
+        margin: 5,
     },
     title: {
-        color: '#4f603c',
-        fontSize: 20,
+        color: '#ffffff',
+        fontSize: 22,
     }
 });
 
