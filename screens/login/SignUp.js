@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import {StyleSheet, Text, TextInput, View, Button, default as ImageEditor} from 'react-native';
 import firebase from 'firebase';
 import { TouchableOpacity } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
@@ -19,12 +19,13 @@ export default class SignUp extends React.Component {
     firstName: '',
     lastName:'',
     studySubject: '',
+    avatar: '',
     items: [
       { label: 'Programmering', value: 'Programmering' },
       { label: 'Interaktivt Design', value: 'Interaktivt Design' },
       { label: 'Spillprogrammering', value: 'Spillprogrammering' },
     ],
-    errorMessage: null }
+    errorMessage: null };
 
   handleSignUp = () => {
     const { email, password, firstName, lastName, studySubject } = this.state
@@ -38,12 +39,12 @@ export default class SignUp extends React.Component {
             fornavn: firstName,
             etternavn: lastName,
             studieretning: studySubject
-        })
+        });
           //console.log(user),
           console.log(user.uid);
         })
       .catch(error => this.setState({ errorMessage: error.message }))
-  }
+  };
 
 /*
 saveUserData = (user) => {
@@ -57,6 +58,7 @@ saveUserData = (user) => {
   }))
 }
 */
+
 
   render() {
     return (
