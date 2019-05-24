@@ -20,10 +20,13 @@ export default class Grupper extends React.Component {
       headerStyle: { marginTop: 24 },
       headerStyle: {
           
-      backgroundColor: '#f2f2f2',
+          backgroundColor: '#f2f2f2',
           borderBottomColor:'transparent',
           borderBottomWidth: 0,
           shadowColor: 'transparent',
+    },
+      headerTitleStyle: {
+          fontSize: 24, 
     },
     };
 

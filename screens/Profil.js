@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
     backgroundContainer: {
-    backgroundColor: '#3e1133',
+    backgroundColor: '#5D1049',
     width: '100%',
     height: '100%',
     display:'flex',

@@ -11,13 +11,19 @@ export default class Fag extends React.Component {
 
     static navigationOptions = {
         title: "Velg et fag",
-        headerStyle: {marginTop: 24}, 
+        headerStyle: {marginTop: 35}, 
         headerStyle: {
-          
+        
+        fontSize: 25,    
         backgroundColor: '#f2f2f2',
         borderBottomColor:'transparent',
         borderBottomWidth: 0,
         shadowColor: 'transparent',
+        
+    },
+        
+        headerTitleStyle: {
+        fontSize: 24, 
     },
     };
 
@@ -53,7 +59,7 @@ const styles = StyleSheet.create ({
     
    MainContainer: {
        flex: 1,
-       margin: 0,
+       margin: 0, 
        backgroundColor: '#f2f2f2',
    },
     
