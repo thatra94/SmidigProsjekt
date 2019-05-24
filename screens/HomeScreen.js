@@ -46,18 +46,41 @@ export default class HomeScreen extends React.Component {
           <Image source={require('../assets/images/Hvit.png')}
                         style={styles.logo}
                         resizeMode="stretch"/>
+            <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 40, shadowOffset:{width: 6,  height: 5}, shadowColor: 'black', shadowOpacity: 0.4}}>
+              <TouchableOpacity
+                onPress={async () => {
+                  await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
+                  this.props.navigation.navigate('Gruppe');
+                }}
+                style={{height: 85}}
+                >
+                <View style={{ flex: 1, flexDirection: 'row', marginTop: 15, width: 250, height: 70, backgroundColor: '#ff6650', borderRadius: 23 }}>
+                    <Image
+                        source={require('../assets/images/open-book.png')}
+                        style={{width: 35, height: 35, marginTop: 16, marginLeft: 20}}
+                    />
+                    <Text style={{textAlign: 'center', marginTop: 25, marginLeft: 30, color: 'white' }}>
+                        Studieretning
+                    </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {this.props.navigation.navigate('Fag')}}
+                style={{height: 105}}
+                >
+                <View style={{ flex: 1, flexDirection: 'row', marginTop: 35, width: 250, height: 70, backgroundColor: '#ff6650', borderRadius: 23 }}>
 
             <View style={styles.whiteFrame}>
 
             <View style={styles.whiteContainer}>
 
             <Text style={styles.txtGroup}>
-                        Hvordan vil du finne gruppe?</Text> 
-              
+                        Hvordan vil du finne gruppe?</Text>
+
             <View style={styles.btnContainer}>
               <View style={styles.btnShadow}>
 
-            <TouchableOpacity onPress={() => 
+            <TouchableOpacity onPress={() =>
                         {this.props.navigation.navigate('Gruppe')}}
                         style={{height: 120, top: -20}}>
               <View style={styles.btnStudieretning}>
@@ -68,7 +91,7 @@ export default class HomeScreen extends React.Component {
                     </View>
                         </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => 
+              <TouchableOpacity onPress={() =>
                         {this.props.navigation.navigate('Fag')}}
                   style={{height: 110, top: 10}}>
                 <View style={styles.btnVelgEmne}>
@@ -103,9 +126,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '45%',
     margin: '5%',
-    width: wp('90%'), 
-    height: hp('55%'), 
-    backgroundColor: 'white', 
+    width: wp('90%'),
+    height: hp('55%'),
+    backgroundColor: 'white',
     borderRadius: 50,
     borderWidth: 0.5,
     borderColor: '#d6d7da',
@@ -114,63 +137,63 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4
   },
   txtGroup:{
-    textAlign: 'center', 
-    marginTop: 60, 
+    textAlign: 'center',
+    marginTop: 60,
     color: '#5D1049',
     fontSize: 20,
     fontWeight: 'bold'
   },
   btnShadow:{
-    flex: 1, 
-    flexDirection: 'column', 
-    alignItems: 'center', 
-    marginTop: 40, 
-    shadowOffset:{width: 6, height: 5}, 
-    shadowColor: 'black', 
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 40,
+    shadowOffset:{width: 6, height: 5},
+    shadowColor: 'black',
     shadowOpacity: 0.4
   },
   btnStudieretning:{
-    flex: 1, 
-    flexDirection: 'row', 
-    marginTop: 30, 
-    width: wp('70%'), 
-    height: hp('20%'), 
-    backgroundColor: '#5D1049', 
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 30,
+    width: wp('70%'),
+    height: hp('20%'),
+    backgroundColor: '#5D1049',
     borderRadius: 30
   },
   txtStudieretning:{
-    textAlign: 'center', 
-    marginTop: 35, 
+    textAlign: 'center',
+    marginTop: 35,
     marginLeft: 30,
     fontWeight: 'bold',
-    fontSize: 18, 
+    fontSize: 18,
     color: 'white'
   },
   bookIcon:{
-    width: 35, 
-    height: 35, 
-    marginTop: 27, 
+    width: 35,
+    height: 35,
+    marginTop: 27,
     marginLeft: 20
   },
   btnVelgEmne:{
     flex: 1,
-    flexDirection: 'row', 
-    marginTop: 15, 
-    width: wp('70%'), 
-    height: hp('20%'), 
-    backgroundColor: '#5D1049', 
+    flexDirection: 'row',
+    marginTop: 15,
+    width: wp('70%'),
+    height: hp('20%'),
+    backgroundColor: '#5D1049',
     borderRadius: 30
   },
   collegeIcon:{
-    width: 35, 
-    height: 35, 
-    marginTop: 27, 
+    width: 35,
+    height: 35,
+    marginTop: 27,
     marginLeft: 20
   },
   txtVelgEmne:{
-    textAlign: 'center', 
-    marginTop: 35, 
-    color: 'white', 
+    textAlign: 'center',
+    marginTop: 35,
+    color: 'white',
     marginLeft: 30,
     fontWeight: 'bold',
     fontSize: 18

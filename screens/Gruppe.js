@@ -37,7 +37,7 @@ export default class Grupper extends React.Component {
     async componentWillMount() {
         let fbData = FireBase.getInstance();
         await this.setState({title: fbData.getGroupList()});
-        console.log(this.state.title);
+        //console.log(this.state.title);
     }
 
    render() {
