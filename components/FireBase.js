@@ -133,7 +133,10 @@ export default class FireBase {
 
     joinGroup(userId, subjectName) {
 
-        if(groupList.length === 0 || groupList === null){
+        console.log(subjectName);
+        console.log(userId);
+        let checkBool = false;
+        if(groupList.length === 0){
             FireBase.createNewGroup(userId, subjectName);
         }
         else {
@@ -142,20 +145,33 @@ export default class FireBase {
                 snapshot.forEach(function (snapshot) {
                     let userCount = snapshot.val().userCount;
                     let groupKey = snapshot.key;
-                    for (let i; i < groupList.length; i++) {
-                        if (groupList[i].title === (subjectName)) {
-                            return;
-                        } else if (groupList === null || groupList[i].title !== (subjectName)) {
-                            if (userCount < 3 && groupList.length > 0) {
-                                FireBase.addToGroup(groupKey, userId, userCount);
-                                return;
-                            } else {
-                                FireBase.createNewGroup(userId, subjectName);
+                    let subject = snapshot.val().subject;
+                    console.log(userCount);
+                    if (subjectName === subject) {
+                        for (let i = 0; i < groupList.length; i++) {
+                            if (groupList[i].title === (subjectName)) {
+                                console.log("err1");
+                                checkBool = true;
+                            } else if (groupList[i].title !== (subjectName)) {
+                                if (userCount < 3 && groupList.length > 0) {
+                                    FireBase.addToGroup(groupKey, userId, userCount);
+                                    console.log("err2");
+                                    checkBool = true;
+                                } else {
+                                    FireBase.createNewGroup(userId, subjectName);
+                                    console.log("err3");
+                                    checkBool = true;
+                                }
+                            }
+                            if (checkBool) {
+                                return checkBool;
                             }
                         }
-
                     }
                 });
+                if (!checkBool) {
+                    FireBase.createNewGroup(userId, subjectName);
+                }
             });
         }
         this.getGroups(userId);

@@ -54,9 +54,7 @@ export default class HomeScreen extends React.Component {
             <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', marginTop: 40, shadowOffset:{width: 6,  height: 5}, shadowColor: 'black', shadowOpacity: 0.4}}>
               <TouchableOpacity
                 onPress={async () => {
-                  /*fb.joinGroup(firebase.auth().currentUser.uid, fb.getSubjectFromUser(firebase.auth().currentUser.uid));*/
                   await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
-                  //await fb.getGroups(firebase.auth().currentUser.uid);
                   this.props.navigation.navigate('Gruppe');
                 }}
                 style={{height: 85}}
