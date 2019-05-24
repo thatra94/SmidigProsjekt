@@ -1,7 +1,5 @@
 import React from 'react';
-import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import * as firebase from 'firebase';
-import FireBase from "./FireBase";
+import { View, FlatList, StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -28,18 +26,13 @@ const styles = StyleSheet.create({
 });
 
 const CustomRow = ({ title }) => (
-    <TouchableOpacity
-        onPress={async () => {
-            await FireBase.getInstance().joinGroup(firebase.auth().currentUser.uid, title);
-            //this.props.navigation.navigate('Gruppe');
-        }}>
-        <View style={styles.rowContainer}>
-            <Text
-                style={styles.title}>
+    <View style={styles.rowContainer}>
+        <View>
+            <Text style={styles.title}>
                 {title}
             </Text>
         </View>
-    </TouchableOpacity>
+    </View>
 );
 
 const CustomListView = ({ itemList }) => (
@@ -50,6 +43,7 @@ const CustomListView = ({ itemList }) => (
                 title={item.title}
             />}
         />
+
     </View>
 );
 
