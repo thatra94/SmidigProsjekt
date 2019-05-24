@@ -152,21 +152,26 @@ export default class FireBase {
                             if (groupList[i].title === (subjectName)) {
                                 console.log("err1");
                                 checkBool = true;
-                            } else if (groupList[i].title !== (subjectName)) {
-                                if (userCount < 3 && groupList.length > 0) {
-                                    FireBase.addToGroup(groupKey, userId, userCount);
-                                    console.log("err2");
-                                    checkBool = true;
-                                } else {
-                                    FireBase.createNewGroup(userId, subjectName);
-                                    console.log("err3");
-                                    checkBool = true;
-                                }
-                            }
-                            if (checkBool) {
-                                return checkBool;
                             }
                         }
+                        if (!checkBool) {
+                            for (let i = 0; i < groupList.length; i++) {
+                                if (groupList[i].title !== (subjectName)) {
+                                    if (userCount < 3 && groupList.length > 0) {
+                                        FireBase.addToGroup(groupKey, userId, userCount);
+                                        console.log("err2");
+                                        checkBool = true;
+                                    } else {
+                                        FireBase.createNewGroup(userId, subjectName);
+                                        console.log("err3");
+                                        checkBool = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (checkBool) {
+                        return checkBool;
                     }
                 });
                 if (!checkBool) {
