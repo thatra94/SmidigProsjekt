@@ -137,10 +137,13 @@ export default class FireBase {
         firebase.database().ref("Groups/")
             .once("value").then(function (snapshot) {
             snapshot.forEach(function (snapshot) {
-                var userCount = snapshot.val().userCount;
-                var groupKey = snapshot.key;
+                let userCount = snapshot.val().userCount;
+                let groupKey = snapshot.key;
                 console.log(snapshot.val().title);
-                if (!groupList.includes(groupKey)) {
+                if (snapshot.val().subject === (subjectName)) {
+                    return;
+                }
+                else {
                     if (userCount < 3) {
                         FireBase.addToGroup(groupKey, userId, userCount);
                         groupFull = true;
@@ -150,11 +153,12 @@ export default class FireBase {
                     }
                 }
             });
-            if (!groupFull) {
-                FireBase.createNewGroup(userId, subjectName);
+            if (!snapshot.val().subject === (subjectName)) {
+                if (!groupFull) {
+                    FireBase.createNewGroup(userId, subjectName);
+                }
             }
         });
         this.getGroups(userId);
     }
-
 }
