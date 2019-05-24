@@ -58,8 +58,9 @@ export default class HomeScreen extends React.Component {
                     <View style={styles.btnContainer}>
                       <View style={styles.btnShadow}>
 
-                        <TouchableOpacity onPress={() =>
-                        {this.props.navigation.navigate('Gruppe')}}
+                        <TouchableOpacity onPress={async () => {
+                          await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
+                          this.props.navigation.navigate('Gruppe');}}
                                           style={{height: 120, top: -20}}>
                           <View style={styles.btnStudieretning}>
                             <Image source={require('../assets/images/open-book.png')}

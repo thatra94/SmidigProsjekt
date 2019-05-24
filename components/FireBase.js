@@ -45,7 +45,7 @@ export default class FireBase {
       mountStudy(firebase.auth().currentUser.uid);
   }
 
- addToGroup(groupKey, userId, userCount){
+ static addToGroup(groupKey, userId, userCount){
     firebase.database().ref('Groups/'+groupKey).update({
       Token: userId,
       userCount: userCount+1,
@@ -56,7 +56,7 @@ export default class FireBase {
     });
 }
 
- createNewGroup(userId, subjectName){
+  static createNewGroup(userId, subjectName){
      const key = firebase.database().ref("Groups/")
          .push({
              userCount: 0,
@@ -120,14 +120,6 @@ export default class FireBase {
             });
     }
 
- printGroups(){
-   if (groupList.length == 0) {
-     console.log("Error");
-   }
-   for(let i = 0; i < groupList.length; i++){
-     console.log(groupList[i].title);
-   }
- }
 
 getGroupList(){
    //console.log(groupList);
@@ -138,29 +130,56 @@ getSubjectList() {
    return subjectsList;
 }
 
-joinGroup(userId, subjectName) {
-    let groupFull = false;
+    joinGroup(userId, subjectName) {
 
-    const query = firebase.database().ref("Groups/")
-        .once("value").then(function (snapshot) {
-            snapshot.forEach(function (snapshot) {
-                var userCount = snapshot.val().userCount;
-                var groupKey = snapshot.key;
-                if (userCount < 3) {
-                    this.addToGroup(groupKey, userId, userCount);
-                    groupFull = true;
-                    return true;
-                } else {
-                    groupFull = false;
+        console.log(subjectName);
+        console.log(userId);
+        let checkBool = false;
+        if(groupList.length === 0){
+            FireBase.createNewGroup(userId, subjectName);
+        }
+        else {
+            firebase.database().ref("Groups/")
+                .once("value").then(function (snapshot) {
+                snapshot.forEach(function (snapshot) {
+                    let userCount = snapshot.val().userCount;
+                    let groupKey = snapshot.key;
+                    let subject = snapshot.val().subject;
+                    console.log(userCount);
+                    if (subjectName === subject) {
+                        for (let i = 0; i < groupList.length; i++) {
+                            if (groupList[i].title === (subjectName)) {
+                                console.log("err1");
+                                checkBool = true;
+                            }
+                        }
+                        if (!checkBool) {
+                            for (let i = 0; i < groupList.length; i++) {
+                                if (groupList[i].title !== (subjectName)) {
+                                    if (userCount < 3 && groupList.length > 0) {
+                                        FireBase.addToGroup(groupKey, userId, userCount);
+                                        console.log("err2");
+                                        checkBool = true;
+                                    } else {
+                                        FireBase.createNewGroup(userId, subjectName);
+                                        console.log("err3");
+                                        checkBool = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (checkBool) {
+                        return checkBool;
+                    }
+                });
+                if (!checkBool) {
+                    FireBase.createNewGroup(userId, subjectName);
                 }
             });
-            if (!groupFull) {
-                this.createNewGroup(userId, subjectName);
-            }
-        });
-    //this.getGroups(userId);
+        }
+        this.getGroups(userId);
     }
-
 
     get uid() {
         return (firebase.auth().currentUser || {}).uid;
@@ -213,6 +232,4 @@ joinGroup(userId, subjectName) {
     refOff() {
         this.ref.off();
     }
-
-
 }
