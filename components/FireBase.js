@@ -139,7 +139,6 @@ export default class FireBase {
             snapshot.forEach(function (snapshot) {
                 let userCount = snapshot.val().userCount;
                 let groupKey = snapshot.key;
-                console.log(snapshot.val().title);
                 if (snapshot.val().subject === (subjectName)) {
                     return;
                 }
@@ -153,7 +152,10 @@ export default class FireBase {
                     }
                 }
             });
-            if (!snapshot.val().subject === (subjectName)) {
+            if (snapshot.val().subject === (subjectName)) {
+                return;
+            }
+            else {
                 if (!groupFull) {
                     FireBase.createNewGroup(userId, subjectName);
                 }
