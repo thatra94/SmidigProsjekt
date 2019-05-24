@@ -132,33 +132,32 @@ export default class FireBase {
     }
 
     joinGroup(userId, subjectName) {
-        let groupFull = false;
 
-        firebase.database().ref("Groups/")
-            .once("value").then(function (snapshot) {
-            snapshot.forEach(function (snapshot) {
-                let userCount = snapshot.val().userCount;
-                let groupKey = snapshot.key;
-                console.log(snapshot.val().title);
-                if (snapshot.val().subject === (subjectName)) {
-                    return;
-                }
-                else {
-                    if (userCount < 3) {
-                        FireBase.addToGroup(groupKey, userId, userCount);
-                        groupFull = true;
-                        return true;
-                    } else {
-                        groupFull = false;
+        if(groupList.length === 0 || groupList === null){
+            FireBase.createNewGroup(userId, subjectName);
+        }
+        else {
+            firebase.database().ref("Groups/")
+                .once("value").then(function (snapshot) {
+                snapshot.forEach(function (snapshot) {
+                    let userCount = snapshot.val().userCount;
+                    let groupKey = snapshot.key;
+                    for (let i; i < groupList.length; i++) {
+                        if (groupList[i].title === (subjectName)) {
+                            return;
+                        } else if (groupList === null || groupList[i].title !== (subjectName)) {
+                            if (userCount < 3 && groupList.length > 0) {
+                                FireBase.addToGroup(groupKey, userId, userCount);
+                                return;
+                            } else {
+                                FireBase.createNewGroup(userId, subjectName);
+                            }
+                        }
+
                     }
-                }
+                });
             });
-            if (!snapshot.val().subject === (subjectName)) {
-                if (!groupFull) {
-                    FireBase.createNewGroup(userId, subjectName);
-                }
-            }
-        });
+        }
         this.getGroups(userId);
     }
 }
