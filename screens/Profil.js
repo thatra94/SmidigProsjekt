@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import {default as ImageEditor, TouchableOpacity} from 'react-native'
 import {
   StyleSheet,
   Image,
   Text,
   View,
-  Button
+  Button,
+  ImageEditor,
+  TouchableOpacity
 } from 'react-native';
 import firebase from '../components/FireBase';
-import { Constants, ImagePicker, Permissions } from 'expo';
+import {ImagePicker, Permissions } from 'expo';
 
 
 
@@ -55,7 +56,7 @@ export default class Profil extends React.Component {
         }
         console.log("scale image to x:" + wantedwidth + " y:" + wantedheight);
         let resizedUri = await new Promise((resolve, reject) => {
-         ImageEditor.cropImage(pickerResult.uri,
+          ImageEditor.cropImage(pickerResult.uri,
               {
                 offset: { x: 0, y: 0 },
                 size: { width: pickerResult.width, height: pickerResult.height },
