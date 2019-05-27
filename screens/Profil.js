@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native'
+import {ImageEditor, TouchableOpacity} from 'react-native'
 import {
   StyleSheet,
   Image,
@@ -8,6 +8,7 @@ import {
   Button
 } from 'react-native';
 import firebase from 'firebase';
+import {ImagePicker, Permissions} from "expo";
 
 
 
@@ -16,7 +17,68 @@ export default class Profil extends React.Component {
      static navigationOptions = {
       header: null,
   };
-    
+
+  state = {
+    avatar: ""
+  };
+
+
+  onImageUpload = async () => {
+    const { status: cameraRollPerm } = await Permissions.askAsync(
+        Permissions.CAMERA_ROLL,
+        Permissions.CAMERA
+    );
+    try {
+      // only if user allows permission to camera roll
+      if (cameraRollPerm === 'granted') {
+        console.log('choosing image granted...');
+        let pickerResult = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        });
+        console.log(
+            'ready to upload... pickerResult json:' + JSON.stringify(pickerResult)
+        );
+
+        let wantedMaxSize = 150;
+        let rawheight = pickerResult.height;
+        let rawwidth = pickerResult.width;
+
+        let ratio = rawwidth / rawheight;
+        let wantedwidth = wantedMaxSize;
+        let wantedheight = wantedMaxSize / ratio;
+        // check vertical or horizontal
+        if(rawheight > rawwidth){
+          wantedwidth = wantedMaxSize*ratio;
+          wantedheight = wantedMaxSize;
+        }
+        console.log("scale image to x:" + wantedwidth + " y:" + wantedheight);
+        let resizedUri = await new Promise((resolve, reject) => {
+          ImageEditor.cropImage(pickerResult.uri,
+              {
+                offset: { x: 0, y: 0 },
+                size: { width: pickerResult.width, height: pickerResult.height },
+                displaySize: { width: wantedwidth, height: wantedheight },
+                resizeMode: 'contain',
+              },
+              (uri) => resolve(uri),
+              () => reject(),
+          );
+        });
+        let uploadUrl = await firebase.getInstance().uploadImage(resizedUri);
+        //let uploadUrl = await firebase.getInstance().uploadImageAsync(resizedUri);
+        await this.setState({ avatar: uploadUrl });
+        console.log(" - await upload successful url:" + uploadUrl);
+        console.log(" - await upload successful avatar state:" + this.state.avatar);
+        await firebase.getInstance().updateAvatar(uploadUrl); //might failed
+      }
+    } catch (err) {
+      console.log('onImageUpload error:' + err.message);
+      alert('Upload image error:' + err.message);
+    }
+  };
+
+
   signOutUser = () => {
     firebase
       .auth()
