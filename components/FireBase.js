@@ -40,14 +40,7 @@ export default class FireBase {
     return this.myInstance;
   }
 
-  mountElements(){
-      getGroups(firebase.auth().currentUser.uid);
-      getSubjects(firebase.auth().currentUser.uid);
-      mountName(firebase.auth().currentUser.uid);
-      mountStudy(firebase.auth().currentUser.uid);
-  }
-
- static addToGroup(groupKey, userId, userCount){
+  static addToGroup(groupKey, userId, userCount){
     firebase.database().ref('Groups/'+groupKey).update({
       Token: userId,
       userCount: userCount+1,
@@ -85,8 +78,10 @@ export default class FireBase {
             lastName = snapshot.val().etternavn;
       });
   }
+
   getName(){
       return firstName +" "+ lastName;
+      console.log(firstName + " " + lastName);
   }
 
   getStudy(userId){

@@ -8,8 +8,7 @@ import {
   Button
 } from 'react-native';
 import firebase from 'firebase';
-
-
+import FireBase from "../components/FireBase";
 
 export default class Profil extends React.Component {
 
@@ -41,9 +40,9 @@ export default class Profil extends React.Component {
                 <Text style={styles.TextStyle}></Text>
             </TouchableOpacity>
         
-            <Text style={styles.nameUser}>John Doe</Text>
+            <Text style={styles.nameUser}>{FireBase.getInstance().getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
-            <Text style={styles.studyUser}>Programmering</Text>
+            <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
         
             <Button color='red' title="Logg ut" onPress={this.signOutUser} />
         </View>
