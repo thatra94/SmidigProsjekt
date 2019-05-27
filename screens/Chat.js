@@ -3,16 +3,15 @@ import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, Touchabl
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import FireBase from '../components/FireBase';
-import CustomListView from '../components/CustomListView';
 
- var groupList = [];
+let fb = FireBase.getInstance();
 
 export default class Chat extends React.Component {
     constructor(props) {
         super(props);
     }
     static navigationOptions = ({ navigation }) => ({
-        title: (navigation.state.params || {}).name || 'Chat!',
+        title: (navigation.state.params || {}).name || '' +fb.setChatName(fb.groupId)+ ' Chat!',
     });
 
     state = {
@@ -35,7 +34,7 @@ export default class Chat extends React.Component {
                 messages={this.state.messages}
                 onSend={FireBase.getInstance().send}
                 user={this.user}
-             alignTop={30} initialText={"IceBreaker"}/>
+             alignTop={30} initialText={"IceBreaker..."}/>
         );
     }
 
@@ -46,6 +45,7 @@ export default class Chat extends React.Component {
                 messages: GiftedChat.append(previousState.messages, message),
             }))
         );
+
     }
     componentWillUnmount() {
         FireBase.getInstance().refOff();

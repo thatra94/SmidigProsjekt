@@ -17,6 +17,8 @@ const subjectsList = [];
 let firstName;
 let lastName;
 let userStudie;
+let groupId = "-LU5dG2QZEOGmsYyetaY";
+let subject = "Webprosjekt";
 
 
 export default class FireBase {
@@ -171,7 +173,7 @@ getSubjectList() {
                     }
                     if (checkBool) {
                         return checkBool;
-                    }
+                }
                 });
                 if (!checkBool) {
                     FireBase.createNewGroup(userId, subjectName);
@@ -181,13 +183,29 @@ getSubjectList() {
         this.getGroups(userId);
     }
 
+    setGroupId(groupId){
+      this.groupId = groupId;
+    }
+
+    getGroupId(){
+      return groupId;
+    }
+
+    setChatName(groupId){
+        firebase.database().ref('Groups/' + groupId)
+            .once("value").then(function (snapshot){
+            this.subject = snapshot.val().subject;
+        });
+        return subject;
+    }
+
     get uid() {
         return (firebase.auth().currentUser || {}).uid;
     }
 
 
-    get ref() {
-        return firebase.database().ref('Messages');
+    ref(groupId) {
+        return firebase.database().ref('Groups/'+groupId+'/Chat');
     }
 
     parse = snapshot => {
@@ -207,7 +225,7 @@ getSubjectList() {
     };
 
     refOn = callback => {
-        this.ref
+        this.ref(this.getGroupId())
             .limitToLast(20)
             .on('child_added', snapshot => callback(this.parse(snapshot)));
     }
@@ -225,11 +243,11 @@ getSubjectList() {
                 user,
                 createdAt: this.timestamp,
             };
-            this.ref.push(message);
+            this.ref(this.getGroupId()).push(message);
         }
     };
 
     refOff() {
-        this.ref.off();
+        this.ref(this.getGroupId()).off();
     }
 }

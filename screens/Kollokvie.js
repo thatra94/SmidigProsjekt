@@ -1,6 +1,5 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import firebase from 'firebase';
 import FireBase from '../components/FireBase';
 import CustomListView from "../components/CustomListView";
 
@@ -11,20 +10,13 @@ export default class Fag extends React.Component {
 
     static navigationOptions = {
         title: "Velg et fag",
-        headerStyle: {marginTop: 35}, 
-        headerStyle: {
-        
+        headerStyle: {marginTop: 35},
         fontSize: 25,    
         backgroundColor: '#f2f2f2',
         borderBottomColor:'transparent',
         borderBottomWidth: 0,
         shadowColor: 'transparent',
         
-    },
-        
-        headerTitleStyle: {
-        fontSize: 24, 
-    },
     };
 
     state = {
