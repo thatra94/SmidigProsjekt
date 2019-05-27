@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import * as snapshot from "expo";
 
 
 const firebaseConfig = {
@@ -7,7 +8,7 @@ const firebaseConfig = {
   authDomain: "smidigprosjekt-e3cdc.firebaseapp.com",
   databaseURL: "https://smidigprosjekt-e3cdc.firebaseio.com",
   projectId: "smidigprosjekt-e3cdc",
-  storageBucket: "smidigprosjekt-e3cdc.appspot.com",
+  storageBucket: "gs://smidigprosjekt-e3cdc.appspot.com/",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -179,7 +180,7 @@ joinGroup(userId, subjectName) {
                         /* noop but you can track the progress here */
                     },
                     reject /* this is where you would put an error callback! */,
-                    () => resolve(task.snapshot.downloadURL)
+                    () => resolve(task.snapshot.ref.getDownloadURL())
                 );
             });
         } catch (err) {
