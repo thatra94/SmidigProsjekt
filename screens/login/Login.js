@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity,  StatusBar } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View, Button, TouchableOpacity,  StatusBar } from 'react-native'
 import { LinearGradient } from 'expo';
 import firebase from 'firebase'
 
@@ -22,7 +22,10 @@ export default class Login extends React.Component {
   render() {
     return ( 
         <View style={styles.backgroundContainer}>
-        <LinearGradient
+            <ScrollView scrollEventThrottle={16}>
+                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    </View>
+            <LinearGradient
                 colors={['#D54FBA', '#3F0630']}
                 style={{position: 'absolute',
                         top: -120,
@@ -31,8 +34,9 @@ export default class Login extends React.Component {
                         height: 500,
                         borderRadius: 500/2}}>
               </LinearGradient>
-          <View style={styles.container}>
-            <Text style={{color: 'white', margin: 40, fontSize: 30}}>Logg inn</Text>
+        
+            <View style={styles.container}>
+            <Text style={{color: 'white', marginTop: '70%', fontSize: 30, marginBottom: '15%'}}>Logg inn</Text>
             {this.state.errorMessage &&
               <Text style={{ color: 'red' }}>
                 {this.state.errorMessage}
@@ -63,6 +67,7 @@ export default class Login extends React.Component {
                 <Text style={styles.loginText}>Logg inn</Text>
             </TouchableOpacity>
           </View>
+        </ScrollView>
         </View>
     )
   }

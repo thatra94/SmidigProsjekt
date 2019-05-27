@@ -77,8 +77,9 @@ saveUserData = (user) => {
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     </View>
         
+                  
                     <View style={styles.container}>
-                        <Text style={{color: 'white', fontSize: 30, marginBottom: 30, marginTop: 100 }}>Registrer deg</Text>
+                        <Text style={{color: 'white', fontSize: 30, marginBottom: '10%', marginTop: '20%' }}>Registrer deg</Text>
                         {this.state.errorMessage &&
                         <Text style={{ color: 'red' }}>
                         {this.state.errorMessage}
