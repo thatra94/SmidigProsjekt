@@ -20,11 +20,11 @@ export default class Chat extends React.Component {
 
     get user() {
         return {
-            name: FireBase.getInstance().getName(),
+            name: fb.getName(),
             //email: this.props.navigation.state.params.email,
            // avatar: this.props.navigation.state.params.avatar,
-            id: FireBase.getInstance().uid,
-            _id: FireBase.getInstance().uid, // need for gifted-chat
+            id: fb.uid,
+            _id: fb.uid, // need for gifted-chat
         };
     }
 
@@ -32,7 +32,7 @@ export default class Chat extends React.Component {
         return (
             <GiftedChat
                 messages={this.state.messages}
-                onSend={FireBase.getInstance().send}
+                onSend={fb.send}
                 user={this.user}
              alignTop={30} initialText={"IceBreaker..."}/>
         );
@@ -40,7 +40,7 @@ export default class Chat extends React.Component {
 
     componentDidMount() {
 
-        FireBase.getInstance().refOn(message =>
+        fb.refOn(message =>
             this.setState(previousState => ({
                 messages: GiftedChat.append(previousState.messages, message),
             }))
@@ -48,7 +48,7 @@ export default class Chat extends React.Component {
 
     }
     componentWillUnmount() {
-        FireBase.getInstance().refOff();
+        fb.refOff();
     }
 }
 
