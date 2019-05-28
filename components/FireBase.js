@@ -19,6 +19,7 @@ const subjectsList = [];
 let firstName;
 let lastName;
 let userStudie;
+let avatar;
 
 function urlToBlob(uri) {
     return new Promise((resolve, reject) => {
@@ -261,12 +262,16 @@ getSubjectList() {
                 .ref('avatar')
                 .child(uuid.v4());
             const task = await ref.put(response);
+            this.setAvatar(firebase.auth().currentUser.uid, ref.getDownloadURL())
             return ref.getDownloadURL();
 
             /*return new Promise((resolve, reject) => {
                    task.on(
                        'state_changed',
                        () => {
+
+
+
 
                        },
                        reject,

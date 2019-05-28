@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import FireBase from '../components/FireBase';
 import {ImagePicker, Permissions} from "expo";
+import * as firebase from "firebase";
 
+let avatarIMG = {uri: 'https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7c507e0-71bf-4088-a588-c7aace7a517a?alt=media&token=657e8a88-8c8e-4b59-9068-14cc14fbfd9e'};
 
 
 export default class Profil extends React.Component {
@@ -21,7 +23,6 @@ export default class Profil extends React.Component {
   state = {
     avatar: ""
   };
-
 
   onImageUpload = async () => {
     const { status: cameraRollPerm } = await Permissions.askAsync(
@@ -76,6 +77,9 @@ export default class Profil extends React.Component {
     }
   };
 
+  componentDidMount() {
+  }
+
 
   signOutUser = () => {
     FireBase.getInstance()
@@ -93,7 +97,8 @@ export default class Profil extends React.Component {
             <Text style={styles.pageTitle}>Din profil</Text>
         </View>
         <View style={styles.container}>
-            <Image style={styles.profileIcon} source={require('../assets/images/user.png' )}/>
+            <Image style={styles.profileIcon} source={avatarIMG}
+            />
             <TouchableOpacity style={styles.editIconContainer} activeOpacity={0.5}>
                 <Image
                 source={require('../assets/images/edit.png')}
