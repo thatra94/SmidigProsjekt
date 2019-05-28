@@ -78,7 +78,7 @@ export default class Profil extends React.Component {
 
 
   signOutUser = () => {
-    firebase
+    FireBase.getInstance()
       .auth()
         .signOut()
           .then(() => {

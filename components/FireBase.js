@@ -268,7 +268,8 @@ getSubjectList() {
                         /* noop but you can track the progress here */
                     },
                     reject /* this is where you would put an error callback! */,
-                    () => resolve(task.snapshot.ref.getDownloadURL())
+                    () => resolve(task.snapshot.ref.getDownloadURL()),
+                    console.log("test", task.snapshot.ref.getDownloadURL())
                 );
             });
         } catch (err) {
