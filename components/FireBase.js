@@ -255,27 +255,29 @@ getSubjectList() {
         try {
             const response = await urlToBlob(uri);
             //const blob = await response.blob();
+            console.log("response url", response);
             const ref = firebase
                 .storage()
                 .ref('avatar')
                 .child(uuid.v4());
             const task = await ref.put(response);
+            return task.snapshot.ref.getDownloadURL();
 
-            return new Promise((resolve, reject) => {
-                task.on(
-                    'state_changed',
-                    () => {
-                        /* noop but you can track the progress here */
-                    },
-                    reject /* this is where you would put an error callback! */,
-                    () => resolve(task.snapshot.ref.getDownloadURL()),
-                    console.log("test", task.snapshot.ref.getDownloadURL())
-                );
-            });
+            /*   return new Promise((resolve, reject) => {
+                   task.on(
+                       'state_changed',
+                       () => {
+
+                       },
+                       reject,
+                       () => resolve(task.snapshot.ref.getDownloadURL()),
+                       console.log("test", task.snapshot.ref.getDownloadURL())
+                   );
+               });*/
         } catch (err) {
             console.log('uploadImage try/catch error: ' + err.message); //Cannot load an empty url
         }
-    }
+    };
 
     updateAvatar = (url) => {
         //await this.setState({ avatar: url });
