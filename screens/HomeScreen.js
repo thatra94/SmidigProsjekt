@@ -1,4 +1,6 @@
+
 import React from 'react';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { LinearGradient } from 'expo';
 import {
   Image,
@@ -16,12 +18,12 @@ import FireBase from '../components/FireBase';
 export default class HomeScreen extends React.Component {
   constructor(){
     super();
-    fb = FireBase.getInstance();
+    let fb = FireBase.getInstance();
     //fb.mountElements();
-      fb.getGroups(firebase.auth().currentUser.uid);
-      fb.getSubjects(firebase.auth().currentUser.uid);
-      fb.mountName(firebase.auth().currentUser.uid);
-      fb.mountStudy(firebase.auth().currentUser.uid);
+    fb.getGroups(firebase.auth().currentUser.uid);
+    fb.getSubjects(firebase.auth().currentUser.uid);
+    fb.mountName(firebase.auth().currentUser.uid);
+    fb.mountStudy(firebase.auth().currentUser.uid);
   }
 
   static navigationOptions = {
@@ -30,127 +32,64 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-            // Bakgrunn 
-            // Lilla header 
-            // Gradient sirkel
-            // Logo
-            // Hvit boks
-            // Studieretning-knapp
-            // Velg et emne-knapp
-            <View style={styles.container}>
-      
-            <View style={{flex: 1, flexDirection: 'row'}}>
-              <View style={{width: 450, 
-                            height: 470, 
-                            backgroundColor: '#330F2A'}} />
-              </View>
-      
-              <LinearGradient
-                colors={['#D54FBA', '#3F0630']}
-                style={{position: 'absolute',
-                        top: -120,
-                        left: -40,
-                        width: 500,
-                        height: 500,
-                        borderRadius: 500/2}}>
-              </LinearGradient>
-      
-              <Image source={require('../assets/images/Hvit.png')}
-                    style={{position: 'absolute',
-                            right: 120,
-                            top: 90,
-                            flex: 1,
-                            width: 185,
-                            height: 185}}
-                            resizeMode="stretch"
-                              />
-            
-            <View style={{
-                          position: 'absolute',
-                          top: 300,
-                          right: 45,
-                          width: 320, 
-                          height: 430, 
-                          backgroundColor: 'white', 
-                          borderRadius: 50,
-                          borderWidth: 0.5,
-                          borderColor: '#d6d7da',
-                          shadowColor: 'black',
-                          shadowOffset:{width: 6, height: 5},
-                          shadowOpacity: 0.4}}>
-      
-            <Text style={{textAlign: 'center', 
-                          marginTop: 60, 
-                          color: '#5D1049',
-                          fontSize: 20,
-                          fontWeight: 'bold' }}>
-                            Hvordan vil du finne gruppe?</Text>          
-      
-            <View style={{flex: 1, 
-                          flexDirection: 'column', 
-                          alignItems: 'center', 
-                          marginTop: 40, 
-                          shadowOffset:{width: 6, height: 5}, 
-                          shadowColor: 'black', 
-                          shadowOpacity: 0.4}}>
-              
-              <TouchableOpacity onPress={() => 
-                            {this.props.navigation.navigate('Gruppe')}}
-                            style={{height: 85, top: 10}}>
-              <View style={{flex: 1, 
-                            flexDirection: 'row', 
-                            marginTop: 15, 
-                            width: 250, 
-                            height: 100, 
-                            backgroundColor: '#5D1049', 
-                            borderRadius: 30 }}>
-              <Image source={require('../assets/images/open-book.png')}
-                    style={{width: 35, 
-                            height: 35, 
-                            marginTop: 16, 
-                            marginLeft: 20}}
+        <View style={styles.container}>
+          <ScrollView scrollEventThrottle={16}>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+
+                <View style={styles.purpleBackground} />
+
+                <LinearGradient
+                    colors={['#D54FBA', '#3F0630']}
+                    style={styles.gradientCircle}>
+                </LinearGradient>
+
+                <Image source={require('../assets/images/Hvit.png')}
+                       style={styles.logo}
+                       resizeMode="stretch"/>
+
+                <View style={styles.whiteFrame}>
+
+                  <View style={styles.whiteContainer}>
+
+                    <Text style={styles.txtGroup}>
+                      Hvordan vil du finne gruppe?</Text>
+
+                    <View style={styles.btnContainer}>
+                      <View style={styles.btnShadow}>
+
+                        <TouchableOpacity onPress={async () => {
+                          await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
+                          this.props.navigation.navigate('Gruppe');}}
+                                          style={{height: 120, top: -20}}>
+                          <View style={styles.btnStudieretning}>
+                            <Image source={require('../assets/images/open-book.png')}
+                                   style={styles.bookIcon}
                             />
-              <Text style={{textAlign: 'center', 
-                            marginTop: 25, 
-                            marginLeft: 30,
-                            fontWeight: 'bold',
-                            fontSize: 18, 
-                            color: 'white' }}>Studieretning</Text>
-                            </View>
-                      </TouchableOpacity>
-      
-              <TouchableOpacity onPress={() => 
-                            {this.props.navigation.navigate('Fag')}}
-                    style={{height: 105, top: 30}}>
-              <View style={{flex: 1,
-                            flexDirection: 'row', 
-                            marginTop: 35, 
-                            width: 250, 
-                            height: 100, 
-                            backgroundColor: '#5D1049', 
-                            borderRadius: 30 }}>
-      
-              <Image source={require('../assets/images/college.png')}
-                    style={{width: 35, 
-                            height: 35, 
-                            marginTop: 17, 
-                            marginLeft: 20}}
-                              />
-      
-              <Text style={{textAlign: 'center', 
-                            marginTop: 25, 
-                            color: 'white', 
-                            marginLeft: 30,
-                            fontWeight: 'bold',
-                            fontSize: 18 }}>
+                            <Text style={styles.txtStudieretning}>Studieretning</Text>
+                          </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() =>
+                        {this.props.navigation.navigate('Fag')}}
+                                          style={{height: 110, top: 10}}>
+                          <View style={styles.btnVelgEmne}>
+                            <Image source={require('../assets/images/college.png')}
+                                   style={styles.collegeIcon}
+                            />
+                            <Text style={styles.txtVelgEmne}>
                               Velg et emne
-                          </Text>
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
                       </View>
-                    </TouchableOpacity>
-      
+                    </View>
+                  </View>
                 </View>
               </View>
             </View>
+          </ScrollView>
+        </View>
     );
   }
 }
@@ -159,12 +98,123 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    width: '100%',
-    height: '100%',
+    height: hp ('100%'),
+    width: wp ('100%')
   },
+  whiteContainer:{
+    bottom: '7%',
+    padding: '2%'
+  },
+  btnContainer:{
+    bottom: '8%'
+  },
+  purpleBackground: {
+    width: wp('100%'),
+    height: hp('60%'),
+    backgroundColor: '#330F2A'
+  },
+  gradientCircle:{
+    position: 'absolute',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: -30,
+    top: -120,
+    width: 500,
+    height: 500,
+    borderRadius: 500/2
+  },
+  logo:{
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 110,
+    top: 50,
+    flex: 1,
+    width: 135,
+    height: 135
+  },
+  whiteFrame:{
+    position: 'absolute',
+    top: '45%',
+    margin: '5%',
+    width: wp('90%'),
+    height: hp('55%'),
+    backgroundColor: 'white',
+    borderRadius: 50,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+    shadowColor: 'black',
+    shadowOffset:{width: 6, height: 5},
+    shadowOpacity: 0.4
+  },
+  txtGroup:{
+    textAlign: 'center',
+    marginTop: 60,
+    color: '#5D1049',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  btnShadow:{
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 40,
+    shadowOffset:{width: 6, height: 5},
+    shadowColor: 'black',
+    shadowOpacity: 0.4
+  },
+  btnStudieretning:{
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 30,
+    width: wp('70%'),
+    height: hp('20%'),
+    backgroundColor: '#5D1049',
+    borderRadius: 30
+  },
+  txtStudieretning:{
+    textAlign: 'center',
+    marginTop: 35,
+    marginLeft: 30,
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: 'white'
+  },
+  bookIcon:{
+    width: 35,
+    height: 35,
+    marginTop: 27,
+    marginLeft: 20
+  },
+  btnVelgEmne:{
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 15,
+    width: wp('70%'),
+    height: hp('20%'),
+    backgroundColor: '#5D1049',
+    borderRadius: 30
+  },
+  collegeIcon:{
+    width: 35,
+    height: 35,
+    marginTop: 27,
+    marginLeft: 20
+  },
+  txtVelgEmne:{
+    textAlign: 'center',
+    marginTop: 35,
+    color: 'white',
+    marginLeft: 30,
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+
+//Har ikke kodet resten. Vet ikke hvis man skal beholde den
   overlayContainer: {
-        flex: 1,
-        backgroundColor: 'rgba(47,163,218, .4)'
+    flex: 1,
+    backgroundColor: 'rgba(47,163,218, .4)'
   },
   menuContainer: {
     height: '40%',

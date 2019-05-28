@@ -8,9 +8,7 @@ import {
   Button
 } from 'react-native';
 import firebase from 'firebase';
-import { LinearGradient } from 'expo';
-
-
+import FireBase from "../components/FireBase";
 
 export default class Profil extends React.Component {
 
@@ -30,16 +28,6 @@ export default class Profil extends React.Component {
   render() {
     return (
     <View style={styles.backgroundContainer}>
-        
-        <LinearGradient
-                colors={['#D54FBA', '#3F0630']}
-                style={{position: 'absolute',
-                        top: -120,
-                        left: -40,
-                        width: 500,
-                        height: 500,
-                        borderRadius: 500/2}}>
-              </LinearGradient>
         <View style={styles.TitleContainer}>
             <Text style={styles.pageTitle}>Din profil</Text>
         </View>
@@ -52,9 +40,9 @@ export default class Profil extends React.Component {
                 <Text style={styles.TextStyle}></Text>
             </TouchableOpacity>
         
-            <Text style={styles.nameUser}>John Doe</Text>
+            <Text style={styles.nameUser}>{FireBase.getInstance().getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
-            <Text style={styles.studyUser}>Programmering</Text>
+            <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
         
             <Button color='red' title="Logg ut" onPress={this.signOutUser} />
         </View>
@@ -86,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
     backgroundContainer: {
-    backgroundColor: '#3e1133',
+    backgroundColor: '#5D1049',
     width: '100%',
     height: '100%',
     display:'flex',
@@ -97,7 +85,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     color: 'white',
-    marginBottom: 0,
+    marginBottom: 20,
   },
     nameUser: {
     marginTop: 20,

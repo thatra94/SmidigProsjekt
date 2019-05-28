@@ -20,7 +20,7 @@ export default class Login extends React.Component {
   }
 
   render() {
-    return ( 
+    return (
         <View style={styles.backgroundContainer}>
             <ScrollView scrollEventThrottle={16}>
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -34,7 +34,7 @@ export default class Login extends React.Component {
                         height: 500,
                         borderRadius: 500/2}}>
               </LinearGradient>
-        
+
             <View style={styles.container}>
             <Text style={{color: 'white', marginTop: '70%', fontSize: 30, marginBottom: '15%'}}>Logg inn</Text>
             {this.state.errorMessage &&
@@ -58,11 +58,11 @@ export default class Login extends React.Component {
               onChangeText={password => this.setState({ password })}
               value={this.state.password}
             />
-            
+
             <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUp')} style={styles.registerButton}>
                 <Text style={styles.registerText}>Registrer deg</Text>
             </TouchableOpacity>
-            
+
             <TouchableOpacity onPress={this.handleLogin} style={styles.loginButton}>
                 <Text style={styles.loginText}>Logg inn</Text>
             </TouchableOpacity>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3e1133',
     width: '100%',
     height: '100%',
-  },    
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   registerButton: {
-    
+
   },
   registerText: {
     color: 'white',

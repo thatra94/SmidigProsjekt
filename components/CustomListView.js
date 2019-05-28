@@ -1,33 +1,44 @@
 import React from 'react';
-import { View, FlatList, StyleSheet, Text } from 'react-native';
+import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import FireBase from "./FireBase";
+import * as firebase from "firebase";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#f2f2f2',
+        marginTop: 10, 
     },
     rowContainer: {
         padding: 30,
-        backgroundColor: '#ff6650',
-        alignItems: 'center',
-        borderWidth: 0.3,
-        height: 150,
+        backgroundColor: '#5D1049',
+        alignItems: 'center', 
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 100,
         borderColor: 'black',
-        marginTop: 5,
+        marginTop: 7,
+        margin: 5,
     },
     title: {
-        color: '#4f603c',
-        fontSize: 20,
+        color: '#ffffff',
+        fontSize: 22,
     }
 });
 
 const CustomRow = ({ title }) => (
-    <View style={styles.rowContainer}>
-        <View>
-            <Text style={styles.title}>
+    <TouchableOpacity
+        onPress={async () => {
+            await FireBase.getInstance().joinGroup(firebase.auth().currentUser.uid, title);
+            //this.props.navigation.navigate('Gruppe');
+        }}>
+        <View style={styles.rowContainer}>
+            <Text
+                style={styles.title}>
                 {title}
             </Text>
         </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const CustomListView = ({ itemList }) => (
@@ -38,7 +49,6 @@ const CustomListView = ({ itemList }) => (
                 title={item.title}
             />}
         />
-
     </View>
 );
 

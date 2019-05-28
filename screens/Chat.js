@@ -1,75 +1,55 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, TouchableOpacity } from "react-native";
+import { GiftedChat } from 'react-native-gifted-chat';
 
-import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
-import CustomListView from '../components/CustomListView';
 
- var groupList = [];
+let fb = FireBase.getInstance();
 
- function getGroups(userId){
-
-    firebase.database().ref('users/' + userId+'/groups')
-      .once("value").then(function (snapshot){
-        snapshot.forEach(function(snapshot) {
-          firebase.database().ref('Groups/'+snapshot.key)
-          .once("value").then(function(snapshot){
-            groupList.push({
-              id: snapshot.key,
-              title: snapshot.val().subject,
-            });
-          });
-        });
-      });
-}
-
-
-async function getStudies(userId) {
-    let studies = [];
-    let result = [];
-    await firebase.database().ref('users/' + userId)
-        .once("value").then(function (snapshot) {
-            firebase.database().ref("Studie/" + snapshot.val().studieretning)
-                .once("value").then(function (snapshot) {
-                snapshot.forEach(function (snapshot) {
-                    studies.push({title: snapshot.key})
-                });
-                let result = studies.map(a => a.title);
-                console.log(studies);
-                return studies;
-            })
-        });
-}
-
-
-export default class Grupper extends React.Component {
-    constructor(props){
-    super(props);
-    getGroups(firebase.auth().currentUser.uid);
-  }
+export default class Chat extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    static navigationOptions = ({ navigation }) => ({
+        title: (navigation.state.params || {}).name || '' +fb.setChatName(fb.groupId)+ ' Chat!',
+    });
 
     state = {
-        list: [
-            {
-                title: 'Databaser',
-            },
-            {
-                title: 'Programmering',
-            },
-            {
-                title: 'Digital Teknologi',
-            }
-        ]
+        messages: [],
     };
 
-   render() {
-       console.log(this.state.list);
-      return (
-         <ScrollView>
-            <CustomListView itemList={this.state.list}/>
-         </ScrollView>
-      )
-   }
+    get user() {
+        return {
+            name: fb.getName(),
+            //email: this.props.navigation.state.params.email,
+           // avatar: this.props.navigation.state.params.avatar,
+            id: fb.uid,
+            _id: fb.uid, // need for gifted-chat
+        };
+    }
+
+    render() {
+        return (
+            <GiftedChat
+                messages={this.state.messages}
+                onSend={fb.send}
+                user={this.user}
+             alignTop={30} initialText={"IceBreaker..."}/>
+        );
+    }
+
+    componentDidMount() {
+
+        fb.refOn(message =>
+            this.setState(previousState => ({
+                messages: GiftedChat.append(previousState.messages, message),
+            }))
+        );
+
+    }
+    componentWillUnmount() {
+        fb.refOff();
+    }
 }
 
 const styles = StyleSheet.create ({
@@ -87,4 +67,4 @@ const styles = StyleSheet.create ({
       color: '#4f603c',
       fontSize: 20,
    }
-})
+});

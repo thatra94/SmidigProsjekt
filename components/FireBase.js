@@ -17,9 +17,18 @@ const subjectsList = [];
 let firstName;
 let lastName;
 let userStudie;
+let groupId = "-LU5dG2QZEOGmsYyetaY";
+let subject = "Webprosjekt";
 
 
 export default class FireBase {
+    constructor() {
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        } else {
+            console.log("firebase apps already running...")
+        }
+    }
 
 
   static myInstance = null;
@@ -31,14 +40,7 @@ export default class FireBase {
     return this.myInstance;
   }
 
-  mountElements(){
-      getGroups(firebase.auth().currentUser.uid);
-      getSubjects(firebase.auth().currentUser.uid);
-      mountName(firebase.auth().currentUser.uid);
-      mountStudy(firebase.auth().currentUser.uid);
-  }
-
- addToGroup(groupKey, userId, userCount){
+  static addToGroup(groupKey, userId, userCount){
     firebase.database().ref('Groups/'+groupKey).update({
       Token: userId,
       userCount: userCount+1,
@@ -49,7 +51,7 @@ export default class FireBase {
     });
 }
 
- createNewGroup(userId, subjectName){
+  static createNewGroup(userId, subjectName){
      const key = firebase.database().ref("Groups/")
          .push({
              userCount: 0,
@@ -76,8 +78,10 @@ export default class FireBase {
             lastName = snapshot.val().etternavn;
       });
   }
+
   getName(){
       return firstName +" "+ lastName;
+      console.log(firstName + " " + lastName);
   }
 
   getStudy(userId){
@@ -113,14 +117,6 @@ export default class FireBase {
             });
     }
 
- printGroups(){
-   if (groupList.length == 0) {
-     console.log("Error");
-   }
-   for(let i = 0; i < groupList.length; i++){
-     console.log(groupList[i].title);
-   }
- }
 
 getGroupList(){
    //console.log(groupList);
@@ -131,26 +127,122 @@ getSubjectList() {
    return subjectsList;
 }
 
-joinGroup(userId, subjectName) {
-    let groupFull = false;
+    joinGroup(userId, subjectName) {
 
-    const query = firebase.database().ref("Groups/")
-        .once("value").then(function (snapshot) {
-            snapshot.forEach(function (snapshot) {
-                var userCount = snapshot.val().userCount;
-                var groupKey = snapshot.key;
-                if (userCount < 3) {
-                    this.addToGroup(groupKey, userId, userCount);
-                    groupFull = true;
-                    return true;
-                } else {
-                    groupFull = false;
+        console.log(subjectName);
+        console.log(userId);
+        let checkBool = false;
+        if(groupList.length === 0){
+            FireBase.createNewGroup(userId, subjectName);
+        }
+        else {
+            firebase.database().ref("Groups/")
+                .once("value").then(function (snapshot) {
+                snapshot.forEach(function (snapshot) {
+                    let userCount = snapshot.val().userCount;
+                    let groupKey = snapshot.key;
+                    let subject = snapshot.val().subject;
+                    console.log(userCount);
+                    if (subjectName === subject) {
+                        for (let i = 0; i < groupList.length; i++) {
+                            if (groupList[i].title === (subjectName)) {
+                                console.log("err1");
+                                checkBool = true;
+                            }
+                        }
+                        if (!checkBool) {
+                            for (let i = 0; i < groupList.length; i++) {
+                                if (groupList[i].title !== (subjectName)) {
+                                    if (userCount < 3 && groupList.length > 0) {
+                                        FireBase.addToGroup(groupKey, userId, userCount);
+                                        console.log("err2");
+                                        checkBool = true;
+                                    } else {
+                                        FireBase.createNewGroup(userId, subjectName);
+                                        console.log("err3");
+                                        checkBool = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (checkBool) {
+                        return checkBool;
+                }
+                });
+                if (!checkBool) {
+                    FireBase.createNewGroup(userId, subjectName);
                 }
             });
-            if (!groupFull) {
-                this.createNewGroup(userId, subjectName);
-            }
+        }
+        this.getGroups(userId);
+    }
+
+    setGroupId(groupId){
+      this.groupId = groupId;
+    }
+
+    getGroupId(){
+      return groupId;
+    }
+
+    setChatName(groupId){
+        firebase.database().ref('Groups/' + groupId)
+            .once("value").then(function (snapshot){
+            this.subject = snapshot.val().subject;
         });
-    //this.getGroups(userId);
-}
+        return subject;
+    }
+
+    get uid() {
+        return (firebase.auth().currentUser || {}).uid;
+    }
+
+
+    ref(groupId) {
+        return firebase.database().ref('Groups/'+groupId+'/Chat');
+    }
+
+    parse = snapshot => {
+        const { timestamp: numberStamp, text, user } = snapshot.val();
+        const { key: id } = snapshot;
+        const { key: _id } = snapshot; //needed for giftedchat
+        const timestamp = new Date(numberStamp);
+
+        const message = {
+            id,
+            _id,
+            timestamp,
+            text,
+            user,
+        };
+        return message;
+    };
+
+    refOn = callback => {
+        this.ref(this.getGroupId())
+            .limitToLast(20)
+            .on('child_added', snapshot => callback(this.parse(snapshot)));
+    }
+
+    get timestamp() {
+        return firebase.database.ServerValue.TIMESTAMP;
+    }
+
+    // send the message to the Backend
+    send = messages => {
+        for (let i = 0; i < messages.length; i++) {
+            const { text, user } = messages[i];
+            const message = {
+                text,
+                user,
+                createdAt: this.timestamp,
+            };
+            this.ref(this.getGroupId()).push(message);
+        }
+    };
+
+    refOff() {
+        this.ref(this.getGroupId()).off();
+    }
 }

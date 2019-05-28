@@ -18,6 +18,16 @@ export default class Grupper extends React.Component {
   static navigationOptions = {
       title: "Dine Grupper",
       headerStyle: { marginTop: 24 },
+      headerStyle: {
+          
+          backgroundColor: '#f2f2f2',
+          borderBottomColor:'transparent',
+          borderBottomWidth: 0,
+          shadowColor: 'transparent',
+    },
+      headerTitleStyle: {
+          fontSize: 24, 
+    },
     };
 
    alertItemName = (item) => {
@@ -46,14 +56,16 @@ export default class Grupper extends React.Component {
 const styles = StyleSheet.create({
 
  MainContainer: {
-   flex: 1,
-   margin: 10
+     flex: 1,
+     margin: 0,
+     backgroundColor: '#f2f2f2',
+
 
  },
 
  TextStyle:{
    fontSize : 25,
-    textAlign: 'center'
+   textAlign: 'center',   
  }
 
 });
