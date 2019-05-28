@@ -1,6 +1,7 @@
 import React from 'react'
 import { ScrollView, StyleSheet, Text, TextInput, View, Button, TouchableOpacity,  StatusBar } from 'react-native'
 import { LinearGradient } from 'expo';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import firebase from 'firebase'
 
 export default class Login extends React.Component {
@@ -36,7 +37,8 @@ export default class Login extends React.Component {
               </LinearGradient>
 
             <View style={styles.container}>
-            <Text style={{color: 'white', marginTop: '70%', fontSize: 30, marginBottom: '15%'}}>Logg inn</Text>
+                
+            <Text style={{color: 'white', marginTop: '30%', fontSize: 30, marginBottom: '15%'}}>Logg inn</Text>
             {this.state.errorMessage &&
               <Text style={{ color: 'red' }}>
                 {this.state.errorMessage}
@@ -76,8 +78,8 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   backgroundContainer: {
     backgroundColor: '#3e1133',
-    width: '100%',
-    height: '100%',
+    height: hp ('100%'),
+    width: wp ('100%')
   },
   container: {
     flex: 1,

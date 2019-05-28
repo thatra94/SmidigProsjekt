@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import firebase from 'firebase';
 import RNPickerSelect from 'react-native-picker-select';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {LinearGradient} from "expo";
 
 export default class SignUp extends React.Component {
@@ -61,22 +62,19 @@ saveUserData = (user) => {
   render() {
     return (
         <View style={styles.backgroundContainer}>
-
-            <LinearGradient
-                colors={['#D54FBA', '#3F0630']}
-                style={{position: 'absolute',
-                        top: -120,
-                        left: -40,
-                        width: 500,
-                        height: 500,
-                        borderRadius: 500/2}}>
-              </LinearGradient>
-
                 <ScrollView scrollEventThrottle={16}>
-
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     </View>
 
+                <LinearGradient
+                    colors={['#D54FBA', '#3F0630']}
+                    style={{position: 'absolute',
+                            top: -120,
+                            left: -40,
+                            width: 500,
+                            height: 500,
+                            borderRadius: 500/2}}>
+                </LinearGradient>
 
                     <View style={styles.container}>
                         <Text style={{color: 'white', fontSize: 30, marginBottom: '10%', marginTop: '20%' }}>Registrer deg</Text>
@@ -85,72 +83,78 @@ saveUserData = (user) => {
                         {this.state.errorMessage}
                         </Text>}
 
-        <TextInput
-          style={styles.textInput}
-          placeholder="Fornavn"
-          autoCapitalize="none"
-          style={styles.textInput}
-          placeholderTextColor='white'
-          onChangeText={firstName => this.setState({ firstName })}
-          value={this.state.firstName}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder="Etternavn"
-          autoCapitalize="none"
-          style={styles.textInput}
-          placeholderTextColor='white'
-          onChangeText={lastName => this.setState({ lastName })}
-          value={this.state.lastName}
-        />
-        <RNPickerSelect
-          items={this.state.items}
-          style={styles.textInputSelector}
-          onValueChange={(value) => {
-            this.setState({
-              studySubject: value,
-            });
-          }}
-        >
-        <TextInput
-          style={styles.textInput}
-          placeholder="Studieretning"
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          style={styles.textInputSelector}
-          onChangeText={studySubject => this.setState({ studySubject })}
-          value={this.state.studySubject}
-        />
-        </RNPickerSelect>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Email"
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          style={styles.textInput}
-          onChangeText={email => this.setState({ email })}
-          value={this.state.email}
-        />
-        <TextInput
-          style={styles.textInput}
-          secureTextEntry
-          placeholder="Password"
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          style={styles.textInput}
-          onChangeText={password => this.setState({ password })}
-          value={this.state.password}
-        />
-        <Button title="Sign Up" onPress={this.handleSignUp} />
-        <TouchableOpacity  onPress={this.handleSignUp}>
-            <Text>Neste</Text>
-        </TouchableOpacity>
-        <Button
-          title="Already have an account? Login"
-          onPress={() => this.props.navigation.navigate('Login')}
-        />
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Fornavn"
+                            autoCapitalize="none"
+                            style={styles.textInput}
+                            placeholderTextColor='white'
+                            onChangeText={firstName => this.setState({ firstName })}
+                            value={this.state.firstName}
+                        />
+
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Etternavn"
+                            autoCapitalize="none"
+                            style={styles.textInput}
+                            placeholderTextColor='white'
+                            onChangeText={lastName => this.setState({ lastName })}
+                            value={this.state.lastName}
+                        />
+
+                        <RNPickerSelect
+                            items={this.state.items}
+                            style={styles.textInputSelector}
+
+                            onValueChange={(value) => {
+                                this.setState({
+                                    studySubject: value,
+                                });
+                            }}
+                        >
+                            <TextInput
+                                placeholder="Studieretning"
+                                autoCapitalize="none"
+                                placeholderTextColor='white'
+                                style={{marginRight: 20}}
+                                style={styles.pickerText}
+                                onChangeText={studySubject => this.setState({ studySubject })}
+                                value={this.state.studySubject}
+                            />
+                        </RNPickerSelect>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Email"
+                            autoCapitalize="none"
+                            placeholderTextColor='white'
+                            style={styles.textInput}
+                            onChangeText={email => this.setState({ email })}
+                            value={this.state.email}
+                        />
+                        <TextInput
+                            style={styles.textInput}
+                            secureTextEntry
+                            placeholder="Password"
+                            autoCapitalize="none"
+                            placeholderTextColor='white'
+                            style={styles.textInput}
+                            onChangeText={password => this.setState({ password })}
+                            value={this.state.password}
+                        />
+
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                            <Text style={styles.registerText}>Allerede bruker? Logg inn</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.loginButton} onPress={this.handleSignUp}>
+                            <Text style={styles.loginText}>Neste</Text>
+                        </TouchableOpacity>
+
                     </View>
+
                 </ScrollView>
+
         </View>
 
     )
@@ -158,11 +162,10 @@ saveUserData = (user) => {
 }
 
 const styles = StyleSheet.create ({
-
     backGroundContainer: {
     backgroundColor: '#3e1133',
-    width: '100%',
-    height: '100%',
+    height: hp ('100%'),
+    width: wp ('100%')
   },
   container: {
     flex: 1,
@@ -191,4 +194,5 @@ const styles = StyleSheet.create ({
     borderRightWidth: 0,
     margin: 40,
   },
+
 });
