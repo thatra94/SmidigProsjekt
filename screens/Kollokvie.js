@@ -38,7 +38,10 @@ export default class Fag extends React.Component {
      <View style={styles.MainContainer}>
 
          <ScrollView>
-         <CustomListView itemList={this.state.title}/>
+         <CustomListView
+             itemList={this.state.title}
+             navigation={this.props.navigation}
+         />
          </ScrollView>
 
      </View>

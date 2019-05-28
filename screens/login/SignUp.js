@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button, LinearGradient } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
-import { TouchableOpacity } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {LinearGradient} from "expo";
 

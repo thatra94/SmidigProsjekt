@@ -2,6 +2,7 @@ import React from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import FireBase from "./FireBase";
 import * as firebase from "firebase";
+import { withNavigation } from 'react-navigation';
 
 const styles = StyleSheet.create({
     container: {
@@ -26,11 +27,11 @@ const styles = StyleSheet.create({
     }
 });
 
-const CustomRow = ({ title }) => (
+const CustomRow = ({ title, navigation }) => (
     <TouchableOpacity
         onPress={async () => {
             await FireBase.getInstance().joinGroup(firebase.auth().currentUser.uid, title);
-            //this.props.navigation.navigate('Gruppe');
+            navigation.navigate('Gruppe');
         }}>
         <View style={styles.rowContainer}>
             <Text
@@ -41,12 +42,13 @@ const CustomRow = ({ title }) => (
     </TouchableOpacity>
 );
 
-const CustomListView = ({ itemList }) => (
+const CustomListView = ({ itemList, navigation }) => (
     <View style={styles.container}>
         <FlatList
             data={itemList}
-            renderItem={({ item }) => <CustomRow
+            renderItem={({ item}) => <CustomRow
                 title={item.title}
+                navigation={navigation}
             />}
         />
     </View>
