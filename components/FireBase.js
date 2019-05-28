@@ -261,9 +261,9 @@ getSubjectList() {
                 .ref('avatar')
                 .child(uuid.v4());
             const task = await ref.put(response);
-            return task.snapshot.ref.getDownloadURL();
+            return ref.getDownloadURL();
 
-            /*   return new Promise((resolve, reject) => {
+            /*return new Promise((resolve, reject) => {
                    task.on(
                        'state_changed',
                        () => {
