@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import firebase from 'firebase';
 import { TouchableOpacity } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import {LinearGradient} from "expo";
 
 export default class SignUp extends React.Component {
     static navigationOptions = {
@@ -24,10 +25,10 @@ export default class SignUp extends React.Component {
       { label: 'Interaktivt Design', value: 'Interaktivt Design' },
       { label: 'Spillprogrammering', value: 'Spillprogrammering' },
     ],
-    errorMessage: null }
+    errorMessage: null };
 
   handleSignUp = () => {
-    const { email, password, firstName, lastName, studySubject } = this.state
+    const { email, password, firstName, lastName, studySubject } = this.state;
     firebase
       .auth()
         .createUserWithEmailAndPassword(email, password)
@@ -149,14 +150,17 @@ saveUserData = (user) => {
           title="Already have an account? Login"
           onPress={() => this.props.navigation.navigate('Login')}
         />
-      </View>
-</View>
+                    </View>
+                </ScrollView>
+        </View>
+
     )
   }
 }
 
-const styles = StyleSheet.create({
-    backgroundContainer: {
+const styles = StyleSheet.create ({
+
+    backGroundContainer: {
     backgroundColor: '#3e1133',
     width: '100%',
     height: '100%',
@@ -166,13 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
-  },
+
   textInputSelector: {
     left: 18,
     height: 40,
@@ -181,7 +179,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 8
   },
-     textInput: {
+                    textInput: {
     height: 40,
     width: '90%',
     borderColor: 'white',
@@ -195,4 +193,4 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     margin: 40,
   },
-})
+});
