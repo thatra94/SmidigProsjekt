@@ -7,17 +7,11 @@ import {
   View,
   Button
 } from 'react-native';
-<<<<<<< HEAD
-import firebase from 'firebase';
-import FireBase from "../components/FireBase";
-=======
 import FireBase from '../components/FireBase';
 import {ImagePicker, Permissions} from "expo";
 import * as firebase from "firebase";
 
 //let avatarIMG = {uri: 'https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7c507e0-71bf-4088-a588-c7aace7a517a?alt=media&token=657e8a88-8c8e-4b59-9068-14cc14fbfd9e'};
-
->>>>>>> thanh-avatar-branch
 
 export default class Profil extends React.Component {
 
@@ -124,10 +118,8 @@ export default class Profil extends React.Component {
         
             <Text style={styles.nameUser}>{FireBase.getInstance().getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
-<<<<<<< HEAD
             <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
         
-=======
             <Text style={styles.studyUser}>Programmering</Text>
 
           <Button
@@ -135,7 +127,6 @@ export default class Profil extends React.Component {
               style={styles.buttonText}
               onPress={this.onImageUpload}
           />
->>>>>>> thanh-avatar-branch
             <Button color='red' title="Logg ut" onPress={this.signOutUser} />
         </View>
     </View>

@@ -19,11 +19,9 @@ const subjectsList = [];
 let firstName;
 let lastName;
 let userStudie;
-<<<<<<< HEAD
 let groupId = "-LU5dG2QZEOGmsYyetaY";
 let subject = "Webprosjekt";
 
-=======
 let photoUrl;
 
 function urlToBlob(uri) {
@@ -40,7 +38,6 @@ function urlToBlob(uri) {
         xhr.send();
     })
 }
->>>>>>> thanh-avatar-branch
 
 export default class FireBase {
     constructor() {
