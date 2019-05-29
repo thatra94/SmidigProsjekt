@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import FireBase from "./FireBase";
 
 const styles = StyleSheet.create({
     container: {
@@ -29,10 +30,13 @@ const styles = StyleSheet.create({
     }
 });
 
-const CustomRow = ({ title, navigation }) => (
+const CustomRow = ({ id, title, navigation }) => (
     <TouchableOpacity
-        onPress={() => {
-
+        onPress={ () => {
+            FireBase.getInstance().chatId = id;
+            FireBase.getInstance().subject = title;
+            console.log(title)
+            console.log(id);
             navigation.navigate('Chat');
         }}>
         <View style={styles.rowContainer}>
@@ -49,6 +53,7 @@ const CustomListView = ({ itemList, navigation }) => (
             data={itemList}
             renderItem={({ item }) => <CustomRow
                 title={item.title}
+                id={item.id}
                 navigation={navigation}
             />}
         />

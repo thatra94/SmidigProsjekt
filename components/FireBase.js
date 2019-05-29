@@ -19,8 +19,8 @@ const subjectsList = [];
 let firstName;
 let lastName;
 let userStudie;
-let groupId = "-LU5dG2QZEOGmsYyetaY";
-let subject = "Webprosjekt";
+let chatId;
+let subject;
 
 let photoUrl;
 
@@ -122,6 +122,7 @@ export default class FireBase {
        });
   }
 
+
   getSubjects(userId) {
 
        firebase.database().ref('users/' + userId)
@@ -196,12 +197,9 @@ getSubjectList() {
         this.getGroups(userId);
     }
 
-    setGroupId(groupId){
-      this.groupId = groupId;
-    }
 
     getGroupId(){
-      return groupId;
+      return chatId;
     }
 
     setChatName(groupId){
@@ -217,8 +215,8 @@ getSubjectList() {
     }
 
 
-    ref(groupId) {
-        return firebase.database().ref('Groups/'+groupId+'/Chat');
+    ref(chatId) {
+        return firebase.database().ref('Groups/'+chatId+'/Chat');
     }
 
     parse = snapshot => {
@@ -238,7 +236,7 @@ getSubjectList() {
     };
 
     refOn = callback => {
-        this.ref(this.getGroupId())
+        this.ref(chatId)
             .limitToLast(20)
             .on('child_added', snapshot => callback(this.parse(snapshot)));
     }
@@ -256,12 +254,12 @@ getSubjectList() {
                 user,
                 createdAt: this.timestamp,
             };
-            this.ref(this.getGroupId()).push(message);
+            this.ref(chatId).push(message);
         }
     };
 
     refOff() {
-        this.ref(this.getGroupId()).off();
+        this.ref(chatId).off();
     }
 
 

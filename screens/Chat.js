@@ -13,7 +13,7 @@ export default class Chat extends React.Component {
         super(props);
     }
     static navigationOptions = ({ navigation }) => ({
-        title: (navigation.state.params || {}).name || '' +fb.setChatName(fb.groupId)+ ' Chat!',
+        title: (navigation.state.params || {}).name || '' +fb.subject+ ' Chat!',
     });
 
     state = {
@@ -42,6 +42,8 @@ export default class Chat extends React.Component {
     }
 
     componentDidMount() {
+
+        console.log(FireBase.getInstance().chatId);
 
         fb.refOn(message =>
             this.setState(previousState => ({

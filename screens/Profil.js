@@ -11,8 +11,6 @@ import FireBase from '../components/FireBase';
 import {ImagePicker, Permissions} from "expo";
 import * as firebase from "firebase";
 
-//let avatarIMG = {uri: 'https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7c507e0-71bf-4088-a588-c7aace7a517a?alt=media&token=657e8a88-8c8e-4b59-9068-14cc14fbfd9e'};
-
 export default class Profil extends React.Component {
 
   constructor(props) {
@@ -82,13 +80,11 @@ export default class Profil extends React.Component {
     }
   };
 
-
   async componentWillMount() {
     let user = await firebase.auth().currentUser.photoURL;
     this.setState({avatar: user});
     console.log("avatState", this.state.avatar);
   }
-
 
   signOutUser = () => {
     FireBase.getInstance()
@@ -119,8 +115,6 @@ export default class Profil extends React.Component {
             <Text style={styles.nameUser}>{FireBase.getInstance().getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
             <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
-        
-            <Text style={styles.studyUser}>Programmering</Text>
 
           <Button
               title="Upload Avatar Image"
