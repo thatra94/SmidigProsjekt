@@ -3,6 +3,7 @@ import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, Touchabl
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import FireBase from '../components/FireBase';
+import * as firebase from "firebase";
 import CustomListView from '../components/CustomListView';
 
  var groupList = [];
@@ -23,7 +24,7 @@ export default class Chat extends React.Component {
         return {
             name: FireBase.getInstance().getName(),
             //email: this.props.navigation.state.params.email,
-           // avatar: this.props.navigation.state.params.avatar,
+            avatar: firebase.auth().currentUser.photoURL,
             id: FireBase.getInstance().uid,
             _id: FireBase.getInstance().uid, // need for gifted-chat
         };

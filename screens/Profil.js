@@ -11,7 +11,7 @@ import FireBase from '../components/FireBase';
 import {ImagePicker, Permissions} from "expo";
 import * as firebase from "firebase";
 
-let avatarIMG = {uri: 'https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7c507e0-71bf-4088-a588-c7aace7a517a?alt=media&token=657e8a88-8c8e-4b59-9068-14cc14fbfd9e'};
+//let avatarIMG = {uri: 'https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7c507e0-71bf-4088-a588-c7aace7a517a?alt=media&token=657e8a88-8c8e-4b59-9068-14cc14fbfd9e'};
 
 
 export default class Profil extends React.Component {
@@ -27,7 +27,7 @@ export default class Profil extends React.Component {
   };
 
   state = {
-    avatar: ""
+    avatar: "https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7748a67-989c-471a-a491-b33a4942e14a?alt=media&token=474bd23d-fab1-4eaa-a041-b6b219b9f8f0"
   };
 
   onImageUpload = async () => {
@@ -87,6 +87,7 @@ export default class Profil extends React.Component {
   async componentWillMount() {
     let user = await firebase.auth().currentUser.photoURL;
     this.setState({avatar: user});
+    console.log("avatState", this.state.avatar);
   }
 
 
@@ -100,13 +101,14 @@ export default class Profil extends React.Component {
       }
   
   render() {
+    let avatarImg = "{uri: '"+this.state.avatar+"'}";
     return (
     <View style={styles.backgroundContainer}>
         <View style={styles.TitleContainer}>
             <Text style={styles.pageTitle}>Din profil</Text>
         </View>
         <View style={styles.container}>
-            <Image style={styles.profileIcon} source={this.state.avatar}
+            <Image style={styles.profileIcon} source={{uri: this.state.avatar}}
             />
             <TouchableOpacity style={styles.editIconContainer} activeOpacity={0.5}>
                 <Image
