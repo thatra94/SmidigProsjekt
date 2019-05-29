@@ -19,7 +19,7 @@ const subjectsList = [];
 let firstName;
 let lastName;
 let userStudie;
-let avatar;
+let photoUrl;
 
 function urlToBlob(uri) {
     return new Promise((resolve, reject) => {
@@ -262,7 +262,7 @@ getSubjectList() {
                 .ref('avatar')
                 .child(uuid.v4());
             const task = await ref.put(response);
-            this.setAvatar(firebase.auth().currentUser.uid, ref.getDownloadURL())
+            //photoUrl = firebase.auth().currentUser.uid.ref.getDownloadURL();
             return ref.getDownloadURL();
 
             /*return new Promise((resolve, reject) => {
@@ -288,7 +288,7 @@ getSubjectList() {
         //await this.setState({ avatar: url });
         let userf = firebase.auth().currentUser;
         if (userf != null) {
-            userf.updateProfile({ avatar: url})
+            userf.updateProfile({ photoURL: url})
                 .then(function() {
                     console.log("Updated avatar successfully. url:" + url);
                     alert("Avatar image is saved successfully.");

@@ -16,6 +16,12 @@ let avatarIMG = {uri: 'https://firebasestorage.googleapis.com/v0/b/smidigprosjek
 
 export default class Profil extends React.Component {
 
+  constructor(props) {
+    super(props);
+    let testUrl = firebase.auth().currentUser.photoURL;
+    console.log("testUrl1", testUrl);
+  }
+
      static navigationOptions = {
       header: null,
   };
@@ -77,7 +83,10 @@ export default class Profil extends React.Component {
     }
   };
 
-  componentDidMount() {
+
+  async componentWillMount() {
+    let user = await firebase.auth().currentUser.photoURL;
+    this.setState({avatar: user});
   }
 
 
@@ -97,7 +106,7 @@ export default class Profil extends React.Component {
             <Text style={styles.pageTitle}>Din profil</Text>
         </View>
         <View style={styles.container}>
-            <Image style={styles.profileIcon} source={avatarIMG}
+            <Image style={styles.profileIcon} source={this.state.avatar}
             />
             <TouchableOpacity style={styles.editIconContainer} activeOpacity={0.5}>
                 <Image
