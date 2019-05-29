@@ -17,9 +17,8 @@ export default class Grupper extends React.Component {
 
   static navigationOptions = {
       title: "Dine Grupper",
-      headerStyle: { marginTop: 24 },
       headerStyle: {
-          
+          marginTop: 24,
           backgroundColor: '#f2f2f2',
           borderBottomColor:'transparent',
           borderBottomWidth: 0,
@@ -45,7 +44,10 @@ export default class Grupper extends React.Component {
      <View style={styles.MainContainer}>
 
          <ScrollView>
-         <GroupListView itemList={this.state.title}/>
+         <GroupListView
+             itemList={this.state.title}
+             navigation={this.props.navigation}
+         />
          </ScrollView>
 
      </View>

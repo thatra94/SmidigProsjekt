@@ -16,8 +16,8 @@ import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
 
 export default class HomeScreen extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     let fb = FireBase.getInstance();
     //fb.mountElements();
     fb.getGroups(firebase.auth().currentUser.uid);

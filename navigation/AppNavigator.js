@@ -9,7 +9,7 @@ import TabBarIcon from '../components/TabBarIcon';
 
 import Fag from '../screens/Kollokvie';
 import Gruppe from '../screens/Gruppe';
-import Test from '../screens/Chat';
+import Chat from '../screens/Chat';
 import Profil from '../screens/Profil';
 import Hub from '../screens/HomeScreen';
 import SignUp from '../screens/login/SignUp';
@@ -17,7 +17,8 @@ import Login from '../screens/login/Login';
 import Loading from '../screens/login/Loading';
 
 const GroupsStack = createStackNavigator({
-  Gruppe: Gruppe
+  Gruppe: Gruppe,
+  Chat: Chat,
 });
 GroupsStack.navigationOptions = {
   tabBarLabel: 'Grupper',
@@ -29,8 +30,9 @@ GroupsStack.navigationOptions = {
   )
 };
 
+/*
 const SettingsStack = createStackNavigator({
-  Test: Test
+  Test: Chat
 });
 SettingsStack.navigationOptions = {
   tabBarLabel: 'WiP',
@@ -41,6 +43,7 @@ SettingsStack.navigationOptions = {
     />
   )
 };
+*/
 
 const HubStack = createStackNavigator({
   Hub: Hub,
@@ -79,13 +82,22 @@ SignupStack.navigationOptions = {
   tabBarVisible: false,
 };
 
-const AppContainer = createAppContainer(createBottomTabNavigator(
+const BottomTabStack = createBottomTabNavigator({
+  HubStack,
+  GroupsStack,
+  ProfilStack,
+});
+
+const AppContainer = createAppContainer(createStackNavigator(
   {
     SignupStack,
-    HubStack,
-    GroupsStack,
-    ProfilStack,
-    SettingsStack,
+    BottomTabStack,
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: 'false'
+    }
   })
 );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import RNPickerSelect from 'react-native-picker-select';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';

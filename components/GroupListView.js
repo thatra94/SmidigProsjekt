@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, StyleSheet, Text } from 'react-native';
+import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -29,22 +29,27 @@ const styles = StyleSheet.create({
     }
 });
 
-const CustomRow = ({ title }) => (
-    <View style={styles.rowContainer}>
-        <View>
+const CustomRow = ({ title, navigation }) => (
+    <TouchableOpacity
+        onPress={() => {
+
+            navigation.navigate('Chat');
+        }}>
+        <View style={styles.rowContainer}>
             <Text style={styles.title}>
                 {title}
             </Text>
         </View>
-    </View>
+    </TouchableOpacity>
 );
 
-const CustomListView = ({ itemList }) => (
+const CustomListView = ({ itemList, navigation }) => (
     <View style={styles.container}>
         <FlatList
             data={itemList}
             renderItem={({ item }) => <CustomRow
                 title={item.title}
+                navigation={navigation}
             />}
         />
 
