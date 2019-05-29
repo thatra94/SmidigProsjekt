@@ -1,5 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
+import uuid from 'uuid';
+
 
 
 const firebaseConfig = {
@@ -17,9 +19,28 @@ const subjectsList = [];
 let firstName;
 let lastName;
 let userStudie;
+<<<<<<< HEAD
 let groupId = "-LU5dG2QZEOGmsYyetaY";
 let subject = "Webprosjekt";
 
+=======
+let photoUrl;
+
+function urlToBlob(uri) {
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.onerror = reject;
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                resolve(xhr.response);
+            }
+        };
+        xhr.open('GET', uri);
+        xhr.responseType = 'blob'; // convert type
+        xhr.send();
+    })
+}
+>>>>>>> thanh-avatar-branch
 
 export default class FireBase {
     constructor() {
@@ -245,4 +266,57 @@ getSubjectList() {
     refOff() {
         this.ref(this.getGroupId()).off();
     }
+
+
+    uploadImage = async uri => {
+        console.log('got image to upload. uri:' + uri);
+        try {
+            const response = await urlToBlob(uri);
+            //const blob = await response.blob();
+            console.log("response url", response);
+            const ref = firebase
+                .storage()
+                .ref('avatar')
+                .child(uuid.v4());
+            const task = await ref.put(response);
+            //photoUrl = firebase.auth().currentUser.uid.ref.getDownloadURL();
+            return ref.getDownloadURL();
+
+            /*return new Promise((resolve, reject) => {
+                   task.on(
+                       'state_changed',
+                       () => {
+
+
+
+
+                       },
+                       reject,
+                       () => resolve(task.snapshot.ref.getDownloadURL()),
+                       console.log("test", task.snapshot.ref.getDownloadURL())
+                   );
+               });*/
+        } catch (err) {
+            console.log('uploadImage try/catch error: ' + err.message); //Cannot load an empty url
+        }
+    };
+
+    updateAvatar = (url) => {
+        //await this.setState({ avatar: url });
+        let userf = firebase.auth().currentUser;
+        if (userf != null) {
+            userf.updateProfile({ photoURL: url})
+                .then(function() {
+                    console.log("Updated avatar successfully. url:" + url);
+                    alert("Avatar image is saved successfully.");
+                }, function(error) {
+                    console.warn("Error update avatar.");
+                    alert("Error update avatar. Error:" + error.message);
+                });
+        } else {
+            console.log("can't update avatar, user is not login.");
+            alert("Unable to update avatar. You must login first.");
+        }
+    };
+
 }

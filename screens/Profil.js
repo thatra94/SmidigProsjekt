@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native'
+import {ImageEditor, TouchableOpacity} from 'react-native'
 import {
   StyleSheet,
   Image,
@@ -7,17 +7,97 @@ import {
   View,
   Button
 } from 'react-native';
+<<<<<<< HEAD
 import firebase from 'firebase';
 import FireBase from "../components/FireBase";
+=======
+import FireBase from '../components/FireBase';
+import {ImagePicker, Permissions} from "expo";
+import * as firebase from "firebase";
+
+//let avatarIMG = {uri: 'https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7c507e0-71bf-4088-a588-c7aace7a517a?alt=media&token=657e8a88-8c8e-4b59-9068-14cc14fbfd9e'};
+
+>>>>>>> thanh-avatar-branch
 
 export default class Profil extends React.Component {
+
+  constructor(props) {
+    super(props);
+    let testUrl = firebase.auth().currentUser.photoURL;
+    console.log("testUrl1", testUrl);
+  }
 
      static navigationOptions = {
       header: null,
   };
-    
+
+  state = {
+    avatar: "https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7748a67-989c-471a-a491-b33a4942e14a?alt=media&token=474bd23d-fab1-4eaa-a041-b6b219b9f8f0"
+  };
+
+  onImageUpload = async () => {
+    const { status: cameraRollPerm } = await Permissions.askAsync(
+        Permissions.CAMERA_ROLL,
+        Permissions.CAMERA
+    );
+    try {
+      // only if user allows permission to camera roll
+      if (cameraRollPerm !== 'granted') {
+        return;
+      }
+      console.log('choosing image granted...');
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [4, 3],
+      });
+      console.log(
+          'ready to upload... pickerResult json:' + JSON.stringify(pickerResult)
+      );
+      let wantedMaxSize = 150;
+      let rawheight = pickerResult.height;
+      let rawwidth = pickerResult.width;
+      let ratio = rawwidth / rawheight;
+      let wantedwidth = wantedMaxSize;
+      let wantedheight = wantedMaxSize / ratio;
+      if (rawheight > rawwidth) {
+        wantedwidth = wantedMaxSize * ratio;
+        wantedheight = wantedMaxSize;
+      }
+      console.log("scale image to x:" + wantedwidth + " y:" + wantedheight);
+      let resizedUri = await new Promise((resolve, reject) => {
+        ImageEditor.cropImage(pickerResult.uri,
+            {
+              offset: {x: 0, y: 0},
+              size: {width: pickerResult.width, height: pickerResult.height},
+              displaySize: {width: wantedwidth, height: wantedheight},
+              resizeMode: 'contain',
+            },
+            (uri) => resolve(uri),
+            () => reject(),
+        );
+      });
+      let uploadUrl = await FireBase.getInstance().uploadImage(resizedUri);
+      console.log("url is", uploadUrl);
+      await this.setState({avatar: uploadUrl});
+      console.log(" - await upload successful url:" + uploadUrl);
+      console.log(" - await upload successful avatar state:" + this.state.avatar);
+      await FireBase.getInstance().updateAvatar(uploadUrl);
+    } catch (err) {
+      console.log('onImageUpload error:' + err.message);
+      alert('Upload image error:' + err.message);
+    }
+  };
+
+
+  async componentWillMount() {
+    let user = await firebase.auth().currentUser.photoURL;
+    this.setState({avatar: user});
+    console.log("avatState", this.state.avatar);
+  }
+
+
   signOutUser = () => {
-    firebase
+    FireBase.getInstance()
       .auth()
         .signOut()
           .then(() => {
@@ -26,13 +106,15 @@ export default class Profil extends React.Component {
       }
   
   render() {
+    let avatarImg = "{uri: '"+this.state.avatar+"'}";
     return (
     <View style={styles.backgroundContainer}>
         <View style={styles.TitleContainer}>
             <Text style={styles.pageTitle}>Din profil</Text>
         </View>
         <View style={styles.container}>
-            <Image style={styles.profileIcon} source={require('../assets/images/user.png' )}/>
+            <Image style={styles.profileIcon} source={{uri: this.state.avatar}}
+            />
             <TouchableOpacity style={styles.editIconContainer} activeOpacity={0.5}>
                 <Image
                 source={require('../assets/images/edit.png')}
@@ -42,8 +124,18 @@ export default class Profil extends React.Component {
         
             <Text style={styles.nameUser}>{FireBase.getInstance().getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
+<<<<<<< HEAD
             <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
         
+=======
+            <Text style={styles.studyUser}>Programmering</Text>
+
+          <Button
+              title="Upload Avatar Image"
+              style={styles.buttonText}
+              onPress={this.onImageUpload}
+          />
+>>>>>>> thanh-avatar-branch
             <Button color='red' title="Logg ut" onPress={this.signOutUser} />
         </View>
     </View>
