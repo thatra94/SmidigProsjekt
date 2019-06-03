@@ -2,8 +2,6 @@ import React from 'react';
 import firebase from 'firebase';
 import uuid from 'uuid';
 
-
-
 const firebaseConfig = {
   apiKey: "AIzaSyA8WS2uhrgoz0ldb-Uke0Uz0fv_cVfQehU",
   authDomain: "smidigprosjekt-e3cdc.firebaseapp.com",
@@ -215,8 +213,8 @@ getSubjectList() {
     }
 
 
-    ref(chatId) {
-        return firebase.database().ref('Groups/'+chatId+'/Chat');
+    ref(cid) {
+        return firebase.database().ref('Groups/'+cid+'/Chat');
     }
 
     parse = snapshot => {
@@ -236,7 +234,7 @@ getSubjectList() {
     };
 
     refOn = callback => {
-        this.ref(chatId)
+        this.ref(FireBase.getInstance().chatId)
             .limitToLast(20)
             .on('child_added', snapshot => callback(this.parse(snapshot)));
     }
@@ -254,12 +252,13 @@ getSubjectList() {
                 user,
                 createdAt: this.timestamp,
             };
-            this.ref(chatId).push(message);
+            console.log(this.ref(FireBase.getInstance().chatId));
+            this.ref(FireBase.getInstance().chatId).push(message);
         }
     };
 
     refOff() {
-        this.ref(chatId).off();
+        this.ref(FireBase.getInstance().chatId).off();
     }
 
 

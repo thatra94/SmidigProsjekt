@@ -4,9 +4,9 @@ import { GiftedChat } from 'react-native-gifted-chat';
 
 import FireBase from '../components/FireBase';
 import * as firebase from "firebase";
-import CustomListView from '../components/CustomListView';
 
 let fb = FireBase.getInstance();
+let cid;
 
 export default class Chat extends React.Component {
     constructor(props) {
@@ -26,8 +26,8 @@ export default class Chat extends React.Component {
             //email: this.props.navigation.state.params.email,
            // avatar: this.props.navigation.state.params.avatar,
             avatar: firebase.auth().currentUser.photoURL,
-            id: FireBase.getInstance().uid,
-            _id: FireBase.getInstance().uid, // need for gifted-chat
+            id: fb.uid,
+            _id: fb.uid, // need for gifted-chat
         };
     }
 
@@ -41,9 +41,10 @@ export default class Chat extends React.Component {
         );
     }
 
-    componentDidMount() {
+    async componentWillMount() {
+    }
 
-        console.log(FireBase.getInstance().chatId);
+    componentDidMount() {
 
         fb.refOn(message =>
             this.setState(previousState => ({
