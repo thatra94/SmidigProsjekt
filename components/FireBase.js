@@ -144,40 +144,50 @@ getSubjectList() {
    return subjectsList;
 }
 
-    joinGroup(userId, subjectName) {
+    async joinGroup(userId, subjectName) {
 
         console.log(subjectName);
         console.log(userId);
         let checkBool = false;
-        if(groupList.length === 0){
+        let groupLength;
+        await firebase.database().ref("Groups").on("value", function (snapshot) {
+            console.log("There are " + snapshot.numChildren() + " Groups");
+            groupLength = snapshot.numChildren();
+        });
+        if (groupLength === 0) {
+            console.log("There are no groups in the world, you have created the first group");
             FireBase.createNewGroup(userId, subjectName);
-        }
-        else {
+        } else {
             firebase.database().ref("Groups/")
                 .once("value").then(function (snapshot) {
                 snapshot.forEach(function (snapshot) {
                     let userCount = snapshot.val().userCount;
                     let groupKey = snapshot.key;
                     let subject = snapshot.val().subject;
-                    console.log(userCount);
+                    let checkedAllGroups = 0;
                     if (subjectName === subject) {
                         for (let i = 0; i < groupList.length; i++) {
                             if (groupList[i].title === (subjectName)) {
-                                console.log("err1");
+                                console.log("Already in a group for this subject");
                                 checkBool = true;
                             }
                         }
                         if (!checkBool) {
                             for (let i = 0; i < groupList.length; i++) {
+                                console.log(groupList[i].title + " ==== " + subjectName)
                                 if (groupList[i].title !== (subjectName)) {
-                                    if (userCount < 3 && groupList.length > 0) {
+                                    console.log(userCount + "#################################");
+                                    console.log(groupKey + "#############################");
+                                    if (userCount < 3 && groupLength > 0) {
                                         FireBase.addToGroup(groupKey, userId, userCount);
-                                        console.log("err2");
+                                        console.log("Added user: " + userId + " \nto group: " + groupKey + " \nwith " + userCount + " users");
+                                        checkBool = true;
+                                    } else if (checkedAllGroups > groupLength){
+                                        FireBase.createNewGroup(userId, subjectName);
+                                        console.log("Created new group to join, waiting for other members, and checked all groups");
                                         checkBool = true;
                                     } else {
-                                        FireBase.createNewGroup(userId, subjectName);
-                                        console.log("err3");
-                                        checkBool = true;
+                                        checkedAllGroups++;
                                     }
                                 }
                             }
@@ -185,7 +195,7 @@ getSubjectList() {
                     }
                     if (checkBool) {
                         return checkBool;
-                }
+                    }
                 });
                 if (!checkBool) {
                     FireBase.createNewGroup(userId, subjectName);
