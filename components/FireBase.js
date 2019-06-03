@@ -174,10 +174,7 @@ getSubjectList() {
                         }
                         if (!checkBool) {
                             for (let i = 0; i < groupList.length; i++) {
-                                console.log(groupList[i].title + " ==== " + subjectName)
                                 if (groupList[i].title !== (subjectName)) {
-                                    console.log(userCount + "#################################");
-                                    console.log(groupKey + "#############################");
                                     if (userCount < 3 && groupLength > 0) {
                                         FireBase.addToGroup(groupKey, userId, userCount);
                                         console.log("Added user: " + userId + " \nto group: " + groupKey + " \nwith " + userCount + " users");
