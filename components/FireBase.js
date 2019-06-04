@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import firebase from 'firebase';
 import uuid from 'uuid';
 
@@ -169,6 +170,7 @@ getSubjectList() {
                         for (let i = 0; i < groupList.length; i++) {
                             if (groupList[i].title === (subjectName)) {
                                 console.log("Already in a group for this subject");
+                                Alert.alert("Du er allerede i en gruppe for "+subjectName, "Forlat den andre før du prøver å bli med i en ny");
                                 checkBool = true;
                             }
                         }
@@ -178,10 +180,12 @@ getSubjectList() {
                                     if (userCount < 3 && groupLength > 0) {
                                         FireBase.addToGroup(groupKey, userId, userCount);
                                         console.log("Added user: " + userId + " \nto group: " + groupKey + " \nwith " + userCount + " users");
+                                        Alert.alert(""+subjectName, "Du har blitt lagt til i en gruppe");
                                         checkBool = true;
                                     } else if (checkedAllGroups > groupLength){
                                         FireBase.createNewGroup(userId, subjectName);
                                         console.log("Created new group to join, waiting for other members, and checked all groups");
+                                        Alert.alert(""+subjectName, "Det var ingen ledige grupper så det har blitt laget en ny");
                                         checkBool = true;
                                     } else {
                                         checkedAllGroups++;

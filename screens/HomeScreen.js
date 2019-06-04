@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { LinearGradient } from 'expo';
@@ -60,20 +59,17 @@ export default class HomeScreen extends React.Component {
                     <View style={styles.btnContainer}>
                       <View style={styles.btnShadow}>
 
-                        <TouchableOpacity onPress={async () => {
-                            Alert.alert(
-                                "Sikker?",
-                                "Ønsker du å bli lagt i en gruppe?",
+                        <TouchableOpacity
+                            onPress={async () => {Alert.alert(
+                                "Er du sikker?",
+                                "Dette legger deg til i en gruppe fra din studieretning",
                                 [
                                     {text: "Ja", onPress: async () => {
                                             await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
                                             this.props.navigation.navigate("Gruppe");}},
                                     {text: "Nei", type: "cancel"}]
-                            );
-                        }}
-                          //await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
-                          //this.props.navigation.navigate('Gruppe');}}
-                                          style={{height: 120, top: -20}}>
+                            )}}
+                            style={{height: 120, top: -20}}>
                           <View style={styles.btnStudieretning}>
                             <Image source={require('../assets/images/open-book.png')}
                                    style={styles.bookIcon}

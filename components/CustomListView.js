@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, FlatList, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import FireBase from "./FireBase";
 import * as firebase from "firebase";
 import { withNavigation } from 'react-navigation';
@@ -29,9 +29,18 @@ const styles = StyleSheet.create({
 
 const CustomRow = ({ title, navigation }) => (
     <TouchableOpacity
-        onPress={async () => {
-            await FireBase.getInstance().joinGroup(firebase.auth().currentUser.uid, title);
-            navigation.navigate('Gruppe');
+        onPress={async () => {Alert.alert(
+            "Er du sikker?",
+            "Dette legger deg til i en gruppe for dette emnet",
+            [
+                {text: "Ja", onPress: async () => {
+                    await FireBase.getInstance().joinGroup(firebase.auth().currentUser.uid, title);
+                    navigation.navigate("Gruppe");}},
+                {text: "Nei", type: "cancel"}
+            ]
+        )
+            //await FireBase.getInstance().joinGroup(firebase.auth().currentUser.uid, title);
+            //navigation.navigate('Gruppe');
         }}>
         <View style={styles.rowContainer}>
             <Text
