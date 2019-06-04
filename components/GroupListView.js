@@ -56,6 +56,7 @@ const CustomListView = ({ itemList, navigation }) => (
                 id={item.id}
                 navigation={navigation}
             />}
+            keyExtractor={(item, index) => index.toString()}
         />
 
     </View>

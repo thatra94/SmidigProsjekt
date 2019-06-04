@@ -46,10 +46,12 @@ const CustomListView = ({ itemList, navigation }) => (
     <View style={styles.container}>
         <FlatList
             data={itemList}
-            renderItem={({ item}) => <CustomRow
+            renderItem={({ item }) => <CustomRow
                 title={item.title}
                 navigation={navigation}
             />}
+            keyExtractor={(item, index) => index.toString()}
+
         />
     </View>
 );

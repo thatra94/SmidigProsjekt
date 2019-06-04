@@ -19,7 +19,6 @@ export default class HomeScreen extends React.Component {
   constructor(props){
     super(props);
     let fb = FireBase.getInstance();
-    //fb.mountElements();
     fb.getGroups(firebase.auth().currentUser.uid);
     fb.getSubjects(firebase.auth().currentUser.uid);
     fb.mountName(firebase.auth().currentUser.uid);
