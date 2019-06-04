@@ -5,6 +5,7 @@ import {
   Image,
   Text,
   View,
+  Alert,
   Button
 } from 'react-native';
 import FireBase from '../components/FireBase';
@@ -121,7 +122,15 @@ export default class Profil extends React.Component {
               style={styles.buttonText}
               onPress={this.onImageUpload}
           />
-            <Button color='red' title="Logg ut" onPress={this.signOutUser} />
+            <Button color='red' title="Logg ut" onPress={ () => {
+              Alert.alert(
+                  "Ønsker du å logge ut?",
+                  "",
+                  [
+                      {text: "Ja", onPress: () => {this.signOutUser()}},
+                      {text: "Nei", type: "cancel"}
+                  ]
+              )}} />
         </View>
     </View>
 
