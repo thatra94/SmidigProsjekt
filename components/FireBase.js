@@ -40,6 +40,7 @@ function urlToBlob(uri) {
 
 export default class FireBase {
     constructor() {
+
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         } else {
