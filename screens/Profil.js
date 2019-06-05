@@ -127,14 +127,12 @@ export default class Profil extends React.Component {
                   "Ønsker du å logge ut?",
                   "",
                   [
-                      {text: "Ja", onPress: () => {this.signOutUser()}},
-                      {text: "Nei", type: "cancel"}
+                      {text: "Avbryt", type: "cancel"},
+                      {text: "Logg ut", onPress: () => {this.signOutUser()}}
                   ]
               )}} />
         </View>
     </View>
-
-
     );
   }
 }

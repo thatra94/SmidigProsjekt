@@ -64,10 +64,10 @@ export default class HomeScreen extends React.Component {
                                 "Er du sikker?",
                                 "Dette legger deg til i en gruppe fra din studieretning",
                                 [
-                                    {text: "Ja", onPress: async () => {
+                                    {text: "Avbryt", type: "cancel"},
+                                    {text: "Fortsett", onPress: async () => {
                                             await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
-                                            this.props.navigation.navigate("Gruppe");}},
-                                    {text: "Nei", type: "cancel"}]
+                                            this.props.navigation.navigate("Gruppe");}}]
                             )}}
                             style={{height: 120, top: -20}}>
                           <View style={styles.btnStudieretning}>
