@@ -21,8 +21,8 @@ export default class Chat extends React.Component {
                 [
                     {text: 'Avbryt', type: 'cancel'},
                     {text: 'Forlat', onPress: async () => {
-                        alert('lag dette thanh');
-                        this.props.navigation.navigate('Gruppe');
+                        await FireBase.removeFromGroup(firebase.auth().currentUser.uid, fb.chatId);
+                        navigation.navigate('Gruppe');
                         }}
                 ]
                 )}>
