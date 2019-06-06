@@ -25,7 +25,7 @@ export default class Profil extends React.Component {
   };
 
   state = {
-    avatar: "https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Ff7748a67-989c-471a-a491-b33a4942e14a?alt=media&token=474bd23d-fab1-4eaa-a041-b6b219b9f8f0"
+    avatar: ""
   };
 
   onImageUpload = async () => {
@@ -97,7 +97,6 @@ export default class Profil extends React.Component {
       }
   
   render() {
-    let avatarImg = "{uri: '"+this.state.avatar+"'}";
     return (
     <View style={styles.backgroundContainer}>
         <View style={styles.TitleContainer}>

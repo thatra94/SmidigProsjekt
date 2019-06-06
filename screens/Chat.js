@@ -15,13 +15,17 @@ export default class Chat extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         title: (navigation.state.params || {}).name || '' +fb.subject+ ' Chat!',
         headerRight: (
-            /*
-            <Button
-                onPress={() => alert('make a onpress')}
-                title="Forlat"
-            />
-            */
-            <TouchableOpacity onPress={() => alert('make a onpress')}>
+            <TouchableOpacity onPress={() => Alert.alert(
+                'Er du sikker på at du vil forlate gruppen',
+                '',
+                [
+                    {text: 'Avbryt', type: 'cancel'},
+                    {text: 'Forlat', onPress: async () => {
+                        alert('lag dette thanh');
+                        this.props.navigation.navigate('Gruppe');
+                        }}
+                ]
+                )}>
                 <Image
                     source={require('../assets/images/edit.png')}
                     style={styles.leaveButton}
@@ -90,7 +94,7 @@ const styles = StyleSheet.create ({
    },
    leaveButton: {
        resizeMode: 'contain',
-       height: '60%',
+       height: '50%',
        left: 220
    }
 });
