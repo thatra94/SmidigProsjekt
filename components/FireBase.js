@@ -85,10 +85,10 @@ export default class FireBase {
 
 static removeFromGroup(userId, groupKey){
       firebase.database().ref('Groups/'+groupKey).update({
-          [userId]: false
+          [userId]: null
       });
       firebase.database().ref('users/'+userId+'/groups').update({
-          [groupKey]: false
+          [groupKey]: null
       });
 }
 
