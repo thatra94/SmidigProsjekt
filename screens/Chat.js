@@ -15,18 +15,19 @@ export default class Chat extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         title: (navigation.state.params || {}).name || '' +fb.subject+ ' Chat!',
         headerRight: (
+            /*
             <Button
                 onPress={() => alert('make a onpress')}
                 title="Forlat"
             />
-            /*
+            */
             <TouchableOpacity onPress={() => alert('make a onpress')}>
                 <Image
                     source={require('../assets/images/edit.png')}
                     style={styles.leaveButton}
                 />
             </TouchableOpacity>
-            */
+
         )
     });
 
@@ -86,5 +87,10 @@ const styles = StyleSheet.create ({
    text: {
       color: '#4f603c',
       fontSize: 20,
+   },
+   leaveButton: {
+       resizeMode: 'contain',
+       height: '60%',
+       left: 220
    }
 });
