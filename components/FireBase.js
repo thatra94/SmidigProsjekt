@@ -69,6 +69,7 @@ export default class FireBase {
     });
 }
 
+
   static createNewGroup(userId, subjectName){
      const key = firebase.database().ref("Groups/")
          .push({
@@ -80,6 +81,15 @@ export default class FireBase {
          }).key;
 
      this.addToGroup(key, userId, 0);
+}
+
+static removeFromGroup(userId, groupKey){
+      firebase.database().ref('Groups/'+groupKey).update({
+          [userId]: false
+      });
+      firebase.database().ref('users/'+userId+'/groups').update({
+          [groupKey]: false
+      });
 }
 
   mountStudy(userId){
