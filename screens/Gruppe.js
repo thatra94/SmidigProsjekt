@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, TouchableOpacity } from "react-native";
+import { NavigationEvents } from "react-navigation";
 
 import FireBase from '../components/FireBase';
 import firebase from "./Kollokvie";
@@ -29,20 +30,28 @@ export default class Grupper extends React.Component {
     },
     };
 
-   alertItemName = (item) => {
-      alert(item)
-   }
-
     async componentWillMount() {
         let fbData = FireBase.getInstance();
         await this.setState({title: fbData.getGroupList()});
         console.log(this.state.title);
     }
 
-   render() {
+    componentDidMount() {
+        this.navListener = this.props.navigation.addListener('didFocus',async () => {
+            console.log('trying to rerender via componentdidmount');
+            await FireBase.getInstance().getGroups();
+            await this.setState({title: FireBase.getInstance().getGroupList()});
+            this.forceUpdate()})
+    }
+
+    render() {
    return (
      <View style={styles.MainContainer}>
-
+         <NavigationEvents
+            onWillFocus={async () => {
+                this.setState({title: []});
+                await FireBase.getInstance().getGroups();
+            }}/>
          <ScrollView>
          <GroupListView
              itemList={this.state.title}
