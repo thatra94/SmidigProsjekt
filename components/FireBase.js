@@ -203,7 +203,7 @@ getSubjectList() {
                                     if (userCount < 3 && groupLength > 0) {
                                         FireBase.addToGroup(groupKey, userId, userCount);
                                         console.log("Added user: " + userId + " \nto group: " + groupKey + " \nwith " + userCount + " users");
-                                        Alert.alert(""+subjectName, "Du har blitt lagt til i en gruppe");
+                                        Alert.alert(""+subjectName, "Du har blitt lagt til i en gruppe med " + userCount + " medlemmer");
                                         checkBool = true;
                                     } else if (checkedAllGroups > groupLength){
                                         FireBase.createNewGroup(userId, subjectName);

@@ -70,8 +70,6 @@ const styles = StyleSheet.create({
      flex: 1,
      margin: 0,
      backgroundColor: '#f2f2f2',
-
-
  },
 
  TextStyle:{
