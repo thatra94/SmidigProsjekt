@@ -25,7 +25,7 @@ export default class Profil extends React.Component {
   };
 
   state = {
-    avatar: ""
+    avatar: "avatar"
   };
 
   onImageUpload = async () => {

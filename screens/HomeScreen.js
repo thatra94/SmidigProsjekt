@@ -118,8 +118,15 @@ const styles = StyleSheet.create({
   },
   purpleBackground: {
     width: wp('100%'),
-    height: hp('60%'),
-    backgroundColor: '#330F2A'
+    backgroundColor: '#330F2A',
+    ...Platform.select({
+      ios: {
+        height: hp('60%'),
+      },
+      android: {
+        height: hp('100%'),
+      },
+    }),
   },
   gradientCircle:{
     position: 'absolute',
@@ -154,8 +161,17 @@ const styles = StyleSheet.create({
     borderColor: '#d6d7da',
     shadowColor: 'black',
     shadowOffset:{width: 6, height: 5},
-    shadowOpacity: 0.4
+    shadowOpacity: 0.4,
+    ...Platform.select({
+          ios: {
+            top: '45%',
+          },
+          android: {
+            top: '25%',
+          }
+    }),
   },
+
   txtGroup:{
     textAlign: 'center',
     marginTop: 60,
@@ -220,6 +236,7 @@ const styles = StyleSheet.create({
   },
 
 //Har ikke kodet resten. Vet ikke hvis man skal beholde den
+  /*
   overlayContainer: {
     flex: 1,
     backgroundColor: 'rgba(47,163,218, .4)'
@@ -311,5 +328,5 @@ const styles = StyleSheet.create({
   helpLinkText: {
     fontSize: 14,
     color: '#2e78b7',
-  },
+  },*/
 });
