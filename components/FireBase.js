@@ -13,13 +13,13 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const groupList = [];
 const subjectsList = [];
 let firstName;
 let lastName;
 let userStudie;
 let chatId;
 let subject;
+
 
 let photoUrl;
 
@@ -38,16 +38,21 @@ function urlToBlob(uri) {
     })
 }
 
-export default class FireBase {
-    constructor() {
+export default class FireBase extends React.Component{
+    constructor(props) {
+        super(props);
 
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         } else {
             console.log("firebase apps already running...")
         }
+        this.setState({groupList: []});
     }
 
+    state = {
+        groupList: [],
+    };
 
   static myInstance = null;
 
@@ -118,18 +123,25 @@ static removeFromGroup(userId, groupKey){
 
   getGroups(userId){
 
+     let tempList = [];
+
+     console.log('reset');
+
      firebase.database().ref('users/' + userId+'/groups')
        .once("value").then(function (snapshot){
          snapshot.forEach(function(childSnapshot) {
            firebase.database().ref('Groups/'+childSnapshot.key)
            .once("value").then(function(childSnapshot){
-             groupList.push({
+             tempList.push({
                id: childSnapshot.key,
                title: childSnapshot.val().subject,
              });
            });
          });
        });
+     this.setState({groupList: tempList});
+     console.log('added groups');
+     console.log(this.state.groupList.length);
   }
 
 
@@ -148,8 +160,8 @@ static removeFromGroup(userId, groupKey){
 
 
 getGroupList(){
-   //console.log(groupList);
-   return groupList;
+   //console.log(this.state.groupList);
+   return this.state.groupList;
  }
 
 getSubjectList() {
@@ -178,20 +190,20 @@ getSubjectList() {
                     let subject = snapshot.val().subject;
                     let checkedAllGroups = 0;
                     if (subjectName === subject) {
-                        for (let i = 0; i < groupList.length; i++) {
-                            if (groupList[i].title === (subjectName)) {
+                        for (let i = 0; i < this.state.groupList.length; i++) {
+                            if (this.state.groupList[i].title === (subjectName)) {
                                 console.log("Already in a group for this subject");
                                 Alert.alert("Du er allerede i en gruppe for "+subjectName, "Forlat den andre før du prøver å bli med i en ny");
                                 checkBool = true;
                             }
                         }
                         if (!checkBool) {
-                            for (let i = 0; i < groupList.length; i++) {
-                                if (groupList[i].title !== (subjectName)) {
+                            for (let i = 0; i < this.state.groupList.length; i++) {
+                                if (this.state.groupList[i].title !== (subjectName)) {
                                     if (userCount < 3 && groupLength > 0) {
                                         FireBase.addToGroup(groupKey, userId, userCount);
                                         console.log("Added user: " + userId + " \nto group: " + groupKey + " \nwith " + userCount + " users");
-                                        Alert.alert(""+subjectName, "Du har blitt lagt til i en gruppe");
+                                        Alert.alert(""+subjectName, "Du har blitt lagt til i en gruppe med " + userCount + " medlemmer");
                                         checkBool = true;
                                     } else if (checkedAllGroups > groupLength){
                                         FireBase.createNewGroup(userId, subjectName);

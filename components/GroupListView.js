@@ -35,9 +35,9 @@ const CustomRow = ({ id, title, navigation }) => (
         onPress={ () => {
             FireBase.getInstance().chatId = id;
             FireBase.getInstance().subject = title;
-            console.log(title)
+            console.log(title);
             console.log(id);
-            navigation.navigate('Chat');
+            navigation.navigate('Chat')
         }}>
         <View style={styles.rowContainer}>
             <Text style={styles.title}>

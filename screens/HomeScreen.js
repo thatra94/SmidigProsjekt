@@ -12,13 +12,14 @@ import {
     View,
 } from 'react-native';
 
+let fb = FireBase.getInstance();
+
 import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
 
 export default class HomeScreen extends React.Component {
   constructor(props){
     super(props);
-    let fb = FireBase.getInstance();
     fb.getGroups(firebase.auth().currentUser.uid);
     fb.getSubjects(firebase.auth().currentUser.uid);
     fb.mountName(firebase.auth().currentUser.uid);
