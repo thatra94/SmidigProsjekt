@@ -14,12 +14,12 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const subjectsList = [];
+let groupList = [];
 let firstName;
 let lastName;
 let userStudie;
 let chatId;
 let subject;
-
 
 let photoUrl;
 
@@ -47,12 +47,7 @@ export default class FireBase extends React.Component{
         } else {
             console.log("firebase apps already running...")
         }
-        this.setState({groupList: []});
     }
-
-    state = {
-        groupList: [],
-    };
 
   static myInstance = null;
 
@@ -123,27 +118,23 @@ static removeFromGroup(userId, groupKey){
 
   getGroups(userId){
 
-     let tempList = [];
-
-     console.log('reset');
-
      firebase.database().ref('users/' + userId+'/groups')
        .once("value").then(function (snapshot){
+         while (groupList.length) {
+             groupList.pop();
+         }
          snapshot.forEach(function(childSnapshot) {
            firebase.database().ref('Groups/'+childSnapshot.key)
            .once("value").then(function(childSnapshot){
-             tempList.push({
+             groupList.push({
                id: childSnapshot.key,
                title: childSnapshot.val().subject,
              });
+             console.log("antall grupper: "+groupList.length);
            });
          });
        });
-     this.setState({groupList: tempList});
-     console.log('added groups');
-     console.log(this.state.groupList.length);
   }
-
 
   getSubjects(userId) {
 
@@ -161,7 +152,7 @@ static removeFromGroup(userId, groupKey){
 
 getGroupList(){
    //console.log(this.state.groupList);
-   return this.state.groupList;
+   return groupList;
  }
 
 getSubjectList() {
