@@ -181,16 +181,16 @@ getSubjectList() {
                     let subject = snapshot.val().subject;
                     let checkedAllGroups = 0;
                     if (subjectName === subject) {
-                        for (let i = 0; i < this.state.groupList.length; i++) {
-                            if (this.state.groupList[i].title === (subjectName)) {
+                        for (let i = 0; i < groupList.length; i++) {
+                            if (groupList[i].title === (subjectName)) {
                                 console.log("Already in a group for this subject");
                                 Alert.alert("Du er allerede i en gruppe for "+subjectName, "Forlat den andre før du prøver å bli med i en ny");
                                 checkBool = true;
                             }
                         }
                         if (!checkBool) {
-                            for (let i = 0; i < this.state.groupList.length; i++) {
-                                if (this.state.groupList[i].title !== (subjectName)) {
+                            for (let i = 0; i < groupList.length; i++) {
+                                if (groupList[i].title !== (subjectName)) {
                                     if (userCount < 3 && groupLength > 0) {
                                         FireBase.addToGroup(groupKey, userId, userCount);
                                         console.log("Added user: " + userId + " \nto group: " + groupKey + " \nwith " + userCount + " users");

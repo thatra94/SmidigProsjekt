@@ -3,7 +3,7 @@ import {Platform, StyleSheet, FlatList, Text, View, Alert, Image, TouchableOpaci
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import FireBase from '../components/FireBase';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 let fb = FireBase.getInstance();
 let cid;
