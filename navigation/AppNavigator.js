@@ -30,21 +30,6 @@ GroupsStack.navigationOptions = {
   )
 };
 
-/*
-const SettingsStack = createStackNavigator({
-  Test: Chat
-});
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'WiP',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-more' : 'md-more'}
-    />
-  )
-};
-*/
-
 const HubStack = createStackNavigator({
   Hub: Hub,
   Fag: Fag,
