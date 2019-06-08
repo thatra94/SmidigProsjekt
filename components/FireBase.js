@@ -83,13 +83,18 @@ export default class FireBase extends React.Component{
      this.addToGroup(key, userId, 0);
 }
 
-static removeFromGroup(userId, groupKey){
-      firebase.database().ref('Groups/'+groupKey).update({
-          [userId]: null
-      });
-      firebase.database().ref('users/'+userId+'/groups').update({
-          [groupKey]: null
-      });
+static async removeFromGroup(userId, groupKey) {
+    let newUserCount;
+    await firebase.database().ref('Groups/' + groupKey).once("value").then(function (snapshot) {
+        newUserCount = snapshot.val().userCount;
+    });
+    firebase.database().ref('Groups/' + groupKey).update({
+        [userId]: null,
+        userCount: newUserCount - 1
+    });
+    firebase.database().ref('users/' + userId + '/groups').update({
+        [groupKey]: null
+    });
 }
 
   mountStudy(userId){
