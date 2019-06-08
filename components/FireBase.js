@@ -112,12 +112,11 @@ static async removeFromGroup(userId, groupKey) {
       });
   }
 
-  getName(){
+  static getName(){
       return firstName +" "+ lastName;
-      console.log(firstName + " " + lastName);
   }
 
-  getStudy(userId){
+  static getStudy(userId){
       return userStudie;
   }
 
@@ -223,19 +222,6 @@ getSubjectList() {
             });
         }
         this.getGroups(userId);
-    }
-
-
-    getGroupId(){
-      return chatId;
-    }
-
-    setChatName(groupId){
-        firebase.database().ref('Groups/' + groupId)
-            .once("value").then(function (snapshot){
-            this.subject = snapshot.val().subject;
-        });
-        return subject;
     }
 
     get uid() {

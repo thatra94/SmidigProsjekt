@@ -1,9 +1,6 @@
-import React, { Component } from "react";
-import { Platform, StyleSheet, FlatList, Text, View, Alert, ScrollView, TouchableOpacity } from "react-native";
-import { NavigationEvents } from "react-navigation";
+import {StyleSheet, View, ScrollView} from "react-native";
 import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
-//import firebase from "./Kollokvie";
 import GroupListView from "../components/GroupListView";
 
 export default class Grupper extends React.Component {

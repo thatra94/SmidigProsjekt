@@ -112,9 +112,9 @@ export default class Profil extends React.Component {
                 <Text style={styles.TextStyle}></Text>
             </TouchableOpacity>
         
-            <Text style={styles.nameUser}>{FireBase.getInstance().getName()}</Text>
+            <Text style={styles.nameUser}>{FireBase.getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
-            <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
+            <Text style={styles.studyUser}>{FireBase.getStudy()}</Text>
 
           <Button
               title="Upload Avatar Image"
