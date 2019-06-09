@@ -1,10 +1,12 @@
-import {StyleSheet, Alert, Image, TouchableOpacity} from "react-native";
+import React, { Component } from "react";
+import {Platform, StyleSheet, FlatList, Text, View, Alert, Image, TouchableOpacity, Button} from "react-native";
 import { GiftedChat } from 'react-native-gifted-chat';
+
 import FireBase from '../components/FireBase';
 import * as firebase from 'firebase';
-import React from "react";
 
 let fb = FireBase.getInstance();
+let cid;
 
 export default class Chat extends React.Component {
     constructor(props) {
@@ -39,7 +41,7 @@ export default class Chat extends React.Component {
 
     get user() {
         return {
-            name: FireBase.getName(),
+            name: fb.getName(),
             //email: this.props.navigation.state.params.email,
            // avatar: this.props.navigation.state.params.avatar,
             avatar: firebase.auth().currentUser.photoURL,
