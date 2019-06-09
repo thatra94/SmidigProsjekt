@@ -56,7 +56,7 @@ export default class Chat extends React.Component {
                 messages={this.state.messages}
                 onSend={fb.send}
                 user={this.user}
-             alignTop={30} initialText={"IceBreaker..."}/>
+                initialText={"IceBreaker..."}/>
         );
     }
 
