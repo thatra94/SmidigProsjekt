@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     //height: hp('55%'),
     backgroundColor: 'white',
     borderRadius: 50,
-    marginTop: 250,
+    marginTop: '62%',
     borderWidth: 0.5,
     borderColor: '#d6d7da', 
     shadowColor: 'black',
