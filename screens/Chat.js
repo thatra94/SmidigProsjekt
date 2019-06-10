@@ -3,7 +3,7 @@ import {Platform, StyleSheet, FlatList, Text, View, Alert, Image, TouchableOpaci
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import FireBase from '../components/FireBase';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 let fb = FireBase.getInstance();
 let cid;
@@ -31,7 +31,6 @@ export default class Chat extends React.Component {
                     style={styles.leaveButton}
                 />
             </TouchableOpacity>
-
         )
     });
 
@@ -56,7 +55,7 @@ export default class Chat extends React.Component {
                 messages={this.state.messages}
                 onSend={fb.send}
                 user={this.user}
-             alignTop={30} initialText={"IceBreaker..."}/>
+                initialText={"IceBreaker..."}/>
         );
     }
 

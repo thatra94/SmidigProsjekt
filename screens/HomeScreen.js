@@ -20,12 +20,6 @@ import FireBase from '../components/FireBase';
 export default class HomeScreen extends React.Component {
   constructor(props){
     super(props);
-    fb.getGroups(firebase.auth().currentUser.uid);
-    fb.getSubjects(firebase.auth().currentUser.uid);
-    fb.mountName(firebase.auth().currentUser.uid);
-    fb.mountStudy(firebase.auth().currentUser.uid);
-    let testUrl = firebase.auth().currentUser.photoURL;
-    console.log("testUrl", testUrl);
   }
 
   static navigationOptions = {
@@ -35,7 +29,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <ScrollView scrollEventThrottle={16}>
+          <View EventThrottle={16}>
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <View style={{flex: 1, flexDirection: 'row'}}>
 
@@ -97,7 +91,7 @@ export default class HomeScreen extends React.Component {
                 </View>
               </View>
             </View>
-          </ScrollView>
+          </View>
         </View>
     );
   }
@@ -119,16 +113,23 @@ const styles = StyleSheet.create({
   },
   purpleBackground: {
     width: wp('100%'),
-    height: hp('60%'),
-    backgroundColor: '#330F2A'
+    backgroundColor: '#330F2A',
+    ...Platform.select({
+      ios: {
+        height: hp('60%'),
+      },
+      android: {
+        height: hp('100%'),
+      },
+    }),
   },
   gradientCircle:{
     position: 'absolute',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    right: -30,
-    top: -120,
+    marginLeft: '-17%',
+    top: -100,
     width: 500,
     height: 500,
     borderRadius: 500/2
@@ -138,25 +139,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 110,
-    top: 50,
+    top: 70,
     flex: 1,
     width: 135,
     height: 135
   },
   whiteFrame:{
     position: 'absolute',
-    top: '45%',
-    margin: '5%',
+    //margin: '5%',
     width: wp('90%'),
-    height: hp('55%'),
+    //height: hp('55%'),
     backgroundColor: 'white',
     borderRadius: 50,
+    marginTop: '62%',
     borderWidth: 0.5,
-    borderColor: '#d6d7da',
+    borderColor: '#d6d7da', 
     shadowColor: 'black',
     shadowOffset:{width: 6, height: 5},
-    shadowOpacity: 0.4
+    shadowOpacity: 0.4,
+    ...Platform.select({
+          ios: {
+            top: '45%',
+            height: hp('55%'),
+            margin: '5%',
+          },
+          android: {
+            top: '25%',
+          }
+    }),
   },
+
   txtGroup:{
     textAlign: 'center',
     marginTop: 60,
@@ -221,6 +233,7 @@ const styles = StyleSheet.create({
   },
 
 //Har ikke kodet resten. Vet ikke hvis man skal beholde den
+  /*
   overlayContainer: {
     flex: 1,
     backgroundColor: 'rgba(47,163,218, .4)'
@@ -312,5 +325,5 @@ const styles = StyleSheet.create({
   helpLinkText: {
     fontSize: 14,
     color: '#2e78b7',
-  },
+  },*/
 });

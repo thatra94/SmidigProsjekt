@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
     width: wp ('100%')
   },
   container: {
+    marginTop: 10,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    right: -30,
+    marginLeft: '-17%',
     top: -120,
     width: 500,
     height: 500,

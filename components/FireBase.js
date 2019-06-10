@@ -14,12 +14,12 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const subjectsList = [];
+let groupList = [];
 let firstName;
 let lastName;
 let userStudie;
 let chatId;
 let subject;
-
 
 let photoUrl;
 
@@ -47,12 +47,7 @@ export default class FireBase extends React.Component{
         } else {
             console.log("firebase apps already running...")
         }
-        this.setState({groupList: []});
     }
-
-    state = {
-        groupList: [],
-    };
 
   static myInstance = null;
 
@@ -88,13 +83,18 @@ export default class FireBase extends React.Component{
      this.addToGroup(key, userId, 0);
 }
 
-static removeFromGroup(userId, groupKey){
-      firebase.database().ref('Groups/'+groupKey).update({
-          [userId]: null
-      });
-      firebase.database().ref('users/'+userId+'/groups').update({
-          [groupKey]: null
-      });
+static async removeFromGroup(userId, groupKey) {
+    let newUserCount;
+    await firebase.database().ref('Groups/' + groupKey).once("value").then(function (snapshot) {
+        newUserCount = snapshot.val().userCount;
+    });
+    firebase.database().ref('Groups/' + groupKey).update({
+        [userId]: null,
+        userCount: newUserCount - 1
+    });
+    firebase.database().ref('users/' + userId + '/groups').update({
+        [groupKey]: null
+    });
 }
 
   mountStudy(userId){
@@ -114,7 +114,6 @@ static removeFromGroup(userId, groupKey){
 
   getName(){
       return firstName +" "+ lastName;
-      console.log(firstName + " " + lastName);
   }
 
   getStudy(userId){
@@ -123,27 +122,21 @@ static removeFromGroup(userId, groupKey){
 
   getGroups(userId){
 
-     let tempList = [];
-
-     console.log('reset');
-
      firebase.database().ref('users/' + userId+'/groups')
        .once("value").then(function (snapshot){
+         while (groupList.length) {groupList.pop();}
          snapshot.forEach(function(childSnapshot) {
            firebase.database().ref('Groups/'+childSnapshot.key)
            .once("value").then(function(childSnapshot){
-             tempList.push({
+             groupList.push({
                id: childSnapshot.key,
                title: childSnapshot.val().subject,
              });
+             console.log("antall grupper: "+groupList.length);
            });
          });
        });
-     this.setState({groupList: tempList});
-     console.log('added groups');
-     console.log(this.state.groupList.length);
   }
-
 
   getSubjects(userId) {
 
@@ -161,7 +154,7 @@ static removeFromGroup(userId, groupKey){
 
 getGroupList(){
    //console.log(this.state.groupList);
-   return this.state.groupList;
+   return groupList;
  }
 
 getSubjectList() {
@@ -190,20 +183,20 @@ getSubjectList() {
                     let subject = snapshot.val().subject;
                     let checkedAllGroups = 0;
                     if (subjectName === subject) {
-                        for (let i = 0; i < this.state.groupList.length; i++) {
-                            if (this.state.groupList[i].title === (subjectName)) {
+                        for (let i = 0; i < groupList.length; i++) {
+                            if (groupList[i].title === (subjectName)) {
                                 console.log("Already in a group for this subject");
                                 Alert.alert("Du er allerede i en gruppe for "+subjectName, "Forlat den andre før du prøver å bli med i en ny");
                                 checkBool = true;
                             }
                         }
                         if (!checkBool) {
-                            for (let i = 0; i < this.state.groupList.length; i++) {
-                                if (this.state.groupList[i].title !== (subjectName)) {
+                            for (let i = 0; i < groupList.length; i++) {
+                                if (groupList[i].title !== (subjectName)) {
                                     if (userCount < 3 && groupLength > 0) {
                                         FireBase.addToGroup(groupKey, userId, userCount);
                                         console.log("Added user: " + userId + " \nto group: " + groupKey + " \nwith " + userCount + " users");
-                                        Alert.alert(""+subjectName, "Du har blitt lagt til i en gruppe");
+                                        Alert.alert(""+subjectName, "Du har blitt lagt til i en gruppe med " + userCount + " medlemmer");
                                         checkBool = true;
                                     } else if (checkedAllGroups > groupLength){
                                         FireBase.createNewGroup(userId, subjectName);
@@ -212,6 +205,9 @@ getSubjectList() {
                                         checkBool = true;
                                     } else {
                                         checkedAllGroups++;
+                                    }
+                                    if(checkBool){
+                                        break;
                                     }
                                 }
                             }
@@ -226,21 +222,8 @@ getSubjectList() {
                 }
             });
         }
-        this.getGroups(userId);
     }
 
-
-    getGroupId(){
-      return chatId;
-    }
-
-    setChatName(groupId){
-        firebase.database().ref('Groups/' + groupId)
-            .once("value").then(function (snapshot){
-            this.subject = snapshot.val().subject;
-        });
-        return subject;
-    }
 
     get uid() {
         return (firebase.auth().currentUser || {}).uid;
@@ -295,7 +278,6 @@ getSubjectList() {
         this.ref(FireBase.getInstance().chatId).off();
     }
 
-
     uploadImage = async uri => {
         console.log('got image to upload. uri:' + uri);
         try {
@@ -310,20 +292,6 @@ getSubjectList() {
             //photoUrl = firebase.auth().currentUser.uid.ref.getDownloadURL();
             return ref.getDownloadURL();
 
-            /*return new Promise((resolve, reject) => {
-                   task.on(
-                       'state_changed',
-                       () => {
-
-
-
-
-                       },
-                       reject,
-                       () => resolve(task.snapshot.ref.getDownloadURL()),
-                       console.log("test", task.snapshot.ref.getDownloadURL())
-                   );
-               });*/
         } catch (err) {
             console.log('uploadImage try/catch error: ' + err.message); //Cannot load an empty url
         }
