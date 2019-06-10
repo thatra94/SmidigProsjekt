@@ -114,7 +114,6 @@ static async removeFromGroup(userId, groupKey) {
 
   getName(){
       return firstName +" "+ lastName;
-      console.log(firstName + " " + lastName);
   }
 
   getStudy(userId){
@@ -209,6 +208,9 @@ getSubjectList() {
                                     } else {
                                         checkedAllGroups++;
                                     }
+                                    if(checkBool){
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -225,18 +227,6 @@ getSubjectList() {
         this.getGroups(userId);
     }
 
-
-    getGroupId(){
-      return chatId;
-    }
-
-    setChatName(groupId){
-        firebase.database().ref('Groups/' + groupId)
-            .once("value").then(function (snapshot){
-            this.subject = snapshot.val().subject;
-        });
-        return subject;
-    }
 
     get uid() {
         return (firebase.auth().currentUser || {}).uid;
@@ -291,7 +281,6 @@ getSubjectList() {
         this.ref(FireBase.getInstance().chatId).off();
     }
 
-
     uploadImage = async uri => {
         console.log('got image to upload. uri:' + uri);
         try {
@@ -306,20 +295,6 @@ getSubjectList() {
             //photoUrl = firebase.auth().currentUser.uid.ref.getDownloadURL();
             return ref.getDownloadURL();
 
-            /*return new Promise((resolve, reject) => {
-                   task.on(
-                       'state_changed',
-                       () => {
-
-
-
-
-                       },
-                       reject,
-                       () => resolve(task.snapshot.ref.getDownloadURL()),
-                       console.log("test", task.snapshot.ref.getDownloadURL())
-                   );
-               });*/
         } catch (err) {
             console.log('uploadImage try/catch error: ' + err.message); //Cannot load an empty url
         }
