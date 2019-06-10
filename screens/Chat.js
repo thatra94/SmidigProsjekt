@@ -14,8 +14,13 @@ export default class Chat extends React.Component {
     }
     static navigationOptions = ({ navigation }) => ({
         title: (navigation.state.params || {}).name || '' +fb.subject+ ' Chat!',
+        headerStyle: {
+            borderBottomColor:'transparent',
+            borderBottomWidth: 0,
+        },
         headerRight: (
-            <TouchableOpacity onPress={() => Alert.alert(
+            <TouchableOpacity
+                onPress={() => Alert.alert(
                 'Er du sikker på at du vil forlate gruppen',
                 '',
                 [
@@ -25,7 +30,9 @@ export default class Chat extends React.Component {
                             navigation.navigate('Gruppe');
                         }}
                 ]
-                )}>
+                )}
+                style={styles.leaveButtonTouchable}
+            >
                 <Image
                     source={require('../assets/images/edit.png')}
                     style={styles.leaveButton}
@@ -85,15 +92,21 @@ const styles = StyleSheet.create ({
       height: 150,
       borderColor: 'black',
       marginTop: 5,
-
    },
    text: {
       color: '#4f603c',
       fontSize: 20,
    },
+   leaveButtonTouchable: {
+       width: 80,
+       height: 40,
+       right: 10,
+   },
    leaveButton: {
-       resizeMode: 'contain',
-       height: '50%',
-       left: 220
+       resizeMode: 'cover',
+       width: 25,
+       height: 25,
+       left: 45,
+       top: 6
    }
 });
