@@ -29,11 +29,11 @@ export default class Grupper extends React.Component {
         },
     };
 
-    async componentWillMount() {
+    /*async componentWillMount() {
         let fbData = FireBase.getInstance();
         await this.setState({title: fbData.getGroupList()});
         console.log(this.state.title);
-    }
+    }*/
 
     async componentDidMount() {
         this.navListener = this.props.navigation.addListener('didFocus',async () => {
@@ -41,8 +41,7 @@ export default class Grupper extends React.Component {
             console.log('trying to rerender via componentdidmount');
             await this.setState({title: []});
             await fbData.getGroups(firebase.auth().currentUser.uid);
-            await this.setState({title: fbData.getGroupList()});
-            setTimeout(()=>{console.log(this.state.title);}, 2000);
+            setTimeout(async () => {await this.setState({title: fbData.getGroupList()})}, 500);
             console.log(this.state.title);
         })
     }
