@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
           },
           android: {
             top: '25%',
+            height: hp('55%'),
           }
     }),
   },
