@@ -1,12 +1,6 @@
 
 
 
-
-
-
-
-
-/*
 let rootRef = firebase.database().ref().child("users");
 
 rootRef.on("child_added", snap => {
@@ -17,28 +11,26 @@ rootRef.on("child_added", snap => {
     $("#table_body").append
         ("<tr><td>" + name + "</td>
         < td > " + email + "</td > <td>
-                
-                </tr > ");
-}); 
-*/
 
-/*
+                </tr > ");
+});
+
 
 let rootRef = firebase.database().ref().child("users");
 $("#table_body").on('click','.delete-btn', function(e){
     let $row = $(this).closest('tr'),
        rowId = $row.data('id');
     let userKey = rootRef.child("id");
-    
+
     rootRef.child(userKey).remove()
-    
+
     .then(function() {
       $row.remove();
     })
-    
+
     .catch(function(error) {
       console.log('ERROR');
-    });  
+    });
 });
 
 rootRef.on("child_changed", snap => {
@@ -57,12 +49,6 @@ $("#table_body").append("<tr data-id='"+userKey+"'>"+
 });
 
 
-
-
-*/
-
-/*
- 
  firebase.initializeApp(firebaseConfig);
 
 const subjectsList = [];
@@ -72,9 +58,3 @@ let lastName;
 let userStudie;
 let chatId;
 let subject;
-
-*/
-
-
-
-

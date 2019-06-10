@@ -12,10 +12,10 @@ import {
     View,
 } from 'react-native';
 
-let fb = FireBase.getInstance();
-
 import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
+
+let fb = FireBase.getInstance();
 
 export default class HomeScreen extends React.Component {
   constructor(props){

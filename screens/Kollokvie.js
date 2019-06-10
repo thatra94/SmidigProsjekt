@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import FireBase from '../components/FireBase';
+
 import CustomListView from "../components/CustomListView";
 
 export default class Fag extends React.Component {

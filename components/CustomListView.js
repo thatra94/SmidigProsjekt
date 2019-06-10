@@ -2,7 +2,6 @@ import React from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import FireBase from "./FireBase";
 import * as firebase from "firebase";
-import { withNavigation } from 'react-navigation';
 
 const styles = StyleSheet.create({
     container: {

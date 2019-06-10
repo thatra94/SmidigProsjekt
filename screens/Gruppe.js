@@ -4,8 +4,8 @@ import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
 import GroupListView from "../components/GroupListView";
 
-export default class Grupper extends React.Component {
-    constructor(props){
+export default class Gruppe extends React.Component {
+    constructor(props) {
         super(props);
     }
 
@@ -26,6 +26,7 @@ export default class Grupper extends React.Component {
             fontSize: 24,
         },
     };
+
     async componentWillMount(){
         await this.setState({title: []});
     }
@@ -34,11 +35,10 @@ export default class Grupper extends React.Component {
         this.navListener = this.props.navigation.addListener('didFocus',async () => {
             let fbData = FireBase.getInstance();
             console.log('trying to rerender via componentdidmount');
-            //await this.setState({title: []});
+            await this.setState({title: []});
             await fbData.getGroups(firebase.auth().currentUser.uid);
             setTimeout(async () => {await this.setState({title: fbData.getGroupList()})}, 400);
             console.log(this.state.title);
-            await this.setState({title: []});
         })
     }
 
