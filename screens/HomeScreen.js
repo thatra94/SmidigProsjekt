@@ -29,7 +29,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <ScrollView scrollEventThrottle={16}>
+          <View EventThrottle={16}>
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <View style={{flex: 1, flexDirection: 'row'}}>
 
@@ -91,7 +91,7 @@ export default class HomeScreen extends React.Component {
                 </View>
               </View>
             </View>
-          </ScrollView>
+          </View>
         </View>
     );
   }
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    right: -30,
-    top: -120,
+    marginLeft: '-17%',
+    top: -100,
     width: 500,
     height: 500,
     borderRadius: 500/2
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 110,
-    top: 50,
+    top: 70,
     flex: 1,
     width: 135,
     height: 135
@@ -151,8 +151,9 @@ const styles = StyleSheet.create({
     //height: hp('55%'),
     backgroundColor: 'white',
     borderRadius: 50,
+    marginTop: 250,
     borderWidth: 0.5,
-    borderColor: '#d6d7da',
+    borderColor: '#d6d7da', 
     shadowColor: 'black',
     shadowOffset:{width: 6, height: 5},
     shadowOpacity: 0.4,
