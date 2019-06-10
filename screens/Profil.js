@@ -122,12 +122,12 @@ export default class Profil extends React.Component {
             <Text style={styles.studentUser}>Student</Text>
             <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
 
-          <Button
-              title="Upload Avatar Image"
-              style={styles.buttonText}
-              onPress={this.onImageUpload}
-          />
-            <Button color='red' title="Logg ut" onPress={ () => {
+
+            <TouchableOpacity onPress={this.onImageUpload} style={styles.avatarBtn}>
+                    <Text style={styles.avatarTxt}>Upload Avatar Image</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={ () => {
               Alert.alert(
                   "Ønsker du å logge ut?",
                   "",
@@ -135,11 +135,13 @@ export default class Profil extends React.Component {
                       {text: "Avbryt", type: "cancel"},
                       {text: "Logg ut", onPress: () => {this.signOutUser()}}
                   ]
-              )}} />
-
-          <Button
-              title="Slett profil"
-              onPress={ () => {
+              )}}
+              style={styles.profileTxt}>
+                    <Text style={styles.logOut}>Logg ut</Text>
+                </TouchableOpacity>
+                                    
+        
+            <TouchableOpacity onPress={ () => {
                 Alert.alert(
                     "Ønsker du å slette profilen din?",
                     "",
@@ -147,9 +149,11 @@ export default class Profil extends React.Component {
                       {text: "Avbryt", type: "cancel"},
                       {text: "Slett", onPress: () => {this.deleteProfile()}}
                     ]
-                )}}
-              style={styles.buttonText}
-          />
+                    )}} 
+                style={styles.profileTxt}>
+                <Text style={styles.profileTxt}>Slett profil</Text>
+            </TouchableOpacity>
+            
         </View>
     </View>
     );
@@ -158,6 +162,7 @@ export default class Profil extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 12,
     shadowColor: "#000",
@@ -169,7 +174,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 13,
     width: 340,
-    height: 450,
+    height: 520,
   },
     container2: {
     alignItems: 'center',
@@ -259,5 +264,29 @@ const styles = StyleSheet.create({
     height:40,
     justifyContent: 'center',
   },
+    avatarBtn: {
+    alignItems: 'center',
+    fontSize: 18,
+    margin: 9,
+    backgroundColor: '#5D1049',
+    borderRadius: 100,
+    padding: 2,
+    width: '60%',
+  },
+    profileTxt: {
+    alignItems: 'center',
+    fontSize: 18,
+    margin: 7,
+  },
+    avatarTxt: {
+    color: 'white',
+    fontSize: 18,
+    margin: 7,
+  },
+    logOut: {
+    color: 'red',
+    fontSize: 18,
+  },
+
     
 });
