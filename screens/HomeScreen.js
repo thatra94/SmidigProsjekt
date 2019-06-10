@@ -20,12 +20,6 @@ import FireBase from '../components/FireBase';
 export default class HomeScreen extends React.Component {
   constructor(props){
     super(props);
-    fb.getGroups(firebase.auth().currentUser.uid);
-    fb.getSubjects(firebase.auth().currentUser.uid);
-    fb.mountName(firebase.auth().currentUser.uid);
-    fb.mountStudy(firebase.auth().currentUser.uid);
-    let testUrl = firebase.auth().currentUser.photoURL;
-    console.log("testUrl", testUrl);
   }
 
   static navigationOptions = {
