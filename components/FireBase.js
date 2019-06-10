@@ -95,6 +95,7 @@ static async removeFromGroup(userId, groupKey) {
     firebase.database().ref('users/' + userId + '/groups').update({
         [groupKey]: null
     });
+    Alert.alert("Du har forlatt gruppen", "");
 }
 
   mountStudy(userId){
