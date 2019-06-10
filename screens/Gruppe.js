@@ -42,6 +42,7 @@ export default class Grupper extends React.Component {
             await this.setState({title: []});
             await fbData.getGroups(firebase.auth().currentUser.uid);
             await this.setState({title: fbData.getGroupList()});
+            setTimeout(()=>{console.log(this.state.title);}, 2000);
             console.log(this.state.title);
         })
     }
