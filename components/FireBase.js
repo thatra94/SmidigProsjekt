@@ -124,9 +124,7 @@ static async removeFromGroup(userId, groupKey) {
 
      firebase.database().ref('users/' + userId+'/groups')
        .once("value").then(function (snapshot){
-         while (groupList.length) {
-             groupList.pop();
-         }
+         while (groupList.length) {groupList.pop();}
          snapshot.forEach(function(childSnapshot) {
            firebase.database().ref('Groups/'+childSnapshot.key)
            .once("value").then(function(childSnapshot){

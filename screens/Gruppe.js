@@ -29,19 +29,13 @@ export default class Grupper extends React.Component {
         },
     };
 
-    /*async componentWillMount() {
-        let fbData = FireBase.getInstance();
-        await this.setState({title: fbData.getGroupList()});
-        console.log(this.state.title);
-    }*/
-
     async componentDidMount() {
         this.navListener = this.props.navigation.addListener('didFocus',async () => {
             let fbData = FireBase.getInstance();
             console.log('trying to rerender via componentdidmount');
             await this.setState({title: []});
             await fbData.getGroups(firebase.auth().currentUser.uid);
-            setTimeout(async () => {await this.setState({title: fbData.getGroupList()})}, 500);
+            setTimeout(async () => {await this.setState({title: fbData.getGroupList()})}, 400);
             console.log(this.state.title);
         })
     }
