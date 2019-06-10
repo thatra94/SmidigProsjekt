@@ -152,10 +152,9 @@ const styles = StyleSheet.create({
   },
   whiteFrame:{
     position: 'absolute',
-    top: '45%',
-    margin: '5%',
+    //margin: '5%',
     width: wp('90%'),
-    height: hp('55%'),
+    //height: hp('55%'),
     backgroundColor: 'white',
     borderRadius: 50,
     borderWidth: 0.5,
@@ -166,6 +165,8 @@ const styles = StyleSheet.create({
     ...Platform.select({
           ios: {
             top: '45%',
+            height: hp('55%'),
+            margin: '5%',
           },
           android: {
             top: '25%',

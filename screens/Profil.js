@@ -20,8 +20,8 @@ export default class Profil extends React.Component {
     console.log("testUrl1", testUrl);
   }
 
-     static navigationOptions = {
-      header: null,
+  static navigationOptions = {
+    header: null,
   };
 
   state = {
@@ -29,7 +29,7 @@ export default class Profil extends React.Component {
   };
 
   onImageUpload = async () => {
-    const { status: cameraRollPerm } = await Permissions.askAsync(
+    const {status: cameraRollPerm} = await Permissions.askAsync(
         Permissions.CAMERA_ROLL,
         Permissions.CAMERA
     );
@@ -89,12 +89,18 @@ export default class Profil extends React.Component {
 
   signOutUser = () => {
     firebase
-      .auth()
+        .auth()
         .signOut()
-          .then(() => {
-            console.log('sign out succesful')
-          }).catch(error => console.log('error'))
-      }
+        .then(() => {
+          console.log('sign out succesful')
+        }).catch(error => console.log('error'))
+  };
+
+  deleteProfile = async () => {
+    let userId = await firebase.auth().currentUser.uid;
+    firebase.database().ref('users/' + userId).remove();
+    this.signOutUser();
+  };
   
   render() {
     return (
@@ -130,6 +136,20 @@ export default class Profil extends React.Component {
                       {text: "Logg ut", onPress: () => {this.signOutUser()}}
                   ]
               )}} />
+
+          <Button
+              title="Slett profil"
+              onPress={ () => {
+                Alert.alert(
+                    "Ønsker du å slette profilen din?",
+                    "",
+                    [
+                      {text: "Avbryt", type: "cancel"},
+                      {text: "Slett", onPress: () => {this.deleteProfile()}}
+                    ]
+                )}}
+              style={styles.buttonText}
+          />
         </View>
     </View>
     );
