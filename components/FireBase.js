@@ -222,7 +222,6 @@ getSubjectList() {
                 }
             });
         }
-        this.getGroups(userId);
     }
 
 
