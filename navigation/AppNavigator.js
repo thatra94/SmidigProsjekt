@@ -10,7 +10,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import Subjects from '../screens/Subjects';
 import Gruppe from '../screens/Gruppe';
 import Chat from '../screens/Chat';
-import Profil from '../screens/Profil';
+import Profile from '../screens/Profile';
 import Hub from '../screens/HomeScreen';
 import SignUp from '../screens/login/SignUp';
 import Login from '../screens/login/Login';
@@ -45,10 +45,10 @@ HubStack.navigationOptions = {
 };
 
 const ProfilStack = createStackNavigator({
-  Profil: Profil
+  Profile: Profile
 });
 ProfilStack.navigationOptions = {
-  tabBarLabel: 'Profil',
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

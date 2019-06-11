@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {ImageEditor, TouchableOpacity} from 'react-native'
 import {
   StyleSheet,
@@ -6,13 +6,12 @@ import {
   Text,
   View,
   Alert,
-  Button
 } from 'react-native';
 import FireBase from '../components/FireBase';
 import {ImagePicker, Permissions} from "expo";
 import * as firebase from "firebase";
 
-export default class Profil extends React.Component {
+export default class Profile extends React.Component {
 
   constructor(props) {
     super(props);
@@ -77,7 +76,7 @@ export default class Profil extends React.Component {
       await FireBase.getInstance().updateAvatar(uploadUrl);
     } catch (err) {
       console.log('onImageUpload error:' + err.message);
-      alert('Upload image error:' + err.message);
+      alert('En feil oppstod når du skulle last opp bilde:' + err.message);
     }
   };
 
@@ -120,16 +119,9 @@ export default class Profil extends React.Component {
         <View style={styles.container}>
             <Image style={styles.profileIcon} source={{uri: this.state.avatar}}
             />
-            <TouchableOpacity style={styles.editIconContainer} activeOpacity={0.5}>
-                
-                <Text style={styles.TextStyle}></Text>
-            </TouchableOpacity>
-        
             <Text style={styles.nameUser}>{FireBase.getInstance().getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
             <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
-
-
             <TouchableOpacity onPress={this.onImageUpload} style={styles.avatarBtn}>
                     <Text style={styles.avatarTxt}>Upload Avatar Image</Text>
             </TouchableOpacity>
