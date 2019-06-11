@@ -62,7 +62,7 @@ export default class HomeScreen extends React.Component {
                                     {text: "Avbryt", type: "cancel"},
                                     {text: "Fortsett", onPress: async () => {
                                             await fb.joinGroup(firebase.auth().currentUser.uid, fb.getStudy());
-                                            this.props.navigation.navigate("Gruppe");}}]
+                                            this.props.navigation.navigate("Groups");}}]
                             )}}
                             style={{height: 120, top: -20}}>
                           <View style={styles.btnStudieretning}>

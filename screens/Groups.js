@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import FireBase from '../components/FireBase';
 import GroupListView from "../components/GroupListView";
 
-export default class Gruppe extends React.Component {
+export default class Groups extends React.Component {
     constructor(props) {
         super(props);
     }

@@ -8,7 +8,7 @@ import {
 import TabBarIcon from '../components/TabBarIcon';
 
 import Subjects from '../screens/Subjects';
-import Gruppe from '../screens/Gruppe';
+import Groups from '../screens/Groups';
 import Chat from '../screens/Chat';
 import Profil from '../screens/Profil';
 import Hub from '../screens/HomeScreen';
@@ -17,7 +17,7 @@ import Login from '../screens/login/Login';
 import Loading from '../screens/login/Loading';
 
 const GroupsStack = createStackNavigator({
-  Gruppe: Gruppe,
+  Groups: Groups,
   Chat: Chat,
 });
 GroupsStack.navigationOptions = {

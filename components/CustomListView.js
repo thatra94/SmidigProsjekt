@@ -35,7 +35,7 @@ const CustomRow = ({ title, navigation }) => (
                 {text: "Avbryt", type: "cancel"},
                 {text: "Fortsett", onPress: async () => {
                     await FireBase.getInstance().joinGroup(firebase.auth().currentUser.uid, title);
-                    navigation.navigate("Gruppe");}}
+                    navigation.navigate("Groups");}}
             ]
         )}}>
         <View style={styles.rowContainer}>
