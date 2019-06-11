@@ -32,7 +32,7 @@ const CustomRow = ({ title, navigation }) => (
             "Er du sikker?",
             "Dette legger deg til i en gruppe for dette emnet",
             [
-                {text: "Avbryt", type: "cancel", style: 'destructive'},
+                {text: "Avbryt", type: "cancel"},
                 {text: "Fortsett", onPress: async () => {
                     await FireBase.getInstance().joinGroup(firebase.auth().currentUser.uid, title);
                     navigation.navigate("Gruppe");}}
