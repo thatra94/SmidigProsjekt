@@ -11,6 +11,8 @@ import FireBase from '../components/FireBase';
 import {ImagePicker, Permissions} from "expo";
 import * as firebase from "firebase";
 
+let fb = FireBase.getInstance();
+
 export default class Profile extends React.Component {
 
   constructor(props) {
@@ -68,12 +70,12 @@ export default class Profile extends React.Component {
             () => reject(),
         );
       });
-      let uploadUrl = await FireBase.getInstance().uploadImage(resizedUri);
+      let uploadUrl = await fb.uploadImage(resizedUri);
       console.log("url is", uploadUrl);
       await this.setState({avatar: uploadUrl});
       console.log(" - await upload successful url:" + uploadUrl);
       console.log(" - await upload successful avatar state:" + this.state.avatar);
-      await FireBase.getInstance().updateAvatar(uploadUrl);
+      await fb.updateAvatar(uploadUrl);
     } catch (err) {
       console.log('onImageUpload error:' + err.message);
       alert('En feil oppstod når du skulle last opp bilde:' + err.message);
@@ -119,9 +121,9 @@ export default class Profile extends React.Component {
         <View style={styles.container}>
             <Image style={styles.profileIcon} source={{uri: this.state.avatar}}
             />
-            <Text style={styles.nameUser}>{FireBase.getInstance().getName()}</Text>
+            <Text style={styles.nameUser}>{fb.getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
-            <Text style={styles.studyUser}>{FireBase.getInstance().getStudy()}</Text>
+            <Text style={styles.studyUser}>{fb.getStudy()}</Text>
             <TouchableOpacity onPress={this.onImageUpload} style={styles.avatarBtn}>
                     <Text style={styles.avatarTxt}>Upload Avatar Image</Text>
             </TouchableOpacity>
