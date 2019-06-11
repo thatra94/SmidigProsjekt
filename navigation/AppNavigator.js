@@ -71,6 +71,11 @@ const BottomTabStack = createBottomTabNavigator({
   HubStack,
   GroupsStack,
   ProfilStack,
+},
+{
+  tabBarOptions: {
+    activeTintColor: '#670656'
+  }
 });
 
 const AppContainer = createAppContainer(createStackNavigator(
