@@ -83,6 +83,9 @@ export default class Profil extends React.Component {
 
   async componentWillMount() {
     let user = await firebase.auth().currentUser.photoURL;
+    if(user === null){
+      user = 'https://firebasestorage.googleapis.com/v0/b/smidigprosjekt-e3cdc.appspot.com/o/avatar%2Fuser.png?alt=media&token=b418ae54-f509-4644-8188-3e266f102c9b'
+    }
     this.setState({avatar: user});
     console.log("avatState", this.state.avatar);
   }
