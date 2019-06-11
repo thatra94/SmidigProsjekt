@@ -18,10 +18,6 @@ let groupList = [];
 let firstName;
 let lastName;
 let userStudie;
-let chatId;
-let subject;
-
-let photoUrl;
 
 function urlToBlob(uri) {
     return new Promise((resolve, reject) => {
@@ -154,7 +150,6 @@ static async removeFromGroup(userId, groupKey) {
 
 
 getGroupList(){
-   //console.log(this.state.groupList);
    return groupList;
  }
 
@@ -290,7 +285,6 @@ getSubjectList() {
                 .ref('avatar')
                 .child(uuid.v4());
             const task = await ref.put(response);
-            //photoUrl = firebase.auth().currentUser.uid.ref.getDownloadURL();
             return ref.getDownloadURL();
 
         } catch (err) {
@@ -299,7 +293,6 @@ getSubjectList() {
     };
 
     updateAvatar = (url) => {
-        //await this.setState({ avatar: url });
         let userf = firebase.auth().currentUser;
         if (userf != null) {
             userf.updateProfile({ photoURL: url})
