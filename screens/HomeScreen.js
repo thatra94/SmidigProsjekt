@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     //height: hp('55%'),
     backgroundColor: 'white',
     borderRadius: 50,
-    //marginTop: '62%',
+    marginTop: '62%',
     borderWidth: 0.5,
     borderColor: '#d6d7da', 
     shadowColor: 'black',
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
           ios: {
             top: '45%',
             height: hp('55%'),
-            marginTop: '62%',
+            //marginTop: '62%',
             margin: '5%',
           },
           android: {

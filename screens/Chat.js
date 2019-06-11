@@ -28,7 +28,7 @@ export default class Chat extends React.Component {
                     {text: 'Forlat', onPress: async () => {
                         await FireBase.removeFromGroup(firebase.auth().currentUser.uid, fb.chatId);
                             navigation.navigate('Gruppe');
-                        }}
+                        }, style: 'destructive'}
                 ]
                 )}
                 style={styles.leaveButtonTouchable}

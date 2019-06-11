@@ -137,7 +137,7 @@ export default class Profil extends React.Component {
                   "",
                   [
                       {text: "Avbryt", type: "cancel"},
-                      {text: "Logg ut", onPress: () => {this.signOutUser()}}
+                      {text: "Logg ut", onPress: () => {this.signOutUser()}, style: 'destructive'}
                   ]
               )}}
               style={styles.profileTxt}>
@@ -151,7 +151,7 @@ export default class Profil extends React.Component {
                     "",
                     [
                       {text: "Avbryt", type: "cancel"},
-                      {text: "Slett", onPress: () => {this.deleteProfile()}}
+                      {text: "Slett", onPress: () => {this.deleteProfile()}, style: 'destructive'}
                     ]
                     )}} 
                 style={styles.profileTxt}>
