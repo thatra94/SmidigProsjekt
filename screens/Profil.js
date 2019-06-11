@@ -98,8 +98,14 @@ export default class Profil extends React.Component {
 
   deleteProfile = async () => {
     let userId = await firebase.auth().currentUser.uid;
+    let user = await firebase.auth().currentUser;
+
     firebase.database().ref('users/' + userId).remove();
-    this.signOutUser();
+    user.delete().then(function () {
+      console.log("user deleted")
+    }).catch(function (error) {
+      console.log("error deleting user")
+    });
   };
   
   render() {
