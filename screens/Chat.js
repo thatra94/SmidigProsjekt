@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import {Platform, StyleSheet, FlatList, Text, View, Alert, Image, TouchableOpacity, Button} from "react-native";
+import React from "react";
+import {StyleSheet, Alert, Image, TouchableOpacity} from "react-native";
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import FireBase from '../components/FireBase';
 import * as firebase from 'firebase';
 
 let fb = FireBase.getInstance();
-let cid;
 
 export default class Chat extends React.Component {
     constructor(props) {
@@ -45,14 +44,12 @@ export default class Chat extends React.Component {
         messages: [],
     };
 
-    get user() {
+    static get user() {
         return {
             name: fb.getName(),
-            //email: this.props.navigation.state.params.email,
-           // avatar: this.props.navigation.state.params.avatar,
             avatar: firebase.auth().currentUser.photoURL,
             id: fb.uid,
-            _id: fb.uid, // need for gifted-chat
+            _id: fb.uid,
         };
     }
 
@@ -61,12 +58,9 @@ export default class Chat extends React.Component {
             <GiftedChat
                 messages={this.state.messages}
                 onSend={fb.send}
-                user={this.user}
+                user={Chat.user}
                 initialText={""}/>
         );
-    }
-
-    async componentWillMount() {
     }
 
     componentDidMount() {

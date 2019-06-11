@@ -74,7 +74,7 @@ export default class HomeScreen extends React.Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() =>
-                        {this.props.navigation.navigate('Fag')}}
+                        {this.props.navigation.navigate('Subjects')}}
                                           style={{height: 110, top: 10}}>
                           <View style={styles.btnVelgEmne}>
                             <Image source={require('../assets/images/college.png')}
