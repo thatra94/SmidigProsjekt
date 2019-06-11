@@ -7,7 +7,7 @@ import {
 } from 'react-navigation';
 import TabBarIcon from '../components/TabBarIcon';
 
-import Fag from '../screens/Kollokvie';
+import Subjects from '../screens/Subjects';
 import Gruppe from '../screens/Gruppe';
 import Chat from '../screens/Chat';
 import Profil from '../screens/Profil';
@@ -32,7 +32,7 @@ GroupsStack.navigationOptions = {
 
 const HubStack = createStackNavigator({
   Hub: Hub,
-  Fag: Fag,
+  Subjects: Subjects,
 });
 HubStack.navigationOptions = {
   tabBarLabel: 'Hjem',

@@ -1,10 +1,10 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import FireBase from '../components/FireBase';
 
 import CustomListView from "../components/CustomListView";
 
-export default class Fag extends React.Component {
+export default class Subjects extends React.Component {
     constructor(props) {
         super(props);
     };
@@ -23,9 +23,6 @@ export default class Fag extends React.Component {
     state = {
         title: [],
 
-    };
-    alertItemName = (item) => {
-        alert(item.name)
     };
 
     async componentWillMount() {
