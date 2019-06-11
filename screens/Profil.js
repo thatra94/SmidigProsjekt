@@ -118,9 +118,7 @@ export default class Profil extends React.Component {
             <Image style={styles.profileIcon} source={{uri: this.state.avatar}}
             />
             <TouchableOpacity style={styles.editIconContainer} activeOpacity={0.5}>
-                <Image
-                source={require('../assets/images/edit.png')}
-                style={styles.editIcon} />
+                
                 <Text style={styles.TextStyle}></Text>
             </TouchableOpacity>
         

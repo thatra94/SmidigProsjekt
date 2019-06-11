@@ -34,7 +34,7 @@ export default class Chat extends React.Component {
                 style={styles.leaveButtonTouchable}
             >
                 <Image
-                    source={require('../assets/images/edit.png')}
+                    source={require('../assets/images/forlatgruppe.png')}
                     style={styles.leaveButton}
                 />
             </TouchableOpacity>
@@ -62,7 +62,7 @@ export default class Chat extends React.Component {
                 messages={this.state.messages}
                 onSend={fb.send}
                 user={this.user}
-                initialText={"IceBreaker..."}/>
+                initialText={""}/>
         );
     }
 
@@ -86,7 +86,7 @@ export default class Chat extends React.Component {
 const styles = StyleSheet.create ({
    container: {
       padding: 30,
-      backgroundColor: '#ff6650',
+      backgroundColor: '#f2f2f2',
       alignItems: 'center',
       borderWidth: 0.3,
       height: 150,
