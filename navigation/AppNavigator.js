@@ -8,7 +8,7 @@ import {
 import TabBarIcon from '../components/TabBarIcon';
 
 import Subjects from '../screens/Subjects';
-import Gruppe from '../screens/Gruppe';
+import Groups from '../screens/Groups';
 import Chat from '../screens/Chat';
 import Profile from '../screens/Profile';
 import Hub from '../screens/HomeScreen';
@@ -17,7 +17,7 @@ import Login from '../screens/login/Login';
 import Loading from '../screens/login/Loading';
 
 const GroupsStack = createStackNavigator({
-  Gruppe: Gruppe,
+  Groups: Groups,
   Chat: Chat,
 });
 GroupsStack.navigationOptions = {
@@ -71,6 +71,11 @@ const BottomTabStack = createBottomTabNavigator({
   HubStack,
   GroupsStack,
   ProfilStack,
+},
+{
+  tabBarOptions: {
+    activeTintColor: '#670656'
+  }
 });
 
 const AppContainer = createAppContainer(createStackNavigator(
