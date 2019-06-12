@@ -1,6 +1,7 @@
 import React from 'react'
 import { ScrollView, StyleSheet, Text, TextInput, View, Button, TouchableOpacity,  StatusBar, Image } from 'react-native'
 import { LinearGradient } from 'expo';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import firebase from 'firebase'
 
@@ -22,8 +23,13 @@ export default class Login extends React.Component {
 
   render() {
     return (
-        <View style={styles.backgroundContainer}>
-            <ScrollView scrollEventThrottle={16}>
+        <KeyboardAwareScrollView
+            style={{backgroundColor: '#3F0630'}}
+            resetScrollToCoords={{x: 0, y: 0}}
+            containContainerStyle={styles.backgroundContainer}
+            scrollEnabled={true}
+        >
+            <ScrollView scrollEventThrottle={16} keyboardShouldPersistTaps={"handled"}>
         
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 </View>
@@ -48,7 +54,7 @@ export default class Login extends React.Component {
                 <TextInput
                   style={styles.textInput}
                   autoCapitalize="none"
-                  placeholder="Brukernavn"
+                  placeholder="Email"
                   placeholderTextColor='white'
                   onChangeText={email => this.setState({ email })}
                   value={this.state.email}
@@ -73,7 +79,7 @@ export default class Login extends React.Component {
                 </TouchableOpacity>
             </View>
         </ScrollView>
-    </View>
+    </KeyboardAwareScrollView>
     )
   }
 }
