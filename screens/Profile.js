@@ -154,7 +154,6 @@ export default class Profile extends React.Component {
                 style={styles.profileTxt}>
                 <Text style={styles.profileTxt}>Slett profil</Text>
             </TouchableOpacity>
-            
         </View>
     </View>
     );

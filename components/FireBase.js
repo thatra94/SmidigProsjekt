@@ -226,8 +226,8 @@ getSubjectList() {
     }
 
 
-    ref(cid) {
-        return firebase.database().ref('Groups/'+cid+'/Chat');
+    ref(chatId) {
+        return firebase.database().ref('Groups/'+chatId+'/Chat');
     }
 
     parse = snapshot => {
@@ -298,14 +298,14 @@ getSubjectList() {
             userf.updateProfile({ photoURL: url})
                 .then(function() {
                     console.log("Updated avatar successfully. url:" + url);
-                    alert("Avatar image is saved successfully.");
+                    alert("Profilbilde ble oppdatert.");
                 }, function(error) {
                     console.warn("Error update avatar.");
-                    alert("Error update avatar. Error:" + error.message);
+                    alert("En feil oppstod med å opppdatere profilbilde" + error.message);
                 });
         } else {
             console.log("can't update avatar, user is not login.");
-            alert("Unable to update avatar. You must login first.");
+            alert("Fikk ikke oppdatert brukerbilde.");
         }
     };
 
