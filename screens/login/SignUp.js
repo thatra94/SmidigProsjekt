@@ -198,7 +198,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderBottomColor: 'white',
     borderBottomWidth: 1,
-    width: '90%'
+    width: '90%',
+    color: 'white',
   },
 /*Neste-knapp*/
   loginButton: {
