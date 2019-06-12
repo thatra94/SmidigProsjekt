@@ -17,7 +17,7 @@ export default class Login extends React.Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => this.props.navigation.navigate('Hub'))
-      .catch(error => this.setState({ errorMessage: error.message }))
+      .catch(error => this.setState({ errorMessage: "Login feilet, inkorrekt brukernavn eller passord" }))
   }
 
   render() {
