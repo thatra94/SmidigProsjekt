@@ -18,7 +18,7 @@ export default class Loading extends React.Component {
         useruid = user.uid;
         console.log(useruid);
         this.mountComponents();
-        this.props.navigation.navigate('Hub');
+        this.props.navigation.navigate('HomeScreen');
       } else {
         console.log("you are not authenticated");
         this.props.navigation.navigate('SignUp')

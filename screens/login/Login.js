@@ -17,7 +17,7 @@ export default class Login extends React.Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => this.props.navigation.navigate('Hub'))
+      .then(() => this.props.navigation.navigate('HomeScreen'))
       .catch(error => this.setState({ errorMessage: "Login feilet, inkorrekt brukernavn eller passord" }))
   }
 
