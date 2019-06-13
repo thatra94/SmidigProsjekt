@@ -47,7 +47,7 @@ const CustomRow = ({ title, navigation }) => (
     </TouchableOpacity>
 );
 
-const CustomListView = ({ itemList, navigation }) => (
+const SubjectsListView = ({ itemList, navigation }) => (
     <View style={styles.container}>
         <FlatList
             data={itemList}
@@ -61,4 +61,4 @@ const CustomListView = ({ itemList, navigation }) => (
     </View>
 );
 
-export default CustomListView;
+export default SubjectsListView;

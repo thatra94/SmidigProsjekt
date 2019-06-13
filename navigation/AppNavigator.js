@@ -11,7 +11,7 @@ import Subjects from '../screens/Subjects';
 import Groups from '../screens/Groups';
 import Chat from '../screens/Chat';
 import Profile from '../screens/Profile';
-import Hub from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 import SignUp from '../screens/login/SignUp';
 import Login from '../screens/login/Login';
 import Loading from '../screens/login/Loading';
@@ -30,11 +30,11 @@ GroupsStack.navigationOptions = {
   )
 };
 
-const HubStack = createStackNavigator({
-  Hub: Hub,
+const HomeScreenStack = createStackNavigator({
+  HomeScreen: HomeScreen,
   Subjects: Subjects,
 });
-HubStack.navigationOptions = {
+HomeScreenStack.navigationOptions = {
   tabBarLabel: 'Hjem',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -68,7 +68,7 @@ SignupStack.navigationOptions = {
 };
 
 const BottomTabStack = createBottomTabNavigator({
-  HubStack,
+  HomeScreenStack,
   GroupsStack,
   ProfilStack,
 },
@@ -86,7 +86,7 @@ const AppContainer = createAppContainer(createStackNavigator(
   {
     headerMode: 'none',
     navigationOptions: {
-      headerVisible: 'false'
+    headerVisible: 'false'
     }
   })
 );

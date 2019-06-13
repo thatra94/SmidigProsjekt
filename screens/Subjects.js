@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import FireBase from '../components/FireBase';
 
-import CustomListView from "../components/CustomListView";
+import SubjectsListView from "../components/SubjectsListView";
 
 export default class Subjects extends React.Component {
     constructor(props) {
@@ -36,7 +36,7 @@ export default class Subjects extends React.Component {
      <View style={styles.MainContainer}>
 
          <ScrollView>
-         <CustomListView
+         <SubjectsListView
              itemList={this.state.title}
              navigation={this.props.navigation}
          />
