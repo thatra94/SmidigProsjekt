@@ -2,6 +2,7 @@ import React from 'react'
 import { ScrollView, StyleSheet, Text, TextInput, View, Button, TouchableOpacity,  StatusBar, Image, Platform } from 'react-native'
 import { LinearGradient } from 'expo';
 import RNPickerSelect from 'react-native-picker-select';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import firebase from 'firebase'
 
@@ -28,6 +29,18 @@ export default class SignUp extends React.Component {
     ],
     errorMessage: null };
 
+  componentDidMount () {
+      this.navListener = this.props.navigation.addListener('didFocus',async () => {
+        this.setState({
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          studySubject: ''
+        })
+      })
+  }
+
   handleSignUp = () => {
     const { email, password, firstName, lastName, studySubject } = this.state;
     firebase
@@ -40,30 +53,21 @@ export default class SignUp extends React.Component {
             fornavn: firstName,
             etternavn: lastName,
             studieretning: studySubject
-        })
-          //console.log(user),
+        });
           console.log(user.uid);
         })
       .catch(error => this.setState({ errorMessage: error.message }))
-  }
-
-/*
-saveUserData = (user) => {
-    console.log(user)
-    let userid = user.uid
-    console.log(userid)
-    firebase.database().ref('users/' + userid).set({
-    email: email.toLowerCase(),
-    firstName: firstName
-    })
-  }))
-}
-*/
+  };
 
   render() {
     return (
-        <View style={styles.backgroundContainer}>
-            <ScrollView scrollEventThrottle={16}>
+        <KeyboardAwareScrollView
+            style={{backgroundColor: '#3F0630'}}
+            resetScrollToCoords={{x: 0, y: 0}}
+            containContainerStyle={styles.backgroundContainer}
+            scrollEnabled={true}
+        >
+            <ScrollView scrollEventThrottle={16} keyboardShouldPersistTaps={"handled"}>
 
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 </View>
@@ -71,8 +75,6 @@ saveUserData = (user) => {
                     colors={['#D54FBA', '#3F0630']}
                     style={styles.gradientCircle}>
                 </LinearGradient>
-
-
 
             <View style={styles.container}>
 
@@ -152,7 +154,7 @@ saveUserData = (user) => {
 
             </View>
         </ScrollView>
-    </View>
+    </KeyboardAwareScrollView>
     )
   }
 }
@@ -189,16 +191,17 @@ const styles = StyleSheet.create({
     width: '90%',
     borderColor: 'gray',
     borderWidth: 1,
-    marginTop: 8,
+    marginTop: 4,
   },
   pickerText: {
-    marginLeft: 20,
+    marginLeft: 18,
     marginBottom: 30,
     marginTop: 10,
     fontSize: 20,
     borderBottomColor: 'white',
     borderBottomWidth: 1,
-    width: '90%'
+    width: '90%',
+    color: 'white',
   },
 /*Neste-knapp*/
   loginButton: {
