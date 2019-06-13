@@ -118,14 +118,14 @@ export default class Profile extends React.Component {
         <View style={styles.TitleContainer}>
             <Text style={styles.pageTitle}>Din profil</Text>
         </View>
-        <View style={styles.container}>
-            <Image style={styles.profileIcon} source={{uri: this.state.avatar}}
+        <View style={styles.container} >
+            <Image  style={styles.profileIcon} source={{uri: this.state.avatar}}
             />
             <Text style={styles.nameUser}>{fb.getName()}</Text>
             <Text style={styles.studentUser}>Student</Text>
             <Text style={styles.studyUser}>{fb.getStudy()}</Text>
             <TouchableOpacity onPress={this.onImageUpload} style={styles.avatarBtn}>
-                    <Text style={styles.avatarTxt}>Upload Avatar Image</Text>
+                    <Text style={styles.avatarTxt}>Last opp profilbilde</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={ () => {
@@ -137,8 +137,8 @@ export default class Profile extends React.Component {
                       {text: "Logg ut", onPress: () => {this.signOutUser()}, style: 'destructive'}
                   ]
               )}}
-              style={styles.profileTxt}>
-                    <Text style={styles.logOut}>Logg ut</Text>
+              style={styles.avatarBtn}>
+                    <Text style={styles.avatarTxt}>Logg ut</Text>
                 </TouchableOpacity>
                                     
         
@@ -151,8 +151,8 @@ export default class Profile extends React.Component {
                       {text: "Slett", onPress: () => {this.deleteProfile()}, style: 'destructive'}
                     ]
                     )}} 
-                style={styles.profileTxt}>
-                <Text style={styles.profileTxt}>Slett profil</Text>
+                style={styles.avatarBtn}>
+                <Text style={styles.avatarTxt}>Slett profil</Text>
             </TouchableOpacity>
         </View>
     </View>
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     avatarTxt: {
     color: 'white',
     fontSize: 18,
-    margin: 7,
+    margin: 2,
   },
     logOut: {
     color: 'red',
